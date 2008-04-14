@@ -1,0 +1,45 @@
+#HOWTO para integrar maven2 con tu IDE y hacer un checkout
+
+== Introduccion ==
+
+El objetivo de esta pagina es tener una referencia de como hacer para hacer un check out del proyecto en los IDEs mas comunes. Y si es necesario instalar el plugin de maven (mevenide)
+
+
+
+== Como se checkout-ea con el Elipse? ==
+
+# Plugin maven y svn. (a version 3.3 Europa ya lo trae incluido)
+# File -> New -> Project
+# SVN -> Checkout Projects from SVN
+# Create a new repository location
+# Url: https://tadp-tp1c2008.googlecode.com/svn/trunk/
+# Accept a todo lo que pregunta
+# Username: el mismo que el mail de google (jcfandino para mi)
+# Password: la que aparece en la pagina del proyecto
+# Save password
+# Seleccionar tp. Next
+# Checkout as a project configured using the New Project Wizard. Finish.
+# Maven -> Project
+# Project name: tadp-tp1c2008. Next
+# Version 1.0-SNAPSHOT
+# Year 2008
+# Organization Grupo6 y el resto de los datos
+# Aceptar y listo.
+
+== Como hacerlo con Netbeans ==
+
+# Plugin maven. Ver Anexo A
+# Versioning -> Subversion -> Checkout
+# URL: https://tadp-tp1c2008.googlecode.com/svn/trunk/
+# User: el de google
+# Password: el de la pagina
+# Save pass. Next.
+# Repository folder trunk/tp
+# Skip tp and checkout only its content. Finish.
+# Aca no se como seguir, usar sentido comun y completar la wiki 
+
+== Anexo A instalar maven en netbeans ==
+
+# Tools -> Plugins
+# Available Plugins -> Maven -> Install
+# Next. Accept. Install.
