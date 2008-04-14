@@ -13,3 +13,9 @@ Todo lo que venga bien para hacer el TP y usarlo como documentacion.
 
 
 ----
+
+== Checkout SVN ==
+
+Aca esta el tutorial de como bajar el proyecto como un proyecto maven.
+
+[HOWTOCheckout]
