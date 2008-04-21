@@ -1,8 +1,7 @@
 package tadp.techie.seis;
 
 
-
-public class Pregunta
+public abstract class Pregunta
 {
 
     private String unidadTematica;
@@ -19,7 +18,7 @@ public class Pregunta
             this.unidadTematica = unidadTematica;
             this.complejidad = complejidad;
             this.textoPregunta = pregunta;		
-            this.tipo = tipo;
+            this.tipo = tipo; 
     }
 
     public String getUnidadTematica() {

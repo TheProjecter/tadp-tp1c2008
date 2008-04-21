@@ -31,7 +31,7 @@ public class UsoPreguntaComparator implements Comparator<Pregunta>
             return n;
         }
         
-        //Si tienen distunto uso
+        //Si tienen distinto uso
         return pregunta1.getCantidadDeVecesQueSeUso() - pregunta2.getCantidadDeVecesQueSeUso();
     }
 }
