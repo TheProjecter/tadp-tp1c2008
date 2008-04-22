@@ -64,18 +64,9 @@ public class Materia
      */
     public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadPreguntasPracticas)
     {
-        //Agrego las practicas
-        Set<Pregunta> practicas = obtenerPreguntas(Pregunta.TiposPregunta.PRACTICO, cantidadPreguntasPracticas, unidadesAbarcadas);
-        //Agrego las teoricas
-        Set<Pregunta> teoricas = obtenerPreguntas(Pregunta.TiposPregunta.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
-
-        //Mezclo todo
-        Set<Pregunta> preguntasParaElExamen = new HashSet<Pregunta>();
-        preguntasParaElExamen.addAll(practicas);
-        preguntasParaElExamen.addAll(teoricas);
-
+       
         //Instancio
-        Examen examen = new Examen(fechaQueSeraTomado,unidadesAbarcadas,preguntasParaElExamen);
+        Examen examen = new Examen(fechaQueSeraTomado,unidadesAbarcadas,cantidadPreguntasTeoricas,cantidadPreguntasPracticas, this);
         //Me lo guardo
         examenes.add(examen);
         //Devuelvo
@@ -91,6 +82,8 @@ public class Materia
      * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
      * @return un conjunto de preguntas (sin repetidas)
      */
+    @SuppressWarnings("unused")
+	@Deprecated
     private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas)
     {
         Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
@@ -149,5 +142,9 @@ public class Materia
     {
         this.nombre = nombre;
     }
-	
+	public void addPregunta(Pregunta pregunta)
+	{
+		preguntas.add(pregunta);
+	}
+
 }
