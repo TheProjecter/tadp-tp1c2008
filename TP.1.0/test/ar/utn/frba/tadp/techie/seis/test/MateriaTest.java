@@ -3,7 +3,8 @@ import ar.utn.frba.tadp.techie.seis.exambase.Materia;
 /**
  * @author Juanmi
  */
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+//import static org.junit.Assert.fail;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -35,14 +36,15 @@ public class MateriaTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public final void testGetPreguntasDeTipo() {
-		fail("Not yet implemented"); // TODO
+	@Test()
+	public final void testGetPreguntasDeTipo() throws Exception {
+		//fail("Not yet implemented"); // TODO
+		assertNotNull("No hay preguntas cargadas", materia.getPreguntas());
 	}
 
 	@Test
-	public final void testGenerarExamen() {
-		materia.generarExamen(ahora, unidadesAbarcadas, 2, 3);
+	public final void testGenerarExamen() throws Exception{
+		assertNotNull(materia.generarExamen(ahora, unidadesAbarcadas, 2, 3));
 	}
-
+	
 }
