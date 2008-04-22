@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test.tadp.techie.seis.test;
+package tadp.techie.seis.test;
 
 import org.junit.After;
 import org.junit.AfterClass;
