@@ -52,13 +52,15 @@ public class Examen
      */
     private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Materia materia)
     {
+    	//selecciono todas las preguntas del tipo que busco
         Set<Pregunta> misPreguntas = materia.getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
+        //creo it para recorrer mi set
         Iterator<Pregunta> it = misPreguntas.iterator();
-
+        
         while(it.hasNext() && misPreguntas.size() < cantidadDePreguntas)
         {
             Pregunta pregunta = it.next();
-
+            //si abarca algun tema del examen la agrego	
             if(this.unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
             	misPreguntas.add(pregunta);
         }
@@ -80,5 +82,8 @@ public class Examen
     {
             return preguntas;
     }
-
+    public void addPregunta(Pregunta pregunta)
+	{
+		preguntas.add(pregunta);
+	}
 }
