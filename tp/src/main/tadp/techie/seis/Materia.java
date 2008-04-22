@@ -65,27 +65,9 @@ public class Materia
     public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadPreguntasPracticas)
     {
         //Agrego las practicas
-        Set<Pregunta> practicas = getPreguntasDeTipo(Pregunta.TiposPregunta.PRACTICO, new UsoPreguntaComparator());
-        Iterator<Pregunta> it = practicas.iterator();
-
-        while(it.hasNext() && practicas.size() < cantidadPreguntasPracticas)
-        {
-            Pregunta pregunta = it.next();
-
-            if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-                practicas.add(pregunta);
-        }
+        Set<Pregunta> practicas = obtenerPreguntas(Pregunta.TiposPregunta.PRACTICO, cantidadPreguntasPracticas, unidadesAbarcadas);
         //Agrego las teoricas
-        Set<Pregunta> teoricas = getPreguntasDeTipo(Pregunta.TiposPregunta.TEORICO, new UsoPreguntaComparator());
-        it = teoricas.iterator();
-
-        while(it.hasNext() && teoricas.size() < cantidadPreguntasTeoricas)
-        {
-            Pregunta pregunta = it.next();
-
-            if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-                teoricas.add(pregunta);
-        }	
+        Set<Pregunta> teoricas = obtenerPreguntas(Pregunta.TiposPregunta.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
 
         //Mezclo todo
         Set<Pregunta> preguntasParaElExamen = new HashSet<Pregunta>();
@@ -100,6 +82,29 @@ public class Materia
         return examen;
     }
     
+    /**
+     * @author juan martin
+     * Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
+     * ante igualdad de uso la eleccion sera aleatoria. 
+     * @param tipoPregunta teorica, practica o practica-teorica?
+     * @param cantidadPreguntas cuantas preguntas de este tipo quiero?
+     * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
+     * @return un conjunto de preguntas (sin repetidas)
+     */
+    private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas)
+    {
+        Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
+        Iterator<Pregunta> it = misPreguntas.iterator();
+
+        while(it.hasNext() && misPreguntas.size() < cantidadDePreguntas)
+        {
+            Pregunta pregunta = it.next();
+
+            if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
+            	misPreguntas.add(pregunta);
+        }
+    	return misPreguntas;
+    }
     /**
      * @return solo el nombre para no hacerlo tan denso
      */
