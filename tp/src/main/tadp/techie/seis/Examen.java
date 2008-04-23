@@ -34,5 +34,10 @@ public class Examen
     {
             return preguntas;
     }
+	public void addPregunta(Pregunta pregunta)
+	{
+		preguntas.add(pregunta);
+	}
+
 
 }

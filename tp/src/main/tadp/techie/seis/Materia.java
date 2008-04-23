@@ -2,6 +2,8 @@ package tadp.techie.seis;
 
 
 import java.util.*;
+
+
 /**
  * 
  * @author maxi - xuan
@@ -149,5 +151,10 @@ public class Materia
     {
         this.nombre = nombre;
     }
+	public void addPregunta(Pregunta pregunta)
+	{
+		preguntas.add(pregunta);
+	}
+
 	
 }
