@@ -5,12 +5,12 @@
 
 En esta pagina se explica la evolucion del desenio para la primer entrega.
 
-====Materia vs. Ejercicio.
+===Materia vs. Ejercicio.===
 
 El enunciado de la primer entrega tiene un par de partes oscuras.
 Principalmente el tema de la distincion de Ejercicio y Pregunta.
 
-====Materia == Ejercicio====
+===Materia == Ejercicio===
 
 El Primer Diseño toma como pregunta y ejercicio lo mismo, para hacerlo menos confuso.
 
