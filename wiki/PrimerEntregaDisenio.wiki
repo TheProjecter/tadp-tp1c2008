@@ -1,21 +1,17 @@
 #labels Featured
-= Introduccion =
+== Diseño de la Primer Entrega ==
 
-Este es nuestro TP de TADP
-Curso 1er Cuatrimestre 2008
+===Introduccion===
 
-----
+En esta pagina se explica la evolucion del desenio para la primer entrega.
 
-Estaria bueno ir poniendo info en esta wiki.
-Arquitectura, diagramas, links, etc.
+====Materia vs. Ejercicio.
 
-Todo lo que venga bien para hacer el TP y usarlo como documentacion.
+El enunciado de la primer entrega tiene un par de partes oscuras.
+Principalmente el tema de la distincion de Ejercicio y Pregunta.
 
+====Materia == Ejercicio====
 
-----
+El Primer Diseño toma como pregunta y ejercicio lo mismo, para hacerlo menos confuso.
 
-== Checkout SVN ==
-
-Aca esta el tutorial de como bajar el proyecto como un proyecto maven.
-
-[HOWTOCheckout]
+[http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.1.jpg Diagrama de clases]
