@@ -61,6 +61,10 @@ public abstract class Pregunta
     public void setTipo(TiposPregunta tipo) {
             this.tipo = tipo;
     }
+    
+    public void usoEnExamen() {
+        cantidadDeVecesQueSeUso ++;
+    }
 
     /**
      * compara por el texto, la unidad tematica y el tipo
