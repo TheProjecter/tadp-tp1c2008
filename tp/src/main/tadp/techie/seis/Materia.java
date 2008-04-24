@@ -103,15 +103,18 @@ public class Materia
     	Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
         Iterator<Pregunta> it = misPreguntas.iterator();
        
+       
        while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
         {
             Pregunta pregunta = it.next();
 
             if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-         
+            {
             	misPreguntas.add(pregunta);
-
+            	
+            }
         }
+      
     	return misPreguntas;
     }
     /**

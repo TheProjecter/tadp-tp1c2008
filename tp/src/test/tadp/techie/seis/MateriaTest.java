@@ -20,10 +20,11 @@ public class MateriaTest {
 	private Materia materia;
 	private Calendar ahora ;
 	private Set<String> unidadesAbarcadas;
+	private Pregunta pregunta;
 	
 	@Before
 	public void setUp() throws Exception {
-		Pregunta		pregunta;
+		//Pregunta		pregunta;
 		List<String>	opcionesChoice;
 		
 		ahora		= Calendar.getInstance();
@@ -45,8 +46,9 @@ public class MateriaTest {
 		materia.addPregunta(pregunta);
 		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", Pregunta.TiposPregunta.TEORICOPRACTICO);  
 		materia.addPregunta(pregunta);
-
 		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
+		materia.addPregunta(pregunta);
+		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
 		materia.addPregunta(pregunta);
 		
 		opcionesChoice.add("Cascada");
@@ -54,13 +56,11 @@ public class MateriaTest {
 		opcionesChoice.add("Modelo");
 		opcionesChoice.add("Evolutivo");
 		opcionesChoice.add("Otros");
+		
 		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
 		materia.addPregunta(pregunta);
 		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
-		materia.addPregunta(pregunta);
-
 		
 	}
 
@@ -79,18 +79,20 @@ public class MateriaTest {
 	@Test
 	public final void testGenerarExamen() throws Exception{
 	
-		/*// Creo lotes de prueba de Unidades Tematicas
-		unidadesAbarcadas =  new HashSet<String>();
-
-		unidadesAbarcadas.add("Patrones");
-		unidadesAbarcadas.add("Ciclos de Vida");
-		unidadesAbarcadas.add("Estructurado");
-		unidadesAbarcadas.add("DFDTR");
-*/
 		assertNotNull(materia.generarExamen(ahora, unidadesAbarcadas, 2, 3));
+	}
+	@Test(expected = NullPointerException.class)
+	public final void testGenerarExamenSinUnidades() throws Exception{
+	
+		assertNotNull(materia.generarExamen(ahora, null, 2, 3));
 	}
 	
 	@Test
+	public final void testCantidadPreguntasExamen() throws Exception{
+	
+		assertEquals( materia.generarExamen(ahora, unidadesAbarcadas, 2, 1).getPreguntas().size(), 3);
+	}
+	/*@Test
 	public final void testNoRepitoPreguntasHastaUsarTodas() throws Exception
 	{
 			
@@ -102,7 +104,7 @@ public class MateriaTest {
 		assertFalse("Se repitieron preguntas antes de agotar las no-usadas.", 
 				ex1.getPreguntas().containsAll(ex2.getPreguntas()) );
 		
-	}
+	}*/
 	
 }
 
