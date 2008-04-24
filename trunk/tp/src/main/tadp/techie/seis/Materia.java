@@ -76,6 +76,10 @@ public class Materia
         preguntasParaElExamen.addAll(practicas);
         preguntasParaElExamen.addAll(teoricas);
 
+        //Incremento la cantidad de veces que se uso
+        for(Pregunta pregunta : preguntasParaElExamen)
+                pregunta.setCantidadDeVecesQueSeUso(pregunta.getCantidadDeVecesQueSeUso()+1);
+        
         //Instancio
         Examen examen = new Examen(fechaQueSeraTomado,unidadesAbarcadas,preguntasParaElExamen);
         //Me lo guardo
