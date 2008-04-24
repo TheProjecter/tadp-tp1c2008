@@ -76,15 +76,19 @@ public class Materia
         preguntasParaElExamen.addAll(practicas);
         preguntasParaElExamen.addAll(teoricas);
         
+             
         //Instancio
         Examen examen = new Examen(fechaQueSeraTomado,unidadesAbarcadas,preguntasParaElExamen);
+        
         //Me lo guardo
         examenes.add(examen);
+        
         //Devuelvo
         return examen;
     }
     
-    /**
+   
+	/**
      * @author juan martin
      * Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
      * ante igualdad de uso la eleccion sera aleatoria. 
@@ -95,15 +99,18 @@ public class Materia
      */
     private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas)
     {
-        Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
+       
+    	Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
         Iterator<Pregunta> it = misPreguntas.iterator();
-
-        while(it.hasNext() && misPreguntas.size() < cantidadDePreguntas)
+       
+       while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
         {
             Pregunta pregunta = it.next();
 
             if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
+         
             	misPreguntas.add(pregunta);
+
         }
     	return misPreguntas;
     }
@@ -155,6 +162,23 @@ public class Materia
 	{
 		preguntas.add(pregunta);
 	}
-
+	public void borrarPreguntas()
+	{
+		preguntas.clear();
+	}
 	
+	/**
+	 * Dos materias son iguales si tienen el mismo nombre.
+	 */
+	 @Override
+	 public boolean equals (Object m)
+	  {
+		 if(m instanceof Materia)
+	        {
+			 Materia materia = (Materia) m;
+	         return this.nombre.equals(materia.getNombre());        
+	        }
+
+	        return false;
+	  }
 }

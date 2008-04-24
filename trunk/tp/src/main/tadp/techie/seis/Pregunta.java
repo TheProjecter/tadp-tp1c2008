@@ -56,7 +56,11 @@ public abstract class Pregunta
     public void setCantidadDeVecesQueSeUso(int cantidadDeVecesQueSeUso) {
             this.cantidadDeVecesQueSeUso = cantidadDeVecesQueSeUso;
     }
-
+    public void incrementarUso() {
+		
+		this.cantidadDeVecesQueSeUso++;
+		
+	}
     public TiposPregunta getTipo() {
             return tipo;
     }
@@ -65,11 +69,7 @@ public abstract class Pregunta
             this.tipo = tipo;
     }
     
-    public void usoEnExamen() {
-        cantidadDeVecesQueSeUso ++;
-    }
-
-    /**
+     /**
      * compara por el texto, la unidad tematica y el tipo
      * no por la dificultad ni cuanto se uso
      * @param otra pregunta
@@ -103,4 +103,6 @@ public abstract class Pregunta
         hash = 97 * hash + (this.tipo != null ? this.tipo.hashCode() : 0);
         return hash;
     }
+
+	
 }

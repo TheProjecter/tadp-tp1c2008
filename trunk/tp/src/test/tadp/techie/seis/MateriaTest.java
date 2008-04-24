@@ -1,7 +1,6 @@
 package tadp.techie.seis;
 
-import static org.junit.Assert.assertNotNull;
-
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -30,16 +29,15 @@ public class MateriaTest {
 		ahora		= Calendar.getInstance();
 		opcionesChoice  =  new ArrayList<String>();
 
-		materia = new Materia("Diseo");
+		materia = new Materia("Disenio");
 
-/*
- * 
- * 		unidadesAbarcadas.add("Patrones");
- *		unidadesAbarcadas.add("Ciclos de Vida");
- *		unidadesAbarcadas.add("Estructurado");
- *		unidadesAbarcadas.add("DFDTR");
- *
- */	
+		// Creo lotes de prueba de Unidades Tematicas
+		unidadesAbarcadas =  new HashSet<String>();
+
+		unidadesAbarcadas.add("Patrones");
+		unidadesAbarcadas.add("Ciclos de Vida");
+		unidadesAbarcadas.add("Estructurado");
+		unidadesAbarcadas.add("DFDTR");	
 
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
@@ -63,31 +61,47 @@ public class MateriaTest {
 		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
 		materia.addPregunta(pregunta);
 
-
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		
+		materia.borrarPreguntas();
+		unidadesAbarcadas.clear();
 	}
 
 	@Test()
 	public final void testGetPreguntasDeTipo() throws Exception {
-		//fail("Not yet implemented"); // TODO
+		
 		assertNotNull("No hay preguntas cargadas", materia.getPreguntas());
 	}
 
 	@Test
 	public final void testGenerarExamen() throws Exception{
-		// Creo lotes de prueba de Unidades Tematicas
+	
+		/*// Creo lotes de prueba de Unidades Tematicas
 		unidadesAbarcadas =  new HashSet<String>();
 
 		unidadesAbarcadas.add("Patrones");
 		unidadesAbarcadas.add("Ciclos de Vida");
 		unidadesAbarcadas.add("Estructurado");
 		unidadesAbarcadas.add("DFDTR");
-
+*/
 		assertNotNull(materia.generarExamen(ahora, unidadesAbarcadas, 2, 3));
+	}
+	
+	@Test
+	public final void testNoRepitoPreguntasHastaUsarTodas() throws Exception
+	{
+			
+		Examen ex1 = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 2, 1);
+		Examen ex2 = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 2, 1);
+	
+		
+		//veo que en examen2 no se incluyo ninguna de las 2 preguntas usadas en examen 1
+		assertFalse("Se repitieron preguntas antes de agotar las no-usadas.", 
+				ex1.getPreguntas().containsAll(ex2.getPreguntas()) );
+		
 	}
 	
 }

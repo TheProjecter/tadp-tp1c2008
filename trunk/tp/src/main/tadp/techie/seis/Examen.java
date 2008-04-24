@@ -13,7 +13,7 @@ public class Examen
      * Instancia un examen en una determinada Fecha que abarca unidades y tiene
      * preguntas, las cuales se les avisa que se estan usando en un examen
      * @param fecha cuando se tomo/tomara
-     * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesriamente todas se abarcan)
+     * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesariamente todas se abarcan)
      * @param preguntas preguntas a incluir
      */
     public Examen(Calendar fecha, Set<String> unidadesAbarcadas, Set<Pregunta> preguntas) 
@@ -42,7 +42,7 @@ public class Examen
         for(Pregunta pregunta : preguntas)
         {
             //Incremento la cantidad de veces que se uso
-            pregunta.usoEnExamen();
+            pregunta.incrementarUso();
             //Incluyo la unidad tematica
             this.unidadesAbarcadas.add(pregunta.getUnidadTematica());
         }
@@ -69,5 +69,30 @@ public class Examen
     {
             preguntas.add(pregunta);
     }
+    public void borrarPreguntas()
+	{
+		preguntas.clear();
+	}
+    /**@author Juan Martin
+     * compara por la fehca, las unidades tematicas y la cantidad de preguntas
+     * @param otro examen
+     * @return si es el mismo
+     */
+    @Override
+    public boolean equals (Object e)
+    {
 
+        if(e instanceof Examen)
+        {
+        	Examen examen = (Examen) e;
+
+            return this.fecha.equals(examen.getFecha())
+                    && this.unidadesAbarcadas.equals(examen.getUnidades())
+                    && (this.preguntas.equals(examen.getPreguntas()));
+            
+        }
+
+        return false;
+
+    }
 }
