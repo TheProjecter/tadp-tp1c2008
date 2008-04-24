@@ -4,12 +4,12 @@ package tadp.techie.seis;
 public abstract class Pregunta
 {
 
-    private String unidadTematica;
-    private int complejidad;
-    public enum TiposPregunta {TEORICO,PRACTICO,TEORICOPRACTICO};
-    private String textoPregunta;
-    private int cantidadDeVecesQueSeUso;
-    private TiposPregunta tipo;
+	private String unidadTematica;
+	private int complejidad;
+	public enum TiposPregunta {TEORICO,PRACTICO,TEORICOPRACTICO};
+	private String textoPregunta;
+	private int cantidadDeVecesQueSeUso;
+	private TiposPregunta tipo;
 
 
     public Pregunta(String unidadTematica, int complejidad, String pregunta,
@@ -18,7 +18,10 @@ public abstract class Pregunta
             this.unidadTematica = unidadTematica;
             this.complejidad = complejidad;
             this.textoPregunta = pregunta;		
-            this.tipo = tipo; 
+            this.tipo = tipo;
+            
+            this.cantidadDeVecesQueSeUso = 0;
+
     }
 
     public String getUnidadTematica() {
