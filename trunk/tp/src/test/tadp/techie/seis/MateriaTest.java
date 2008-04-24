@@ -1,9 +1,11 @@
-package tadp.techie.seis.test;
+package tadp.techie.seis;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
@@ -26,9 +28,9 @@ public class MateriaTest {
 		List<String>	opcionesChoice;
 		
 		ahora		= Calendar.getInstance();
-		opcionesChoice  =  new HashSet<String>();
+		opcionesChoice  =  new ArrayList<String>();
 
-		materia = new Materia("Diseño");
+		materia = new Materia("Diseo");
 
 /*
  * 
@@ -39,14 +41,14 @@ public class MateriaTest {
  *
  */	
 
-		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", TEORICO);  
+		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", TEORICO);  
+		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", TEORICOPRACTICO);  
+		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", Pregunta.TiposPregunta.TEORICOPRACTICO);  
 		materia.addPregunta(pregunta);
 
-		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", TEORICO);  
+		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
 		
 		opcionesChoice.add("Cascada");
@@ -54,11 +56,11 @@ public class MateriaTest {
 		opcionesChoice.add("Modelo");
 		opcionesChoice.add("Evolutivo");
 		opcionesChoice.add("Otros");
-		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", TEORICO, opcionesChoice);
+		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
 		materia.addPregunta(pregunta);
-		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", TEORICO, opcionesChoice);
+		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", PRACTICO);  
+		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
 		materia.addPregunta(pregunta);
 
 
