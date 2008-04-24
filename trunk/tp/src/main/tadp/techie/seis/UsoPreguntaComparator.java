@@ -7,6 +7,7 @@ import java.util.Random;
  * Comparador para comparar preguntas por cantidad de examenes en los que fue tomada
  * Si las materias a comparar tienen la misma cantidad entonces se devuelve un numero
  * al azar. Solo se devuelve cero si son la misma pregunta (equals->true)
+ * @return un entero positivo, cero, or positivo dependiendo de si el primer arg es menor, igual o mayor que el segundo.
  * @author xuan
  */
 
