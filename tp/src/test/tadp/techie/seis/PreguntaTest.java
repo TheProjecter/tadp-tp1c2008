@@ -1,4 +1,4 @@
-package tadp.techie.seis.test;
+package tadp.techie.seis;
 
 
 /**
