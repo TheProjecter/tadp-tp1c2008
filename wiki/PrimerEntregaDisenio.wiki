@@ -16,4 +16,4 @@ El Primer Diseño toma como pregunta y ejercicio lo mismo, para hacerlo menos co
 
 [http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.1.jpg Diagrama de clases completo]
 
-[http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.2.jpg Diagrama de clases version simplificada]
+[http://tadp-tp1c2008.googlecode.com/svn-history/r46/trunk/uml/daEntrega1.v0.2.jpg Diagrama de clases version simplificada]
