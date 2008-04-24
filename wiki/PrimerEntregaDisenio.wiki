@@ -14,4 +14,6 @@ Principalmente el tema de la distincion de Ejercicio y Pregunta.
 
 El Primer Diseño toma como pregunta y ejercicio lo mismo, para hacerlo menos confuso.
 
-[http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.1.jpg Diagrama de clases]
+[http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.1.jpg Diagrama de clases completo]
+
+[http://tadp-tp1c2008.googlecode.com/svn-history/r42/trunk/uml/daEntrega1.v0.2.jpg Diagrama de clases version simplificada]
