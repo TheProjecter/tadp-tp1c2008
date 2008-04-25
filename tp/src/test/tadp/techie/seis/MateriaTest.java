@@ -126,7 +126,7 @@ public class MateriaTest {
 	@Test
 	public final void testPreguntasExamen() throws Exception{
 	
-            Set preguntas = materia.generarExamen(ahora, unidadesAbarcadas, 3, 2).getPreguntas();
+            Set<Pregunta> preguntas = materia.generarExamen(ahora, unidadesAbarcadas, 3, 2).getPreguntas();
             
             assertEquals( preguntas.size(), 5);
             
@@ -142,7 +142,7 @@ public class MateriaTest {
             
             
 	}
-	/*@Test
+	@Test
 	public final void testNoRepitoPreguntasHastaUsarTodas() throws Exception
 	{
 			
@@ -154,7 +154,7 @@ public class MateriaTest {
 		assertFalse("Se repitieron preguntas antes de agotar las no-usadas.", 
 				ex1.getPreguntas().containsAll(ex2.getPreguntas()) );
 		
-	}*/
+	}
 	
 }
 
