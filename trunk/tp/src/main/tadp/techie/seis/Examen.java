@@ -19,7 +19,11 @@ public class Examen
     public Examen(Calendar fecha, Set<String> unidadesAbarcadas, Set<Pregunta> preguntas) 
     {
         this(fecha, preguntas);
-//        this.unidadesAbarcadas = unidadesAbarcadas;
+
+        //Si me mandan null null
+        if(unidadesAbarcadas == null)
+            return;
+        
         for(String unidad : unidadesAbarcadas)
         {
             //Incluyo la unidad tematica
