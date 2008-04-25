@@ -13,10 +13,11 @@ import org.junit.Test;
 
 public class ExamenTest {
 	private Examen examen;
+	private Examen examenAux; 
 	private Pregunta pregunta;
 	private TreeSet<Pregunta> misPreguntas;
 	private Set<String> unidadesAbarcadas;
-	
+	private Calendar now;
 	@Before
 	public void setUp() throws Exception {
 		
@@ -35,11 +36,14 @@ public class ExamenTest {
 		unidadesAbarcadas.add("Ciclos de Vida");
 		unidadesAbarcadas.add("Estructurado");
 		unidadesAbarcadas.add("Carta Estructurada");	
-
+		
+		now = Calendar.getInstance();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		unidadesAbarcadas.clear();
+		misPreguntas.clear();
 	}
 
 	@Test
@@ -49,13 +53,14 @@ public class ExamenTest {
 
 	@Test
 	public final void testCrearExamenSinUnidadesTematicas() throws ExamenSinPreguntasException {
+		//se puede crear un examen sin preguntas (ver contrato de Examen)
 		assertNotNull(examen = new Examen(Calendar.getInstance(), null, misPreguntas ));
 		assertEquals(examen.getUnidades().size(), misPreguntas.size()/*2*/);
 	}
 	
 	@Test (expected = ExamenSinPreguntasException.class)
 	public final void testCrearExamenSinPreguntas() throws ExamenSinPreguntasException {
-		//Un examen sin preguntas no tiene sentido
+		//Un examen sin preguntas no puede ser creado
 		examen = new Examen(Calendar.getInstance(), unidadesAbarcadas, null );
 		
 	}
@@ -80,9 +85,38 @@ public class ExamenTest {
 	
 
 	@Test
-	public final void testEqualsExamen() {
-		fail("Not yet implemented"); // TODO
+	public final void testEqualsPorFechaExamen() throws ExamenSinPreguntasException {
+		
+		examen = new Examen(now, unidadesAbarcadas, misPreguntas );
+		
+		examenAux = new Examen(now, unidadesAbarcadas, misPreguntas );
+		assertEquals("Los examenes deberian ser iguales.", examen, examenAux);
+		
+		try {
+			//1000 millisecs -- espero un segundo para que no sean iguales las fechas
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} 
+		
+		examenAux = new Examen( Calendar.getInstance(), unidadesAbarcadas, misPreguntas );
+		assertFalse( "Los examenes deberian deberian ser distintos.", examen.equals(examenAux) );
+		
 		
 	}
-
+	@Test
+	public final void testEqualsPorUnidades() throws ExamenSinPreguntasException {
+		
+		examen = new Examen(now, unidadesAbarcadas, misPreguntas );
+		examenAux = new Examen(now, unidadesAbarcadas, misPreguntas );
+		
+		assertEquals("Los examenes deberian ser iguales.", examen, examenAux);
+		
+		unidadesAbarcadas.add("UML");
+		examenAux = new Examen( now, unidadesAbarcadas, misPreguntas );
+		
+		assertFalse( "Los examenes deberian deberian ser distintos.", examen.equals(examenAux) );
+		
+		
+	}
 }

@@ -115,7 +115,12 @@ public class MateriaIntegralesTest {
 		System.out.println(materia.getPreguntas().size());
 		
 	}
-
+	@After
+	public void tearDown() throws Exception {
+		materia.borrarPreguntas();
+		unidadesAbarcadas.clear();
+	}
+	
 	@Test(expected = PreguntasInsuficientesException.class)
 	public void testGenerarExamenOK() throws PreguntasInsuficientesException, ExamenSinPreguntasException {
 
@@ -125,7 +130,6 @@ public class MateriaIntegralesTest {
 		assertNotNull (materia.generarExamen(Calendar.getInstance(), colUT, 3, 2));
 		return;
 	}
-
 	@Test
 	public final void testGenerarExamenPatrones() throws Exception {
 		HashSet<String> colUT = new HashSet<String>();
@@ -134,8 +138,6 @@ public class MateriaIntegralesTest {
 		assertNotNull (materia.generarExamen(Calendar.getInstance(), colUT, 0, 2));
 		return;
 	}
-
-
 	@Test(expected = Exception.class) // Definir Clase!!! 
 	public final void testFalloExamenPorFecha() throws Exception 
 	{
@@ -148,9 +150,7 @@ public class MateriaIntegralesTest {
 		materia.generarExamen(fechaPasada, unidadesTematicas, 0, 2);
 		return;
 	}
-
-	
-	@Test(expected = Exception.class) // Definir Clase!!! 
+		@Test(expected = Exception.class) // Definir Clase!!! 
 	public final void testFalloExamenPorPocasPreguntasTeoricas() throws Exception {
 		HashSet<String> colUT = new HashSet<String>();
 		
@@ -158,9 +158,7 @@ public class MateriaIntegralesTest {
 		assertNotNull( materia.generarExamen(Calendar.getInstance(), colUT, 4, 1));
 		return;
 	}
-
-	
-	@Test(expected = Exception.class) // Definir Clase!!! 
+		@Test(expected = Exception.class) // Definir Clase!!! 
 	public final void testFalloExamenPorPocasPreguntasPracticas() throws Exception {
 		HashSet<String> colUT = new HashSet<String>();
 		
@@ -170,11 +168,7 @@ public class MateriaIntegralesTest {
 		return;
 	}
 	
-	@After
-	public void tearDown() throws Exception {
-		materia.borrarPreguntas();
-		unidadesAbarcadas.clear();
-	}
+	
 
 }
 

@@ -83,13 +83,10 @@ public class Examen
     {
         return unidadesAbarcadas;
     }
-
-
     public Set<Pregunta> getPreguntas()
     {
         return preguntas;
     }
-    
     public void addPregunta(Pregunta pregunta)
     {
             preguntas.add(pregunta);
