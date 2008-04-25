@@ -10,14 +10,15 @@ public class Examen
     private Set<Pregunta> preguntas;
 
     /**
-     * Instancia un examen en una determinada Fecha que abarca unidades y tiene
+     * <p>Instancia un examen en una determinada Fecha que abarca unidades y tiene
      * preguntas, las cuales se les avisa que se estan usando en un examen
      * Si se envian preguntas que abarcan unidades no declaradas, estas unidades
-     * tambien seran parte del examen.
+     * tambien seran parte del examen.<p>
      * Si el parametro unidadesAbarcadas es null o una coleccion vacia el llamado tendra
      * el mismo efecto que new Examen(fecha, preguntas), tomandose como unidadesAbarcadas
      * solo las incluidas en las preguntas.
-     * no se pueden crear examens sin preguntas.
+     * <p>No se pueden crear examenes sin preguntas.<p>
+     * <p>Se pueden crear examenes sin fecha, aunque no es recomendable.<p>
      * @param fecha cuando se tomo/tomara
      * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesariamente todas se abarcan)
      * @param preguntas preguntas a incluir
@@ -63,13 +64,21 @@ public class Examen
             this.unidadesAbarcadas.add(pregunta.getUnidadTematica());
         }
     }
-
+    
+    public void setFecha(Calendar fecha)
+    {
+        this.fecha = fecha;
+    }
+    
     public Calendar getFecha()
     {
         return fecha;
     }
 
-
+    public void setUnidades( Set<String> unidades)
+    {
+        this.unidadesAbarcadas = unidades;
+    }
     public Set<String> getUnidades()
     {
         return unidadesAbarcadas;

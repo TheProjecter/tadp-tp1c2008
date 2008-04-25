@@ -65,6 +65,12 @@ public class ExamenTest {
 		
 	}
 	@Test
+	public final void testCrearExamenSinFecha() throws ExamenSinPreguntasException {
+		//puedo setear la fecha dsps
+		examen = new Examen(null, unidadesAbarcadas, misPreguntas );
+		
+	}
+	@Test
 	public final void testBorrarPreguntas() throws ExamenSinPreguntasException {
 		assertNotNull(examen = new Examen(Calendar.getInstance(), unidadesAbarcadas, misPreguntas ));
 		assertNotNull(examen.getPreguntas());

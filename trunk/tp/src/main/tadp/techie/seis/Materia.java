@@ -55,9 +55,9 @@ public class Materia
     /**
      * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
      * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
-     * que se queran abarcar y una cantidad determinada de teoricas y practicas
-     * Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
-     * y si furon tomadas igual cantidad de veces se elige al azar.
+     * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
+     * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
+     * y si furon tomadas igual cantidad de veces se elige al azar.<p>
      * @param fechaQueSeraTomado cuando?
      * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
      * @param cantidadPreguntasTeoricas cuantas teoricas?
