@@ -5,9 +5,10 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TP0TestUnitarioComparator.class,
 	PreguntaTest.class,
-	MateriaTest.class
+	ExamenTest.class,
+	MateriaTest.class,
+	MateriaIntegralesTest.class
 })
 public class AllTests {
 
