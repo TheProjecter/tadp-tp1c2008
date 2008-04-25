@@ -116,8 +116,8 @@ public class MateriaIntegralesTest {
 		
 	}
 
-	@Test
-	public void testGenerarExamenOK() {
+	@Test(expected = PreguntasInsuficientesException.class)
+	public void testGenerarExamenOK() throws PreguntasInsuficientesException, ExamenSinPreguntasException {
 
 		HashSet<String> colUT = new HashSet<String>();
 		

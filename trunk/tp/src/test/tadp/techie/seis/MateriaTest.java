@@ -21,8 +21,8 @@ public class MateriaTest {
 	private Calendar ahora ;
 	private Set<String> unidadesAbarcadas;
 	private Pregunta pregunta;
-        private Set<Pregunta> preguntasMuyUsadas = new HashSet<Pregunta>();
-        private Set<Pregunta> preguntasPocoUsadas = new HashSet<Pregunta>();
+    private Set<Pregunta> preguntasMuyUsadas;
+    private Set<Pregunta> preguntasPocoUsadas;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -32,6 +32,9 @@ public class MateriaTest {
 		ahora		= Calendar.getInstance();
 		opcionesChoice  =  new ArrayList<String>();
 
+		preguntasMuyUsadas = new HashSet<Pregunta>();
+		preguntasPocoUsadas = new HashSet<Pregunta>();
+		
 		materia = new Materia("Disenio");
 
 		// Creo lotes de prueba de Unidades Tematicas
@@ -104,6 +107,8 @@ public class MateriaTest {
 	public void tearDown() throws Exception {
 		materia.borrarPreguntas();
 		unidadesAbarcadas.clear();
+		preguntasMuyUsadas.clear();
+		preguntasPocoUsadas.clear();
 	}
 
 	@Test()

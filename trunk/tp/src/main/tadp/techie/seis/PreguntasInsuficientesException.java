@@ -12,7 +12,12 @@ package tadp.techie.seis;
  */
 class PreguntasInsuficientesException extends Exception
 {
-    PreguntasInsuficientesException()
+   
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	PreguntasInsuficientesException()
     {
         super();
     }
