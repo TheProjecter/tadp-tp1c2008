@@ -2,8 +2,6 @@ package tadp.techie.seis;
 
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -65,9 +63,10 @@ public class Materia
      * @param cantidadPreguntasTeoricas cuantas teoricas?
      * @param cantidadPreguntasPracticas cuantas practicas?
      * @return el examen con las preguntas
+     * @throws ExamenSinPreguntasException 
      */
     public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadPreguntasPracticas)
-            throws PreguntasInsuficientesException
+            throws PreguntasInsuficientesException, ExamenSinPreguntasException
     {
         Set<Pregunta> practicas;
         Set<Pregunta> teoricas;
@@ -79,7 +78,7 @@ public class Materia
         }
         catch(PreguntasInsuficientesException ex)
         {
-            throw new PreguntasInsuficientesException("No sufucientes preguntas de tipo PRACTICO en la materia "+nombre);
+            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo PRACTICO en la materia "+nombre);
         }   
         try
         {
@@ -88,7 +87,7 @@ public class Materia
         }
         catch(PreguntasInsuficientesException ex)
         {
-            throw new PreguntasInsuficientesException("No sufucientes preguntas de tipo TEORICO en la materia "+nombre);
+            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo TEORICO en la materia "+nombre);
         }
         
         //Mezclo todo

@@ -17,14 +17,17 @@ public class Examen
      * Si el parametro unidadesAbarcadas es null o una coleccion vacia el llamado tendra
      * el mismo efecto que new Examen(fecha, preguntas), tomandose como unidadesAbarcadas
      * solo las incluidas en las preguntas.
+     * no se pueden crear examens sin preguntas.
      * @param fecha cuando se tomo/tomara
      * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesariamente todas se abarcan)
      * @param preguntas preguntas a incluir
+     * @throws ExamenSinPreguntasException 
      */
-    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Set<Pregunta> preguntas) 
+    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Set<Pregunta> preguntas) throws ExamenSinPreguntasException 
     {
-        this(fecha, preguntas);
-
+      
+    	this(fecha, preguntas);
+   	
         //Si me mandan null null
         if(unidadesAbarcadas == null)
             return;
@@ -41,9 +44,13 @@ public class Examen
      * Las unidades abarcadas son las mismas que abarcan las materias
      * @param fecha cuando se tomo/tomara
      * @param preguntas preguntas a incluir
+     * @throws ExamenSinPreguntasException 
      */
-    public Examen(Calendar fecha, Set<Pregunta> preguntas) 
+    public Examen(Calendar fecha, Set<Pregunta> preguntas) throws ExamenSinPreguntasException 
     {
+    	if(preguntas == null)
+          	throw new ExamenSinPreguntasException("No se puede crear un examen sin preguntas");
+    	
         this.fecha = fecha;
         this.preguntas = preguntas;
         this.unidadesAbarcadas = new HashSet<String>();
