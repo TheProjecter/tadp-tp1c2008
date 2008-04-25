@@ -12,11 +12,16 @@ public class Examen
     /**
      * Instancia un examen en una determinada Fecha que abarca unidades y tiene
      * preguntas, las cuales se les avisa que se estan usando en un examen
+     * Si se envian preguntas que abarcan unidades no declaradas, estas unidades
+     * tambien seran parte del examen.
+     * Si el parametro unidadesAbarcadas es null o una coleccion vacia el llamado tendra
+     * el mismo efecto que new Examen(fecha, preguntas), tomandose como unidadesAbarcadas
+     * solo las incluidas en las preguntas.
      * @param fecha cuando se tomo/tomara
      * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesariamente todas se abarcan)
      * @param preguntas preguntas a incluir
      */
-    public Examen(Calendar fecha, Set<String> unidadesAbarcadas, Set<Pregunta> preguntas) 
+    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Set<Pregunta> preguntas) 
     {
         this(fecha, preguntas);
 
