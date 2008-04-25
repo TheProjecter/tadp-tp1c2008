@@ -106,9 +106,6 @@ public class Materia
         return examen;
     }
 
-    
-    
-   
 	/**
      * @author juan martin
      * Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
@@ -163,12 +160,10 @@ public class Materia
 
         return retval;
     }
-
     public Set<Pregunta> getPreguntas() 
     {
         return preguntas;
     }
-
     public List<Examen> getExamenes() 
     {
         return examenes;
@@ -177,7 +172,6 @@ public class Materia
     {
         return nombre;
     }
-
     public void setNombre(String nombre)
     {
         this.nombre = nombre;

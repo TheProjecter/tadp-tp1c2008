@@ -50,7 +50,7 @@ public class Examen
     public Examen(Calendar fecha, Set<Pregunta> preguntas) throws ExamenSinPreguntasException 
     {
     	if(preguntas == null)
-          	throw new ExamenSinPreguntasException("No se puede crear un examen sin preguntas");
+          	throw new ExamenSinPreguntasException("No se puede crear un examen sin preguntas.");
     	
         this.fecha = fecha;
         this.preguntas = preguntas;
