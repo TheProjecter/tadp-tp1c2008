@@ -2,6 +2,8 @@ package tadp.techie.seis;
 
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -65,27 +67,47 @@ public class Materia
      * @return el examen con las preguntas
      */
     public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadPreguntasPracticas)
+            throws PreguntasInsuficientesException
     {
-        //Agrego las practicas
-        Set<Pregunta> practicas = obtenerPreguntas(Pregunta.TiposPregunta.PRACTICO, cantidadPreguntasPracticas, unidadesAbarcadas);
-        //Agrego las teoricas
-        Set<Pregunta> teoricas = obtenerPreguntas(Pregunta.TiposPregunta.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
-
+        Set<Pregunta> practicas;
+        Set<Pregunta> teoricas;
+                
+        try
+        {
+            //Agrego las practicas
+            practicas = obtenerPreguntas(Pregunta.TiposPregunta.PRACTICO, cantidadPreguntasPracticas, unidadesAbarcadas);
+        }
+        catch(PreguntasInsuficientesException ex)
+        {
+            throw new PreguntasInsuficientesException("No sufucientes preguntas de tipo PRACTICO en la materia "+nombre);
+        }   
+        try
+        {
+            //Agrego las teoricas
+            teoricas = obtenerPreguntas(Pregunta.TiposPregunta.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
+        }
+        catch(PreguntasInsuficientesException ex)
+        {
+            throw new PreguntasInsuficientesException("No sufucientes preguntas de tipo TEORICO en la materia "+nombre);
+        }
+        
         //Mezclo todo
         Set<Pregunta> preguntasParaElExamen = new HashSet<Pregunta>();
         preguntasParaElExamen.addAll(practicas);
         preguntasParaElExamen.addAll(teoricas);
-        
-             
+
+
         //Instancio
-        Examen examen = new Examen(fechaQueSeraTomado,unidadesAbarcadas,preguntasParaElExamen);
-        
-        //Me lo guardo
+        Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, preguntasParaElExamen);
+
+
         examenes.add(examen);
-        
-        //Devuelvo
+
+
         return examen;
     }
+
+    
     
    
 	/**
@@ -97,7 +119,7 @@ public class Materia
      * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
      * @return un conjunto de preguntas (sin repetidas)
      */
-    private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas)
+    private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
     {
        
     	Set<Pregunta> preguntasPosibles = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
@@ -111,6 +133,9 @@ public class Materia
             if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
                 misPreguntas.add(pregunta);
         }
+        
+        if(misPreguntas.size() != cantidadDePreguntas)
+            throw new PreguntasInsuficientesException();
       
     	return misPreguntas;
     }
