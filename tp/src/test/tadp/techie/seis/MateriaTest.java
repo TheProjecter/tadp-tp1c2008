@@ -21,6 +21,8 @@ public class MateriaTest {
 	private Calendar ahora ;
 	private Set<String> unidadesAbarcadas;
 	private Pregunta pregunta;
+        private Set<Pregunta> preguntasMuyUsadas = new HashSet<Pregunta>();
+        private Set<Pregunta> preguntasPocoUsadas = new HashSet<Pregunta>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,28 +42,62 @@ public class MateriaTest {
 		unidadesAbarcadas.add("Estructurado");
 		unidadesAbarcadas.add("DFDTR");	
 
+                //Esta la use muchas veces.
+		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", Pregunta.TiposPregunta.TEORICO);  
+		materia.addPregunta(pregunta);
+                for(int i = 0; i < 20; i++)
+                    pregunta.incrementarUso();
+                preguntasMuyUsadas.add(pregunta);                
+                
+                //Solo dos veces
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
+                pregunta.incrementarUso();
+                pregunta.incrementarUso();                
+                preguntasPocoUsadas.add(pregunta);
+                //Solo una
 		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", Pregunta.TiposPregunta.TEORICOPRACTICO);  
+                pregunta.incrementarUso();
+                preguntasPocoUsadas.add(pregunta);
+                //Solo tres
+		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", Pregunta.TiposPregunta.TEORICO);  
 		materia.addPregunta(pregunta);
-		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
+                pregunta.incrementarUso();
+                pregunta.incrementarUso();
+                pregunta.incrementarUso();                
+                preguntasPocoUsadas.add(pregunta);
+
+		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICOPRACTICO);  
 		materia.addPregunta(pregunta);
+                
+                //3 veces
 		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
 		materia.addPregunta(pregunta);
-		
+                pregunta.incrementarUso();
+                pregunta.incrementarUso();
+                pregunta.incrementarUso();
+		preguntasPocoUsadas.add(pregunta);
+                
 		opcionesChoice.add("Cascada");
 		opcionesChoice.add("Espiral");
 		opcionesChoice.add("Modelo");
 		opcionesChoice.add("Evolutivo");
 		opcionesChoice.add("Otros");
-		
-		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
+                
+                //Muchas veces
+		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", Pregunta.TiposPregunta.PRACTICO, opcionesChoice);
 		materia.addPregunta(pregunta);
-		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", Pregunta.TiposPregunta.TEORICO, opcionesChoice);
+                for(int i = 0; i < 20; i++)
+                    pregunta.incrementarUso();
+                preguntasMuyUsadas.add(pregunta);    
+                
+                
+		//2 veces                
+		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", Pregunta.TiposPregunta.PRACTICO, opcionesChoice);
 		materia.addPregunta(pregunta);
-		
+                pregunta.incrementarUso();
+                preguntasPocoUsadas.add(pregunta);
 	}
 
 	@After
@@ -88,9 +124,23 @@ public class MateriaTest {
 	}
 	
 	@Test
-	public final void testCantidadPreguntasExamen() throws Exception{
+	public final void testPreguntasExamen() throws Exception{
 	
-		assertEquals( materia.generarExamen(ahora, unidadesAbarcadas, 2, 1).getPreguntas().size(), 3);
+            Set preguntas = materia.generarExamen(ahora, unidadesAbarcadas, 3, 2).getPreguntas();
+            
+            assertEquals( preguntas.size(), 5);
+            
+            for( Pregunta preg : preguntasPocoUsadas)
+            {
+                assertTrue( preguntas.contains(preg));
+            }
+            for( Pregunta preg : preguntasMuyUsadas)
+            {
+                assertFalse( preguntas.contains(preg));
+            }
+
+            
+            
 	}
 	/*@Test
 	public final void testNoRepitoPreguntasHastaUsarTodas() throws Exception
