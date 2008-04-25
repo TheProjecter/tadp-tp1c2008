@@ -11,7 +11,13 @@ public abstract class Pregunta
 	private int cantidadDeVecesQueSeUso;
 	private TiposPregunta tipo;
 
-
+	/**
+	 * Pregunta.<p>
+	 * @param unidadTematica   	que unidad tematica?
+	 * @param complejidad		valor de complejidad?
+	 * @param pregunta			que pregunta?
+	 * @param tipo				tipo de pregunta? [TEORICO - PRACTICO - TEORICOPRACTICO]
+	 */
     public Pregunta(String unidadTematica, int complejidad, String pregunta,
                      TiposPregunta tipo) {
 
