@@ -45,7 +45,7 @@ public class Materia
 
         for(Pregunta pregunta : preguntas)
         {
-            if(pregunta.getTipo() == tipo)
+            if(pregunta.getTipo().equals(tipo))
                 retval.add(pregunta);
         }
 
@@ -100,19 +100,16 @@ public class Materia
     private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposPregunta tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas)
     {
        
-    	Set<Pregunta> misPreguntas = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
-        Iterator<Pregunta> it = misPreguntas.iterator();
-       
+    	Set<Pregunta> preguntasPosibles = getPreguntasDeTipo(tipoPregunta, new UsoPreguntaComparator());
+        Set<Pregunta> misPreguntas = new HashSet<Pregunta>();
+        Iterator<Pregunta> it = preguntasPosibles.iterator();
        
        while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
         {
             Pregunta pregunta = it.next();
 
             if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-            {
-            	misPreguntas.add(pregunta);
-            	
-            }
+                misPreguntas.add(pregunta);
         }
       
     	return misPreguntas;
