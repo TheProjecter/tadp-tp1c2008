@@ -147,6 +147,7 @@ public class MateriaTest {
             
             
 	}
+	
 	@Test
 	public final void testNoRepitoPreguntasHastaUsarTodas() throws Exception
 	{
@@ -161,5 +162,24 @@ public class MateriaTest {
 		
 	}
 	
+	@Test
+	public final void testConsultarPreguntas() throws Exception
+	{
+			
+		materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 2, 1);
+		
+		//para cada pregunta de materia veo que es una de las que genere y veo que 
+		for(Pregunta p: materia.getPreguntas())	
+		{
+			//la pregunta es una de las que se cargo ...por ende tiene ke estar en alguna de las dos colecciones
+			assertTrue("Hay preguntas que no fueron cargadas.",(preguntasMuyUsadas.contains(p)||preguntasPocoUsadas.contains(p)));
+				
+		}
+		assertEquals("No se recibio la cantidad preguntas teoricas esperadas.", 
+				materia.getPreguntasDeTipo(Pregunta.TiposPregunta.TEORICO, new UsoPreguntaComparator()).size(), 2 );
+		assertEquals("No se recibio la cantidad preguntas practicas esperadas.", 
+				materia.getPreguntasDeTipo(Pregunta.TiposPregunta.PRACTICO, new UsoPreguntaComparator()).size(), 1 );
+		
+	}
 }
 
