@@ -133,13 +133,13 @@ public class MateriaTest {
     {
             materia.generarExamen(ahora, unidadesAbarcadas, 20, 1);
     }	
-    @Test(expected = Exception.class)  
+    @Test(expected = PreguntasInsuficientesException.class)  
 	public final void testFalloExamenPorPocasPreguntasTeoricas() throws Exception {
 		
 		assertNotNull( materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 20, 1));
 		return;
 	}
-		@Test(expected = Exception.class)  
+		@Test(expected = PreguntasInsuficientesException.class)  
 	public final void testFalloExamenPorPocasPreguntasPracticas() throws Exception {
 		
 		assertNotNull( materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 0, 8));
