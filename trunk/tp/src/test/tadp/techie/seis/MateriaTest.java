@@ -11,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tadp.techie.seis.Materia;
 
 
 
@@ -127,7 +126,13 @@ public class MateriaTest {
 	
 		assertNotNull(materia.generarExamen(ahora, null, 2, 3));
 	}
-	
+        
+        @Test(expected = PreguntasInsuficientesException.class)
+        public final void testGenerarExamenConPreguntasInsuficientes() throws PreguntasInsuficientesException, ExamenSinPreguntasException
+        {
+            materia.generarExamen(ahora, unidadesAbarcadas, 20, 1);
+        }	
+        
 	@Test
 	public final void testPreguntasExamen() throws Exception{
 	
