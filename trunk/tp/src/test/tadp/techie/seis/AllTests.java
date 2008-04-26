@@ -7,8 +7,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	PreguntaTest.class,
 	ExamenTest.class,
-	MateriaTest.class,
-})
+	MateriaTest.class
+        })
 public class AllTests {
 
 }
