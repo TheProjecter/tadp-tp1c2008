@@ -1,6 +1,7 @@
 package tadp.techie.seis;
 
 import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -126,13 +127,26 @@ public class MateriaTest {
 	
 		assertNotNull(materia.generarExamen(ahora, null, 2, 3));
 	}
-        
+    @Deprecated    
     @Test(expected = PreguntasInsuficientesException.class)
     public final void testGenerarExamenConPreguntasInsuficientes() throws PreguntasInsuficientesException, ExamenSinPreguntasException
     {
             materia.generarExamen(ahora, unidadesAbarcadas, 20, 1);
     }	
-        
+    @Test(expected = Exception.class)  
+	public final void testFalloExamenPorPocasPreguntasTeoricas() throws Exception {
+		
+		assertNotNull( materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 20, 1));
+		return;
+	}
+		@Test(expected = Exception.class)  
+	public final void testFalloExamenPorPocasPreguntasPracticas() throws Exception {
+		
+		assertNotNull( materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 0, 8));
+
+		return;
+	}
+	    
 	@Test
 	public final void testPreguntasExamen() throws Exception{
 	

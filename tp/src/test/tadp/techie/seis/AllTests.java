@@ -8,7 +8,6 @@ import org.junit.runners.Suite;
 	PreguntaTest.class,
 	ExamenTest.class,
 	MateriaTest.class,
-	MateriaIntegralesTest.class
 })
 public class AllTests {
 
