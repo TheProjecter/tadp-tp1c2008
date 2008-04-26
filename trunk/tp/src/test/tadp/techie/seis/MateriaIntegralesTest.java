@@ -138,18 +138,6 @@ public class MateriaIntegralesTest {
 		assertNotNull (materia.generarExamen(Calendar.getInstance(), colUT, 0, 2));
 		return;
 	}
-	@Test(expected = Exception.class) // Definir Clase!!! 
-	public final void testFalloExamenPorFecha() throws Exception 
-	{
-		HashSet<String> unidadesTematicas = new HashSet<String>();
-		
-		Calendar fechaPasada = Calendar.getInstance();
-		fechaPasada.add(Calendar.YEAR, -2);
-
-		unidadesTematicas.add("Patrones");
-		materia.generarExamen(fechaPasada, unidadesTematicas, 0, 2);
-		return;
-	}
 		@Test(expected = Exception.class) // Definir Clase!!! 
 	public final void testFalloExamenPorPocasPreguntasTeoricas() throws Exception {
 		HashSet<String> colUT = new HashSet<String>();
