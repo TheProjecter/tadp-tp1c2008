@@ -11,12 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-import tadp.techie.seis.*;
-
 
 public class MateriaIntegralesTest {
 
@@ -33,7 +27,7 @@ public class MateriaIntegralesTest {
 		List <String> opcionesChoice;
 		unidadesAbarcadas = new HashSet<String>();
 
-		ahora		= Calendar.getInstance();
+		ahora = Calendar.getInstance();
 
 		// Creo la materia nueva
 		materia		= new Materia("Diseño");
