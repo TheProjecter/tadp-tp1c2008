@@ -127,12 +127,7 @@ public class MateriaTest {
 	
 		assertNotNull(materia.generarExamen(ahora, null, 2, 3));
 	}
-    @Deprecated    
-    @Test(expected = PreguntasInsuficientesException.class)
-    public final void testGenerarExamenConPreguntasInsuficientes() throws PreguntasInsuficientesException, ExamenSinPreguntasException
-    {
-            materia.generarExamen(ahora, unidadesAbarcadas, 20, 1);
-    }	
+    
     @Test(expected = PreguntasInsuficientesException.class)  
 	public final void testFalloExamenPorPocasPreguntasTeoricas() throws Exception {
 		
