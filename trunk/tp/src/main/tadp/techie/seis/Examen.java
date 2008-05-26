@@ -28,7 +28,7 @@ public class Examen
     {
       
     	this(fecha, preguntas);
-   	
+   	    	
         //Si me mandan null null
         if(unidadesAbarcadas == null)
             return;
@@ -39,6 +39,7 @@ public class Examen
             this.unidadesAbarcadas.add(unidad);
         }
     }
+    
     /**
      * Instancia un examen en una determinada Fecha que abarca unidades y tiene
      * preguntas, las cuales se les avisa que se estan usando en un examen
@@ -65,18 +66,7 @@ public class Examen
         }
     }
     
-    /**
-     * Este metodo crea la correcion de un examen y la asigna al alumno pasado como parametro
-     * 
-     * @param a: Alumno del cual se esta corrigiendo el examen
-     * @param nota: Nota que se saco el Alumno
-     * @param notasPregunta: Mapa con cada pregunta y su resultado (B, B-, R, etc)
-     */
-    public void corregirExamen(Alumno a, int nota, Map<Pregunta, ExamenCorregido.RespuestaPregunta> notasPregunta)
-    {
-    	a.addExamenCorregido(new ExamenCorregido(this, nota, notasPregunta));
-    	return;
-    }
+
     
     public void setFecha(Calendar fecha)
     {

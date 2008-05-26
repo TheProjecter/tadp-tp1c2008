@@ -1,12 +1,14 @@
 package tadp.techie.seis;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Alumno {
 
 	private String eMail;
-	private Collection <ExamenCorregido> examenesCorregidos;
+	private Collection<ExamenCorregido> examenesCorregidos = new ArrayList<ExamenCorregido>();
 
+	
 	/**
 	 * Agrega el examen corregido a la lista de examenes dados por el Alumno 
 	 * 
