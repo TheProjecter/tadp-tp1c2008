@@ -31,13 +31,13 @@ Seria mas o menos asi:
 }
 
 //RespuestaPregunta es la nota (B|M|R|etc)
-RespuestaPregunta getRespuestaItem(ItemExamen item)
+RespuestaPregunta getNotaItem(ItemExamen item)
 {
 	//...
 	return BIEN;
 }
 
-int getNotaExamen()
+int getNotaFinal()
 {
 	//...
 	return 4;
