@@ -11,8 +11,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tadp.techie.seis.ExamenCorregido.RespuestaPregunta;
 
-public class AlumnoTest {
+
+public class AlumnoTest implements Corrector {
 
 	private Alumno alumno;
 	private Examen examen;
@@ -23,18 +25,13 @@ public class AlumnoTest {
 		alumno = new Alumno();
 		examen = this.generarExamenTest();
 
-		ExamenCorregidoBuilder ex = new ExamenCorregidoBuilder(alumno, examen);
-		ex.setNota(6);
+		ExamenCorregidoBuilder ex = new ExamenCorregidoBuilder(alumno, examen, this);
 
 		ex.corregirExamen();
 		
 		// Genero un segundo examen
-		ex = new ExamenCorregidoBuilder(alumno, this.generarExamenTest());
-		ex.setNota(4);
+		ex = new ExamenCorregidoBuilder(alumno, this.generarExamenTest(), this);
 		ex.corregirExamen();
-
-		
-		
 	}
 
 
@@ -137,4 +134,22 @@ public class AlumnoTest {
 
 	}
 
+
+	/**
+	 * getNotaFinal() Metodo implementado para que pueda implementar la interfaz Corrector
+	 * 
+	 */
+	public int getNotaFinal() {
+		return 4;
+	}
+
+	/**
+	 * getNotaPregunta() Metodo implementado para que pueda implementar la interfaz Corrector
+	 * 
+	 */
+	public RespuestaPregunta getNotaPregunta(Pregunta preg) {
+		return ExamenCorregido.RespuestaPregunta.BIENMENOS;
+	}
+
+	
 }

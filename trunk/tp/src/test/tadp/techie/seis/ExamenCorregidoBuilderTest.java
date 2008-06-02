@@ -1,6 +1,3 @@
-/**
- * 
- */
 package tadp.techie.seis;
 
 
@@ -19,14 +16,13 @@ import static org.junit.Assert.*;
  * @author Nico
  *
  */
-public class ExamenCorregidoBuilderTest {
+public class ExamenCorregidoBuilderTest implements Corrector {
 
-	
 	private Alumno alumno;
 	private Examen examen;
 	private ExamenCorregidoBuilder builder;
-	
-	
+	private int notaExamen;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -36,8 +32,11 @@ public class ExamenCorregidoBuilderTest {
 		alumno = new Alumno();
 		examen = this.generarExamenTest();
 
-		builder = new ExamenCorregidoBuilder(alumno, examen);
+		builder = new ExamenCorregidoBuilder(alumno, examen, this);
 		
+		notaExamen = 6;
+		//builder.addCriterioCorreccion(Criterio.getInstance);
+
 		return;
 	}
 
@@ -48,53 +47,15 @@ public class ExamenCorregidoBuilderTest {
 	@Test
 	public void crearExamenConNotaOK() throws Exception 
 	{
-
-		builder.setNota(8);	
-		// Verifico que haya creado el ExamenCorregido
-		
-		assertNotNull(builder.corregirExamen());
-		
-		// Verifico que este entre los Examenes del Alumno
-		assertNotNull(alumno.consultarNotaExamen(examen));	
-
-		return;
-	}
-	
-	
-	/**
-	 * Test para verificar que un examen con la correccion de las preguntas se creo correctamente
-	 */
-	@Test
-	public void crearExamenConRtasOK() throws Exception 
-	{
-
-		this.corregirPreguntasAll();
-		
 		// Verifico que haya creado el ExamenCorregido
 		assertNotNull(builder.corregirExamen());
-		
+
 		// Verifico que este entre los Examenes del Alumno
 		assertNotNull(alumno.consultarNotaExamen(examen));	
 
 		return;
 	}
-	
-	
-	
-	/**
-	 * Test para verificar que un examen corregido sin nota ni preguntas no puede crearse
-	 */
-	@Test (expected = CorreccionIncompletaException.class)
-	public void crearCorreccionExamenVacioKO() throws CorreccionIncompletaException 
-	{
-		// Verifico que haya creado el ExamenCorregido
-		assertNull(builder.corregirExamen());
-		
-		// Verifico que este entre los Examenes del Alumno
-		assertNotNull(alumno.consultarNotaExamen(examen));	
 
-		return;
-	}
 
 
 	/**
@@ -103,17 +64,20 @@ public class ExamenCorregidoBuilderTest {
 	 */
 	@Test(expected = NotaIncorrectaException.class)
 	public void cargarNotaCero() throws NotaIncorrectaException {
-		builder.setNota(0);	
+		notaExamen = 0;
+		builder.corregirExamen();	
 		return;
 	}
-	
+
+
 	/**
 	 * Test para verificar que el Builder no permite setear una nota mayor a 10
 	 * @throws NotaIncorrectaException
 	 */
 	@Test(expected = NotaIncorrectaException.class)
 	public void cargarNotaOnce() throws NotaIncorrectaException {
-		builder.setNota(11);
+		notaExamen = 11;
+		builder.corregirExamen();	
 		return;
 	}
 
@@ -124,9 +88,8 @@ public class ExamenCorregidoBuilderTest {
 	@Test
 	public void cargarNotaDiez() throws NotaIncorrectaException 
 	{
-		builder.setNota(10);
-		assertTrue(builder.getNota() == 10);	
-		
+		notaExamen = 10;
+		builder.corregirExamen();	
 		return;
 	}
 	
@@ -137,39 +100,12 @@ public class ExamenCorregidoBuilderTest {
 	@Test
 	public void cargarNotaUno() throws NotaIncorrectaException
 	{
-		builder.setNota(1);
-		assertTrue(builder.getNota() == 1);	
-		
-		return;
-	}
-
-	/**
-	 * Test para verificar que el Builder no tiene problemas en las notas limite
-	 */
-	@Test(expected = PreguntaNoEstaEnExamenException.class)
-	public void cargarPreguntaNoExistente() throws Exception
-	{
-		Pregunta preg = new ADesarrollar("Filosofía", 75, "El Huevo o la Gallina?", Pregunta.TiposPregunta.TEORICO);  
-		builder.addCorreccionPregunta(preg, ExamenCorregido.RespuestaPregunta.BIEN);
-
+		notaExamen = 1;
+		builder.corregirExamen();	
 		return;
 	}
 
 
-	@Test(expected = PreguntaCargadaException.class)
-	public void cargarPreguntaCargadaAntes() throws Exception
-	{
-		this.corregirPreguntasAll();
-
-		// Intento cargar todas las preguntas de vuelta
-		for(Pregunta preg : examen.getPreguntas())
-        {
-			builder.addCorreccionPregunta(preg, ExamenCorregido.RespuestaPregunta.REGULAR);
-        }
-		
-		return;
-	}
-	
 	
 	/**
 	 * @throws java.lang.Exception
@@ -241,12 +177,33 @@ public class ExamenCorregidoBuilderTest {
 	 * Metodo auxiliar para dar todas las preguntas del examen corregidas como Bien-
 	 * @throws Exception
 	 */
+/*
 	public void corregirPreguntasAll () throws Exception
 	{
 		for(Pregunta preg : examen.getPreguntas())
 			builder.addCorreccionPregunta(preg, ExamenCorregido.RespuestaPregunta.BIENMENOS);
 
 	}
-	
+*/
 
+	/**
+	 * Implementacion de la interfaz Corrector, para que devuelva la correccion
+	 * de una pregunta especifica 
+	 * 
+	 */
+	public ExamenCorregido.RespuestaPregunta getNotaPregunta(Pregunta preg)
+	{
+		return ExamenCorregido.RespuestaPregunta.BIENMENOS;
+	}
+	
+	
+	/**
+	 * Implementacion de la interfaz Corrector, para que devuelva 
+	 * la nota final de un examen
+	 * 
+	 */
+	public int getNotaFinal()
+	{
+		return notaExamen;
+	}
 }
