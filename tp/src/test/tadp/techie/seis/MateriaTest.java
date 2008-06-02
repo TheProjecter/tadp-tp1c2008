@@ -46,36 +46,36 @@ public class MateriaTest {
 		unidadesAbarcadas.add("DFDTR");	
 
                 //Esta la use muchas veces.
-		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", Pregunta.TiposPregunta.TEORICO);  
+		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
                 preguntasMuyUsadas.add(pregunta);                
                 
                 //Solo dos veces
-		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICO);  
+		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
                 preguntasPocoUsadas.add(pregunta);
                 //Solo una
-		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", Pregunta.TiposPregunta.TEORICO);  
+		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 preguntasPocoUsadas.add(pregunta);
                 //Solo tres
-		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", Pregunta.TiposPregunta.TEORICO);  
+		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
                 preguntasPocoUsadas.add(pregunta);
 
-		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", Pregunta.TiposPregunta.TEORICOPRACTICO);  
+		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICOPRACTICO);  
 		materia.addPregunta(pregunta);
                 
                 //3 veces
-		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", Pregunta.TiposPregunta.PRACTICO);  
+		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
@@ -89,7 +89,7 @@ public class MateriaTest {
 		opcionesChoice.add("Otros");
                 
                 //Muchas veces
-		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", Pregunta.TiposPregunta.PRACTICO, opcionesChoice);
+		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", ItemExamen.TiposItem.PRACTICO, opcionesChoice);
 		materia.addPregunta(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
@@ -97,7 +97,7 @@ public class MateriaTest {
                 
                 
 		//2 veces                
-		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", Pregunta.TiposPregunta.PRACTICO, opcionesChoice);
+		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", ItemExamen.TiposItem.PRACTICO, opcionesChoice);
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 preguntasPocoUsadas.add(pregunta);
