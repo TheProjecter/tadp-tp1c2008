@@ -4,24 +4,24 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * Comparador para comparar preguntas por cantidad de examenes en los que fue tomada
+ * Comparador para comparar items(preguntas o ejercicios) por cantidad de examenes en los que fue tomada
  * Si las materias a comparar tienen la misma cantidad entonces se devuelve un numero
  * al azar. Solo se devuelve cero si son la misma pregunta (equals->true)
  * @return un entero positivo, cero, or positivo dependiendo de si el primer arg es menor, igual o mayor que el segundo.
  * @author xuan
  */
 
-public class UsoPreguntaComparator implements Comparator<Pregunta>
+public class UsoItemComparator implements Comparator<ItemExamen>
 {
 
-    public int compare(Pregunta pregunta1, Pregunta pregunta2)
+    public int compare(ItemExamen item1, ItemExamen item2)
     {
         //Si son la misma retorno 0
-        if(pregunta1.equals(pregunta2))
+        if(item1.equals(item2))
             return 0;
         //Si no son la misma pero tienen el mismo uso
         //retorno un entero aleatorio no cero
-        if(pregunta1.getCantidadDeVecesQueSeUso() == pregunta2.getCantidadDeVecesQueSeUso())
+        if(item1.getCantidadDeVecesQueSeUso() == item2.getCantidadDeVecesQueSeUso())
         {
             Random rnd = new Random(System.currentTimeMillis());
             int n;
@@ -33,6 +33,6 @@ public class UsoPreguntaComparator implements Comparator<Pregunta>
         }
         
         //Si tienen distinto uso
-        return pregunta1.getCantidadDeVecesQueSeUso() - pregunta2.getCantidadDeVecesQueSeUso();
+        return item1.getCantidadDeVecesQueSeUso() - item2.getCantidadDeVecesQueSeUso();
     }
 }
