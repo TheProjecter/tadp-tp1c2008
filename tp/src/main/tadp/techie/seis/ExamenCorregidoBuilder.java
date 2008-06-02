@@ -1,6 +1,7 @@
 package tadp.techie.seis;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class ExamenCorregidoBuilder {
@@ -8,11 +9,12 @@ public class ExamenCorregidoBuilder {
 	private	Alumno alumno;
 	private	Examen examen;
 	private Corrector corrector;
+        private HashSet<CriterioDeCorreccion> criterios;
 
 	private	int nota;
 
 	// Mapa que contiene por cada Pregunta el resultado de la respuesta
-	private Map<Pregunta, ExamenCorregido.RespuestaPregunta> notasPregunta;
+	private Map<ItemExamen, ExamenCorregido.RespuestaPregunta> notasItems;
 
 
 	/**
@@ -26,8 +28,9 @@ public class ExamenCorregidoBuilder {
 		this.setAlumno(al);
 		this.setExamen(ex);
 		this.setCorrector(cor);
+                this.setCriterios(new HashSet<CriterioDeCorreccion>());
 
-		this.setNotasPregunta(new HashMap<Pregunta, ExamenCorregido.RespuestaPregunta>());
+		this.setNotasPregunta(new HashMap<ItemExamen, ExamenCorregido.RespuestaPregunta>());
 
 	}
 
@@ -40,11 +43,20 @@ public class ExamenCorregidoBuilder {
 		ExamenCorregido ex;
 
 		// Tomo por cada pregunta la respuesta que corresponde
-		for(Pregunta preg : this.getExamen().getPreguntas())
+		for(ItemExamen preg : this.getExamen().getPreguntas())
 			this.getNotasPregunta().put(preg, this.getCorrector().getNotaPregunta(preg)); 
 
-		//TODO Criterios de correccion
-//		if ()
+                boolean cumpleCriterios = true;
+                
+		for(CriterioDeCorreccion criterio : this.getCriterios())
+                {
+                    if(!criterio.cumple(this.getNotasPregunta()))
+                    {
+                        cumpleCriterios = false;
+                        break;
+                    }
+                }
+		if (cumpleCriterios)
 	//		try {
 				this.setNota(this.getCorrector().getNotaFinal());				
 	//		}
@@ -79,8 +91,8 @@ public class ExamenCorregidoBuilder {
 		return nota;
 	}
 
-	public Map<Pregunta, ExamenCorregido.RespuestaPregunta> getNotasPregunta() {
-		return notasPregunta;
+	public Map<ItemExamen, ExamenCorregido.RespuestaPregunta> getNotasPregunta() {
+		return notasItems;
 	}
 
 
@@ -100,8 +112,8 @@ public class ExamenCorregidoBuilder {
 		this.corrector = cor;
 	}
 
-	private void setNotasPregunta(Map<Pregunta, ExamenCorregido.RespuestaPregunta> notasPregunta) {
-		this.notasPregunta = notasPregunta;
+	private void setNotasPregunta(Map<ItemExamen, ExamenCorregido.RespuestaPregunta> notasItems) {
+		this.notasItems = notasItems;
 	}
 	
 	
@@ -120,6 +132,21 @@ public class ExamenCorregidoBuilder {
 
 		throw new NotaIncorrectaException();
 	}
+
+        public HashSet<CriterioDeCorreccion> getCriterios()
+        {
+            return criterios;
+        }
+
+        public void setCriterios(HashSet<CriterioDeCorreccion> criterios)
+        {
+            this.criterios = criterios;
+        }
+        
+        public void addCriterio(CriterioDeCorreccion criterio)
+        {
+            this.getCriterios().add(criterio);
+        }
 
 
 }
