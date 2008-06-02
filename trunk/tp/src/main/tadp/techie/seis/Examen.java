@@ -140,4 +140,18 @@ public class Examen
 	public void setEjercicios(Set<Ejercicio> ejercicios) {
 		this.ejercicios = ejercicios;
 	}
+        /**
+         * 
+         * @return  todos los items, preguntas mas ejercicios
+         * en una sola coleccion
+         */
+        public Collection<ItemExamen> getItems()
+        {
+            HashSet<ItemExamen> retval = new HashSet<ItemExamen>();
+            
+            retval.addAll(getEjercicios());
+            retval.addAll(getPreguntas());
+            
+            return retval;
+        }
 }
