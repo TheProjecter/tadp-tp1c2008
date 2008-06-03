@@ -6,6 +6,9 @@ public class Ejercicio extends ItemExamen{
 
 	/**
 	 * Ejercicio.<e>
+	 * 
+	 * Un ejercicio (a diferencia de una pregunta) no admite multiple choice.-
+	 * 
 	 * @param unidadTematica   	que unidad tematica?
 	 * @param complejidad		valor de complejidad?
 	 * @param ejercicio			que ejercicio?
