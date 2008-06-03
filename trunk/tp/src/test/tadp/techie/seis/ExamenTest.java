@@ -53,36 +53,36 @@ public class ExamenTest {
 	}
 
 	@Test
-	public final void testCrearExamen() throws ExamenSinPreguntasException {
+	public final void testCrearExamen() throws ExamenSinPreguntasNiEjerciciosException {
 		assertNotNull(examen = new Examen(Calendar.getInstance(), unidadesAbarcadas, misPreguntas , misEjercicios));
 	}
 
 	@Test
-	public final void testCrearExamenSinUnidadesTematicas() throws ExamenSinPreguntasException {
+	public final void testCrearExamenSinUnidadesTematicas() throws ExamenSinPreguntasNiEjerciciosException {
 		//se puede crear un examen sin preguntas (ver contrato de Examen)
 		assertNotNull(examen = new Examen(Calendar.getInstance(), null, misPreguntas, misEjercicios ));
 		assertEquals(examen.getUnidades().size(), misPreguntas.size() + misEjercicios.size()/*3*/);
 	}
 	
-	@Test (expected = ExamenSinPreguntasException.class)
-	public final void testCrearExamenSinPreguntas() throws ExamenSinPreguntasException {
+	@Test (expected = ExamenSinPreguntasNiEjerciciosException.class)
+	public final void testCrearExamenSinPreguntas() throws ExamenSinPreguntasNiEjerciciosException {
 		//Un examen sin preguntas no puede ser creado
 		examen = new Examen(Calendar.getInstance(), unidadesAbarcadas, null , null);
 		
 	}
-	@Test (expected = ExamenSinPreguntasException.class)
-	public final void testCrearExamenSinPreguntasYSinUnidades() throws ExamenSinPreguntasException {
+	@Test (expected = ExamenSinPreguntasNiEjerciciosException.class)
+	public final void testCrearExamenSinPreguntasYSinUnidades() throws ExamenSinPreguntasNiEjerciciosException {
 		examen = new Examen(Calendar.getInstance(), null, null );
 		
 	}
 	@Test
-	public final void testCrearExamenSinFecha() throws ExamenSinPreguntasException {
+	public final void testCrearExamenSinFecha() throws ExamenSinPreguntasNiEjerciciosException {
 		//puedo setear la fecha dsps
 		examen = new Examen(null, unidadesAbarcadas, misPreguntas , misEjercicios);
 		
 	}
 	@Test
-	public final void testBorrarPreguntas() throws ExamenSinPreguntasException {
+	public final void testBorrarPreguntas() throws ExamenSinPreguntasNiEjerciciosException {
 		assertNotNull(examen = new Examen(Calendar.getInstance(), unidadesAbarcadas, misPreguntas , misEjercicios));
 		assertNotNull(examen.getPreguntas());
 		examen.borrarPreguntas();
@@ -91,7 +91,7 @@ public class ExamenTest {
 	
 
 	@Test
-	public final void testEqualsPorFechaExamen() throws ExamenSinPreguntasException {
+	public final void testEqualsPorFechaExamen() throws ExamenSinPreguntasNiEjerciciosException {
 		
 		examen = new Examen(now, unidadesAbarcadas, misPreguntas , misEjercicios);
 		
@@ -111,7 +111,7 @@ public class ExamenTest {
 		
 	}
 	@Test
-	public final void testEqualsPorUnidades() throws ExamenSinPreguntasException {
+	public final void testEqualsPorUnidades() throws ExamenSinPreguntasNiEjerciciosException {
 		
 		examen = new Examen(now, unidadesAbarcadas, misPreguntas , misEjercicios);
 		examenAux = new Examen(now, unidadesAbarcadas, misPreguntas , misEjercicios);

@@ -42,7 +42,7 @@ public class AlumnoTest implements Corrector {
 	 * 
 	 */
 	@Test
-	public void examenEncontradoTest() throws ExamenSinPreguntasException 
+	public void examenEncontradoTest() throws ExamenSinPreguntasNiEjerciciosException 
 	{
 		ExamenCorregido ex;
 		
@@ -59,7 +59,7 @@ public class AlumnoTest implements Corrector {
 	 * 
 	 */
 	@Test
-	public void examenNoEncontradoTest() throws ExamenSinPreguntasException 
+	public void examenNoEncontradoTest() throws ExamenSinPreguntasNiEjerciciosException 
 	{
 		ExamenCorregido ex = null;
 		Set<Pregunta> preguntas = new HashSet<Pregunta>();

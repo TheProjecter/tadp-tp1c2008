@@ -61,7 +61,7 @@ public class Materia
 
         return retval;
     }
-
+   
     /**
      * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
      * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
@@ -73,32 +73,21 @@ public class Materia
      * @param cantidadPreguntasTeoricas cuantas teoricas?
      * @param cantidadEjerciciosPracticos cuantos practicos?
      * @return el examen con las preguntas
-     * @throws ExamenSinPreguntasException 
+     * @throws ExamenSinPreguntasNiEjerciciosException 
      */
     public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
-            throws PreguntasInsuficientesException, ExamenSinPreguntasException
+            throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
     {
     	 Set<Ejercicio> ejerciciosPracticos;
-         Set<Pregunta> preguntasTeoricas;
-                 
-         try
-         {
+         Set<Pregunta> preguntasTeoricas;      
+       
              //Agrego las practicas
-             ejerciciosPracticos = obtenerEjercicios(ItemExamen.TiposItem.PRACTICO,  cantidadEjerciciosPracticos, unidadesAbarcadas);
-         }
-         catch(PreguntasInsuficientesException ex)
-         {
-             throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo PRACTICO en la materia "+nombre);
-         }   
-         try
-         {
+             ejerciciosPracticos = obtenerEjercicios( ItemExamen.TiposItem.PRACTICO,  cantidadEjerciciosPracticos, unidadesAbarcadas);
+       
              //Agrego las teoricas
              preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
-         }
-         catch(PreguntasInsuficientesException ex)
-         {
-             throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo TEORICO en la materia "+nombre);
-         }
+        
+         
          
          //Mezclo todo
          Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
@@ -137,11 +126,12 @@ public class Materia
         }
         
         if(misPreguntas.size() != cantidadDePreguntas)
-            throw new PreguntasInsuficientesException();
+            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoPregunta +" en la materia "+nombre);
       
     	return misPreguntas;
     }
-    private  Set<Ejercicio> obtenerEjercicios(ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
+    
+    private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
     {
        
     	Set<Ejercicio> ejerciciosPosibles = getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
@@ -150,17 +140,17 @@ public class Materia
        
        while(it.hasNext() && (misEjercicios.size() < cantidadDeEjercicios))
         {
-            Ejercicio ejercicio = it.next();
+    	   Ejercicio ejercicio = it.next();
 
             if(unidadesAbarcadas.contains(ejercicio.getUnidadTematica()))
             	misEjercicios.add(ejercicio);
         }
         
         if(misEjercicios.size() != cantidadDeEjercicios)
-            throw new PreguntasInsuficientesException();
-      
+            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoEjercicio +" en la materia "+nombre);      
     	return misEjercicios;
     }
+    
     /**
      * @return solo el nombre para no hacerlo tan denso
      */

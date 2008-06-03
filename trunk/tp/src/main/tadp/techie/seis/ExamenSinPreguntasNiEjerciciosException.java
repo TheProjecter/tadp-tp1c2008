@@ -5,7 +5,7 @@ package tadp.techie.seis;
  *
  * @author Juan Martin
  */
-class ExamenSinPreguntasException extends Exception
+class ExamenSinPreguntasNiEjerciciosException extends Exception
 {
 	
 	
@@ -13,11 +13,11 @@ class ExamenSinPreguntasException extends Exception
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ExamenSinPreguntasException()
+	ExamenSinPreguntasNiEjerciciosException()
     {
         super();
     }
-	ExamenSinPreguntasException(String str)
+	ExamenSinPreguntasNiEjerciciosException(String str)
     {
         super(str);
     }

@@ -24,11 +24,10 @@ public class Examen
      * @param unidadesAbarcadas unidades abarcadas por las preguntas (no necesariamente todas se abarcan)
      * @param preguntas preguntas a incluir
      * @param ejercicios ejercicios a incluir
-     * @throws ExamenSinPreguntasException 
+     * @throws ExamenSinPreguntasNiEjerciciosException 
      */
-    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, 
-    		Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) 
-    		throws ExamenSinPreguntasException 
+    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) 
+    		throws ExamenSinPreguntasNiEjerciciosException 
     {
       
     	this(fecha, preguntas, ejercicios);
@@ -50,12 +49,12 @@ public class Examen
      * Las unidades abarcadas son las mismas que abarcan las materias
      * @param fecha cuando se tomo/tomara
      * @param preguntas preguntas a incluir
-     * @throws ExamenSinPreguntasException 
+     * @throws ExamenSinPreguntasNiEjerciciosException 
      */
-    public Examen(Calendar fecha, Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) throws ExamenSinPreguntasException 
+    public Examen(Calendar fecha, Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) throws ExamenSinPreguntasNiEjerciciosException 
     {
-    	if(preguntas == null) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
-          	throw new ExamenSinPreguntasException("No se puede crear un examen sin preguntas.");
+    	if(preguntas == null && preguntas == null) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
+          	throw new ExamenSinPreguntasNiEjerciciosException("No se puede crear un examen sin preguntas ni ejercicios.");
     	
     	
         this.fecha = fecha;
@@ -65,7 +64,8 @@ public class Examen
         
         for(Pregunta pregunta : preguntas)
         {
-            //Incremento la cantidad de veces que se uso
+           
+        	//Incremento la cantidad de veces que se uso
             pregunta.incrementarUso();
             //Incluyo la unidad tematica
             this.unidadesAbarcadas.add(pregunta.getUnidadTematica());
@@ -78,8 +78,7 @@ public class Examen
     }
     
 
-    
-    public void setFecha(Calendar fecha)
+	public void setFecha(Calendar fecha)
     {
         this.fecha = fecha;
     }
