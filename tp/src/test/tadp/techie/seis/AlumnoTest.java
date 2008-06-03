@@ -122,7 +122,7 @@ public class AlumnoTest implements Corrector {
 
 		try 
 		{
-			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 2);
+			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 0);
 		}
 		catch (Exception e)
 		{
