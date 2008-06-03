@@ -30,10 +30,9 @@ public class UnoDeCadaTipoCriterioDeCorreccion implements CriterioDeCorreccion
         {
             if(mapaItems.get(item) == RespuestaPregunta.BIEN || mapaItems.get(item) == RespuestaPregunta.BIENMENOS)
             {
-                if(item.getTipo() == ItemExamen.TiposItem.TEORICOPRACTICO || item.getTipo() == ItemExamen.TiposItem.TEORICO)
-                    teoricaBien = true;
-                if(item.getTipo() == ItemExamen.TiposItem.TEORICOPRACTICO || item.getTipo() == ItemExamen.TiposItem.PRACTICO)
-                    practicaBien = true;
+                //Si es lo setea en true, sino lo deja como esta
+                teoricaBien |= item.isTeorico();
+                practicaBien |= item.isPractico();
             }
                 
             if(teoricaBien && practicaBien)
@@ -42,5 +41,5 @@ public class UnoDeCadaTipoCriterioDeCorreccion implements CriterioDeCorreccion
         
         return false;
     }
-
+    
 }
