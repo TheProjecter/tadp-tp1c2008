@@ -150,18 +150,16 @@ public class ExamenCorregidoBuilderTest implements Corrector {
 		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.PRACTICO);  
 		materia.addPregunta(pregunta);
 
-		
 		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.PRACTICO);  
 		materia.addPregunta(pregunta);
 	            
-	    
 		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
 		materia.addPregunta(pregunta);
 
 
 		try 
 		{
-			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 2);
+			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 0);
 		}
 		catch (Exception e)
 		{
