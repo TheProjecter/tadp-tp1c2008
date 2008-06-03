@@ -54,8 +54,8 @@ public class Materia
         for(Ejercicio ejercicio : ejercicios)
         {
             
-        		if(ejercicio.getTipo().equals(tipo))
-                    retval.add(ejercicio);
+            if(ejercicio.getTipo().equals(tipo))
+                retval.add(ejercicio);
 	
         }
 
@@ -71,20 +71,20 @@ public class Materia
      * @param fechaQueSeraTomado cuando?
      * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
      * @param cantidadPreguntasTeoricas cuantas teoricas?
-     * @param cantidadPreguntasPracticas cuantas practicas?
+     * @param cantidadEjerciciosPracticos cuantos practicos?
      * @return el examen con las preguntas
      * @throws ExamenSinPreguntasException 
      */
-    public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadPreguntasPracticas)
+    public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
             throws PreguntasInsuficientesException, ExamenSinPreguntasException
     {
-    	 Set<Ejercicio> practicas;
-         Set<Pregunta> teoricas;
+    	 Set<Ejercicio> ejerciciosPracticos;
+         Set<Pregunta> preguntasTeoricas;
                  
          try
          {
              //Agrego las practicas
-             practicas = obtenerEjercicios(ItemExamen.TiposItem.PRACTICO, cantidadPreguntasPracticas, unidadesAbarcadas);
+             ejerciciosPracticos = obtenerEjercicios(ItemExamen.TiposItem.PRACTICO,  cantidadEjerciciosPracticos, unidadesAbarcadas);
          }
          catch(PreguntasInsuficientesException ex)
          {
@@ -93,7 +93,7 @@ public class Materia
          try
          {
              //Agrego las teoricas
-             teoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
+             preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
          }
          catch(PreguntasInsuficientesException ex)
          {
@@ -102,12 +102,12 @@ public class Materia
          
          //Mezclo todo
          Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
-         preguntasParaElExamen.addAll(practicas);
-         preguntasParaElExamen.addAll(teoricas);
+         preguntasParaElExamen.addAll(ejerciciosPracticos);
+         preguntasParaElExamen.addAll(preguntasTeoricas);
 
 
          //Instancio
-         Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, teoricas, practicas);
+         Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, preguntasTeoricas, ejerciciosPracticos);
          examenes.add(examen);
          return examen;
     }
@@ -141,10 +141,10 @@ public class Materia
       
     	return misPreguntas;
     }
-    private  Set<Ejercicio> obtenerEjercicios(ItemExamen.TiposItem tipoPregunta, int cantidadDeEjercicios, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
+    private  Set<Ejercicio> obtenerEjercicios(ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
     {
        
-    	Set<Ejercicio> ejerciciosPosibles = getEjerciciosDeTipo(tipoPregunta, new UsoItemComparator());
+    	Set<Ejercicio> ejerciciosPosibles = getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
         Set<Ejercicio> misEjercicios = new HashSet<Ejercicio>();
         Iterator<Ejercicio> it = ejerciciosPosibles.iterator();
        
@@ -204,28 +204,36 @@ public class Materia
     {
         this.nombre = nombre;
     }
-	public void addPregunta(Pregunta pregunta)
-	{
-		preguntas.add(pregunta);
-	}
-	public void borrarPreguntas()
-	{
-		preguntas.clear();
-	}
+    public void addPregunta(Pregunta pregunta)
+    {
+            preguntas.add(pregunta);
+    }
+    public void borrarPreguntas()
+    {
+            preguntas.clear();
+    }
 	
-	/**
-	 * Dos materias son iguales si tienen el mismo nombre.
-	 */
-	 @Override
-	 public boolean equals (Object m)
-	  {
-		 if(m instanceof Materia)
-	        {
-			 Materia materia = (Materia) m;
-	         return this.nombre.equals(materia.getNombre());        
-	        }
+    /**
+    * Dos materias son iguales si tienen el mismo nombre.
+    */
+    @Override
+    public boolean equals (Object m)
+    {
+        if(m instanceof Materia)
+        {
+                 Materia materia = (Materia) m;
+         return this.nombre.equals(materia.getNombre());        
+        }
 
-	        return false;
-	  }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 23 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        return hash;
+    }
 	
 }

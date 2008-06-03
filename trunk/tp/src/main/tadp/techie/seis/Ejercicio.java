@@ -18,38 +18,6 @@ public class Ejercicio extends ItemExamen{
                    
 
     }
-
-     /**
-     * compara por el texto, la unidad tematica y el tipo
-     * no por la dificultad ni cuanto se uso
-     * @param otra pregunta
-     * @return si es la misma
-     */
-    @Override
-    public boolean equals (Object e)
-    {
-
-        if(e instanceof Ejercicio)
-        {
-            Ejercicio ejercicio = (Ejercicio) e;
-
-            return this.getTextoEnunciado().equals(ejercicio.getTextoEnunciado())
-                    && this.getUnidadTematica().equals(ejercicio.getUnidadTematica())
-                    && (this.getTipo() == ejercicio.getTipo());
-            
-        }
-
-
-        return false;
-
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return super.hashCode();
-    }
-
 	
 }
 
