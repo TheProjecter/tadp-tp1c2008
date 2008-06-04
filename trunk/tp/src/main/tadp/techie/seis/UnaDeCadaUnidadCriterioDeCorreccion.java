@@ -34,6 +34,6 @@ public class UnaDeCadaUnidadCriterioDeCorreccion implements CriterioDeCorreccion
             unidadesAbarcadas.add(item.getUnidadTematica());
         }
         
-        return unidadesAbarcadas.containsAll(unidadesBien);
+        return unidadesBien.containsAll(unidadesAbarcadas);
     }
 }
