@@ -1,5 +1,6 @@
 package tadp.techie.seis;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class ExamenCorregidoBuilder {
 		ExamenCorregido ex;
 
 		// Tomo por cada pregunta la respuesta que corresponde
-		for(ItemExamen preg : this.getExamen().getPreguntas())
+		for(ItemExamen preg : this.getExamen().getItems())
 			this.getNotasPregunta().put(preg, this.getCorrector().getNotaPregunta(preg)); 
 
                 boolean cumpleCriterios = true;
@@ -138,9 +139,12 @@ public class ExamenCorregidoBuilder {
             return criterios;
         }
 
-        public void setCriterios(HashSet<CriterioDeCorreccion> criterios)
+        public void setCriterios(Collection<CriterioDeCorreccion> criterios)
         {
-            this.criterios = criterios;
+            if(this.criterios == null)
+                this.criterios = new HashSet<CriterioDeCorreccion>();
+            this.criterios.clear();
+            this.criterios.addAll(criterios);
         }
         
         public void addCriterio(CriterioDeCorreccion criterio)
