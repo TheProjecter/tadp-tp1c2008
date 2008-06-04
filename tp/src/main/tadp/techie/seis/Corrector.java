@@ -2,7 +2,7 @@ package tadp.techie.seis;
 
 public interface Corrector {
 
-	public ExamenCorregido.RespuestaPregunta getNotaPregunta(ItemExamen preg);
+	public ExamenCorregido.CalificacionPregunta getNotaPregunta(ItemExamen preg);
 	
 	public int getNotaFinal();
 

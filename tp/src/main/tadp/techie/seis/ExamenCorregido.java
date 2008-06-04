@@ -4,14 +4,14 @@ import java.util.Map;
 
 public class ExamenCorregido {
 
-	public enum RespuestaPregunta {MAL, REGULAR, REGULARMAS, BIENMENOS, BIEN};
+	public enum CalificacionPregunta {MAL, REGULAR, REGULARMAS, BIENMENOS, BIEN};
 
 	private Examen examen;
 	private int nota;
-	private Map<ItemExamen, RespuestaPregunta> notasPregunta;
+	private Map<ItemExamen, CalificacionPregunta> notasPregunta;
 	
 	
-	public ExamenCorregido(Examen ex, int nota, Map<ItemExamen, RespuestaPregunta> notasPregunta)
+	public ExamenCorregido(Examen ex, int nota, Map<ItemExamen, CalificacionPregunta> notasPregunta)
 	{
 		this.setExamen(ex);
 		this.setNota(nota);
@@ -28,7 +28,7 @@ public class ExamenCorregido {
 	public int getNota() {
 		return nota;
 	}
-	public Map<ItemExamen, RespuestaPregunta> getNotasPregunta() {
+	public Map<ItemExamen, CalificacionPregunta> getNotasPregunta() {
 		return notasPregunta;
 	}
 	public void setExamen(Examen examen) {
@@ -37,7 +37,7 @@ public class ExamenCorregido {
 	public void setNota(int nota) {
 		this.nota = nota;
 	}
-	public void setNotasPregunta(Map<ItemExamen, RespuestaPregunta> notasPregunta) {
+	public void setNotasPregunta(Map<ItemExamen, CalificacionPregunta> notasPregunta) {
 		this.notasPregunta = notasPregunta;
 	}
 	

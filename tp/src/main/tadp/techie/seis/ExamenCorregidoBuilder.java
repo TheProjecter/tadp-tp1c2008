@@ -14,7 +14,7 @@ public class ExamenCorregidoBuilder {
 	private	int nota;
 
 	// Mapa que contiene por cada Pregunta el resultado de la respuesta
-	private Map<ItemExamen, ExamenCorregido.RespuestaPregunta> notasItems;
+	private Map<ItemExamen, ExamenCorregido.CalificacionPregunta> notasItems;
 
 
 	/**
@@ -30,7 +30,7 @@ public class ExamenCorregidoBuilder {
 		this.setCorrector(cor);
                 this.setCriterios(new HashSet<CriterioDeCorreccion>());
 
-		this.setNotasPregunta(new HashMap<ItemExamen, ExamenCorregido.RespuestaPregunta>());
+		this.setNotasPregunta(new HashMap<ItemExamen, ExamenCorregido.CalificacionPregunta>());
 
 	}
 
@@ -91,7 +91,7 @@ public class ExamenCorregidoBuilder {
 		return nota;
 	}
 
-	public Map<ItemExamen, ExamenCorregido.RespuestaPregunta> getNotasPregunta() {
+	public Map<ItemExamen, ExamenCorregido.CalificacionPregunta> getNotasPregunta() {
 		return notasItems;
 	}
 
@@ -112,7 +112,7 @@ public class ExamenCorregidoBuilder {
 		this.corrector = cor;
 	}
 
-	private void setNotasPregunta(Map<ItemExamen, ExamenCorregido.RespuestaPregunta> notasItems) {
+	private void setNotasPregunta(Map<ItemExamen, ExamenCorregido.CalificacionPregunta> notasItems) {
 		this.notasItems = notasItems;
 	}
 	

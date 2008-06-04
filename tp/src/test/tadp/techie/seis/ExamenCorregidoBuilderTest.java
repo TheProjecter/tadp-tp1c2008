@@ -189,9 +189,9 @@ public class ExamenCorregidoBuilderTest implements Corrector {
 	 * de una pregunta especifica 
 	 * 
 	 */
-	public ExamenCorregido.RespuestaPregunta getNotaPregunta(ItemExamen preg)
+	public ExamenCorregido.CalificacionPregunta getNotaPregunta(ItemExamen preg)
 	{
-		return ExamenCorregido.RespuestaPregunta.BIENMENOS;
+		return ExamenCorregido.CalificacionPregunta.BIENMENOS;
 	}
 	
 	
