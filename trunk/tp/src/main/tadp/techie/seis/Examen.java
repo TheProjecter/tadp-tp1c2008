@@ -144,7 +144,7 @@ public class Examen
          * @return  todos los items, preguntas mas ejercicios
          * en una sola coleccion
          */
-        public Collection<ItemExamen> getItems()
+   public Collection<ItemExamen> getItems()
         {
             HashSet<ItemExamen> retval = new HashSet<ItemExamen>();
             
@@ -153,4 +153,6 @@ public class Examen
             
             return retval;
         }
+        
+        
 }

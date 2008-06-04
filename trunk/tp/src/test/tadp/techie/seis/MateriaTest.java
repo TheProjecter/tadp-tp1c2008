@@ -179,8 +179,8 @@ public class MateriaTest {
 		
 		Set<ItemExamen> itemsExamen = new HashSet<ItemExamen>();
 		
-		itemsExamen.addAll(	examen.getPreguntas());
-		itemsExamen.addAll( examen.getEjercicios());
+		itemsExamen.addAll(	examen.getItems());
+		
             
             assertEquals( itemsExamen.size(), 5);
            
