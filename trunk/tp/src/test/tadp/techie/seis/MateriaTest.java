@@ -19,8 +19,8 @@ public class MateriaTest {
 	private Set<String> unidadesAbarcadas;
 	private Pregunta pregunta;
 	private Ejercicio ejercicio;
-    private Set<Pregunta> preguntasMuyUsadas;
-    private Set<Pregunta> preguntasPocoUsadas;
+    private Set<ItemExamen> itemsMuyUsados;
+    private Set<ItemExamen> itemsPocoUsados;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -30,8 +30,8 @@ public class MateriaTest {
 		ahora		= Calendar.getInstance();
 		opcionesChoice  =  new ArrayList<String>();
 
-		preguntasMuyUsadas = new HashSet<Pregunta>();
-		preguntasPocoUsadas = new HashSet<Pregunta>();
+		itemsMuyUsados = new HashSet<ItemExamen>();
+		itemsPocoUsados = new HashSet<ItemExamen>();
 		
 		materia = new Materia("Disenio");
 
@@ -48,26 +48,26 @@ public class MateriaTest {
 		materia.addPregunta(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
-                preguntasMuyUsadas.add(pregunta);                
+                itemsMuyUsados.add(pregunta);                
                 
                 //Solo dos veces
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
-                preguntasPocoUsadas.add(pregunta);
+                itemsPocoUsados.add(pregunta);
                 //Solo una
 		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
-                preguntasPocoUsadas.add(pregunta);
+                itemsPocoUsados.add(pregunta);
                 //Solo tres
 		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.TEORICO);  
 		materia.addPregunta(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
-                preguntasPocoUsadas.add(pregunta);
+                itemsPocoUsados.add(pregunta);
 
 		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICOPRACTICO);  
 		materia.addPregunta(pregunta);
@@ -78,7 +78,7 @@ public class MateriaTest {
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
-		preguntasPocoUsadas.add(pregunta);
+		itemsPocoUsados.add(pregunta);
                 
 		opcionesChoice.add("Cascada");
 		opcionesChoice.add("Espiral");
@@ -91,33 +91,54 @@ public class MateriaTest {
 		materia.addPregunta(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
-                preguntasMuyUsadas.add(pregunta);    
+                itemsMuyUsados.add(pregunta);    
                 
                 
 		//2 veces                
 		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", ItemExamen.TiposItem.PRACTICO, opcionesChoice);
 		materia.addPregunta(pregunta);
         pregunta.incrementarUso();
-        preguntasPocoUsadas.add(pregunta);
+        itemsPocoUsados.add(pregunta);
         
         //Ejercicios
         
         ejercicio = new Ejercicio("Ciclos de Vida", 50, "De un ejemplo de modelo en espiral.", ItemExamen.TiposItem.PRACTICO);
+        for(int i = 0; i < 20; i++)
+        	ejercicio.incrementarUso();
         materia.addEjercicio(ejercicio);  
+        itemsMuyUsados.add(ejercicio);
         
         ejercicio = new Ejercicio("Ciclos de Vida", 30, "De un ejemplo de modelo en cascada.", ItemExamen.TiposItem.PRACTICO);
+        for(int i = 0; i < 20; i++)
+        	ejercicio.incrementarUso();
         materia.addEjercicio(ejercicio);
-      
+        itemsMuyUsados.add(ejercicio);
+        
         ejercicio = new Ejercicio("Ciclos de Vida", 45, "De un ejemplo de modelo de prototipos.", ItemExamen.TiposItem.PRACTICO);
+        for(int i = 0; i < 20; i++)
+        	ejercicio.incrementarUso();
         materia.addEjercicio(ejercicio);
+        itemsMuyUsados.add(ejercicio);
+        
+        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patrón Observer.", ItemExamen.TiposItem.PRACTICO);
+        materia.addEjercicio(ejercicio);
+        itemsPocoUsados.add(ejercicio);
+        
+        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicación de Command.", ItemExamen.TiposItem.PRACTICO);
+        materia.addEjercicio(ejercicio);
+        itemsPocoUsados.add(ejercicio);
+       
+        ejercicio = new Ejercicio("Patrones", 20, "ejemplo de aplicacion de Strategy.", ItemExamen.TiposItem.PRACTICO);
+        materia.addEjercicio(ejercicio);
+        itemsPocoUsados.add(ejercicio);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		materia.borrarPreguntas();
 		unidadesAbarcadas.clear();
-		preguntasMuyUsadas.clear();
-		preguntasPocoUsadas.clear();
+		itemsMuyUsados.clear();
+		itemsPocoUsados.clear();
 	}
 
 	@Test()
@@ -152,24 +173,26 @@ public class MateriaTest {
 	}
 	    
 	@Test
-	public final void testPreguntasExamen() throws Exception{
+	public final void testItemsExamen() throws Exception{
 	
        Examen examen =  materia.generarExamen(ahora, unidadesAbarcadas, 3, 2);    
 		
-		Set<Pregunta> preguntas = examen.getPreguntas();
-        Set<Ejercicio> ejercicios = examen.getEjercicios();
+		Set<ItemExamen> itemsExamen = new HashSet<ItemExamen>();
+		
+		itemsExamen.addAll(	examen.getPreguntas());
+		itemsExamen.addAll( examen.getEjercicios());
             
-            assertEquals( preguntas.size()+ ejercicios.size(), 5);
-            /*
-            for( Pregunta preg : preguntasPocoUsadas)
+            assertEquals( itemsExamen.size(), 5);
+           
+            for( ItemExamen item : itemsExamen)
             {
-                assertTrue( preguntas.contains(preg));
+                assertTrue( itemsPocoUsados.contains(item));
             }
-            for( Pregunta preg : preguntasMuyUsadas)
+            for( ItemExamen item : itemsExamen)
             {
-                assertFalse( preguntas.contains(preg));
+                assertFalse( itemsMuyUsados.contains(item));
             }
-*/
+
             
             
 	}
