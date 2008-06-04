@@ -230,5 +230,13 @@ public class Materia
 			ejercicios.add(ejercicio);
 		
 	}
+	 public Set<Ejercicio> getEjercicios(Ejercicio ej)
+	    {
+	            return ejercicios;
+	    }
+	    public void borrarEjercicios()
+	    {
+	    	ejercicios.clear();
+	    }
 	
 }
