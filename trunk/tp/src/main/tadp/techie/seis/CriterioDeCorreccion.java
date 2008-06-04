@@ -16,6 +16,6 @@ import java.util.Map;
 public interface CriterioDeCorreccion
 {
 
-    public boolean cumple(Map<ItemExamen,ExamenCorregido.RespuestaPregunta> mapaItems);
+    public boolean cumple(Map<ItemExamen,ExamenCorregido.CalificacionPregunta> mapaItems);
     
 }

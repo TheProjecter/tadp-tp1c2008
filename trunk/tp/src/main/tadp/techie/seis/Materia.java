@@ -225,5 +225,10 @@ public class Materia
         hash = 23 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
         return hash;
     }
+	public void addEjercicio(Ejercicio ejercicio) {
+
+			ejercicios.add(ejercicio);
+		
+	}
 	
 }

@@ -6,7 +6,7 @@
 package tadp.techie.seis;
 
 import java.util.Map;
-import tadp.techie.seis.ExamenCorregido.RespuestaPregunta;
+import tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
 
 /**
  *
@@ -21,14 +21,14 @@ public class UnoDeCadaTipoCriterioDeCorreccion implements CriterioDeCorreccion
      * (Teorico y Practico). Las TeoricoPracticas cuantan para las dos. Asi que con que haya
      * solo una teorico practica alcanza para que se cumpla el criterio
      */
-    public boolean cumple(Map<ItemExamen, RespuestaPregunta> mapaItems)
+    public boolean cumple(Map<ItemExamen, CalificacionPregunta> mapaItems)
     {
         boolean teoricaBien = false;
         boolean practicaBien = false;
         
         for( ItemExamen item : mapaItems.keySet())
         {
-            if(mapaItems.get(item) == RespuestaPregunta.BIEN || mapaItems.get(item) == RespuestaPregunta.BIENMENOS)
+            if(mapaItems.get(item) == CalificacionPregunta.BIEN || mapaItems.get(item) == CalificacionPregunta.BIENMENOS)
             {
                 //Si es lo setea en true, sino lo deja como esta
                 teoricaBien |= item.isTeorico();

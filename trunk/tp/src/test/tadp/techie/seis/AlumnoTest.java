@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tadp.techie.seis.ExamenCorregido.RespuestaPregunta;
+import tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
 
 
 public class AlumnoTest implements Corrector {
@@ -147,8 +147,8 @@ public class AlumnoTest implements Corrector {
 	 * getNotaPregunta() Metodo implementado para que pueda implementar la interfaz Corrector
 	 * 
 	 */
-	public RespuestaPregunta getNotaPregunta(ItemExamen preg) {
-		return ExamenCorregido.RespuestaPregunta.BIENMENOS;
+	public CalificacionPregunta getNotaPregunta(ItemExamen preg) {
+		return ExamenCorregido.CalificacionPregunta.BIENMENOS;
 	}
 
 	
