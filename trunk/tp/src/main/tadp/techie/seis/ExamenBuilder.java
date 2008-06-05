@@ -14,17 +14,19 @@ public class ExamenBuilder
 	
 	private Materia materia;
 	private Set<String> unidadesAbarcadas;
+	private Calendar fecha;
 	
 	public ExamenBuilder()
 	{
 		this.setUnidadesAbarcadas(new HashSet<String>());
 	}
 	
-	public ExamenBuilder(Materia materia, Collection<String> unidadesAbarcadas)
+	public ExamenBuilder(Materia materia, Collection<String> unidadesAbarcadas, Calendar fecha)
 	{
 		this();
 		this.setMateria(materia);
 		this.getUnidadesAbarcadas().addAll(unidadesAbarcadas);
+		this.fecha = fecha;
 	}
 	
 	
@@ -38,7 +40,7 @@ public class ExamenBuilder
 	}
 	
 	
-	public Examen generarExamen() throws PreguntasInsuficientesException
+	public Examen generarExamen() throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
 	{
 		Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
 		
@@ -46,8 +48,10 @@ public class ExamenBuilder
 		{
 			itemsTotales.addAll(obtenerItems(getMateria().getItems(), mapaPrototipos.get(proto), proto));
 		}
-		
-		return null;
+		//Instancio
+		Examen examen = new Examen(fecha, unidadesAbarcadas, itemsTotales);
+		materia.addExamen(examen);
+		return examen;
 	}
 	
 	
