@@ -1,5 +1,7 @@
 package tadp.techie.seis;
 
+import java.util.Set;
+
 
 public abstract class Pregunta extends ItemExamen
 {
@@ -51,5 +53,11 @@ public abstract class Pregunta extends ItemExamen
     public  void addTo(ItemAddable materia){
     	
     	materia.addPregunta(this);
+    }
+    
+    @Override
+    public Set<? extends ItemExamen> getItemsFrom(Materia materia)
+    {
+    	return materia.getPreguntas();
     }
 }

@@ -1,5 +1,8 @@
 package tadp.techie.seis;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class Ejercicio extends ItemExamen{
 	
@@ -25,5 +28,9 @@ public class Ejercicio extends ItemExamen{
     	
     	materia.addEjercicio(this);
     }
+	@Override
+	public Set<? extends ItemExamen> getItemsFrom(Materia materia) {
+		return materia.getEjercicios();
+	}
 }
 

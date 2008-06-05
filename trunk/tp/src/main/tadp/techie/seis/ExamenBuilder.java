@@ -2,13 +2,65 @@ package tadp.techie.seis;
 
 import java.util.Calendar;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 
-public class ExamenBuilder {
+public class ExamenBuilder
+{
 	
+	private Materia materia;
+	private Set<String> unidadesAbarcadas;
+	
+	HashMap<PrototipoItem<ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<ItemExamen>, Integer>();
+	
+	
+	public void putPrototipo(PrototipoItem<ItemExamen> proto, int cantidad)
+	{
+		mapaPrototipos.put(proto, new Integer(cantidad));
+	}
+	
+	
+	public Examen generarExamen() throws PreguntasInsuficientesException
+	{
+		Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
+		
+		for(PrototipoItem<ItemExamen> proto : mapaPrototipos.keySet())
+		{
+			itemsTotales.addAll(obtenerItems(materia.getItems(), mapaPrototipos.get(proto), proto));
+		}
+		
+		return null;
+	}
+	
+	
+	private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<ItemExamen> proto)
+		throws PreguntasInsuficientesException
+	{
+		Set<ItemExamen> retval = new HashSet<ItemExamen>();
+		
+		Iterator<ItemExamen> it = origen.iterator();
+	
+		while(it.hasNext() && (retval.size() < cantidad))
+		{
+			ItemExamen item = it.next();
+	
+			//Lo tengo que agregar si es de una unidad tematica que quiero y ademas se parece al prototipo
+			//Si el campo del prototipo por el que comparo es null o 0 no lo tengo que comprar entonces lo tomo
+			//como verdadero
+			if(		unidadesAbarcadas.contains(item.getUnidadTematica())
+				&&	proto.itemSeParece(item)
+				)
+				retval.add(item);
+		}
+	
+		if(retval.size() != cantidad)
+			throw new PreguntasInsuficientesException("No hay suficientes items de tipo "+ proto.getTipo() +" en la materia "+materia.getNombre());
+	
+		return retval;
+	}
 	
 	/**
 	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
@@ -49,54 +101,54 @@ public class ExamenBuilder {
 	}
    
     
-/**
-* @author juan martin
-* Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
-* ante igualdad de uso la eleccion sera aleatoria. 
-* @param tipoPregunta teorica, practica o practica-teorica?
-* @param cantidadPreguntas cuantas preguntas de este tipo quiero?
-* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-* @return un conjunto de preguntas (sin repetidas)
-*/
-private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposItem tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
-{
-
-	Set<Pregunta> preguntasPosibles = materia.getPreguntasDeTipo(tipoPregunta, new UsoItemComparator());
-	Set<Pregunta> misPreguntas = new HashSet<Pregunta>();
-	Iterator<Pregunta> it = preguntasPosibles.iterator();
-
-	while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
+	/**
+	* @author juan martin
+	* Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
+	* ante igualdad de uso la eleccion sera aleatoria. 
+	* @param tipoPregunta teorica, practica o practica-teorica?
+	* @param cantidadPreguntas cuantas preguntas de este tipo quiero?
+	* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
+	* @return un conjunto de preguntas (sin repetidas)
+	*/
+	private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposItem tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
 	{
-		Pregunta pregunta = it.next();
-
-		if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-			misPreguntas.add(pregunta);
+	
+		Set<Pregunta> preguntasPosibles = materia.getPreguntasDeTipo(tipoPregunta, new UsoItemComparator());
+		Set<Pregunta> misPreguntas = new HashSet<Pregunta>();
+		Iterator<Pregunta> it = preguntasPosibles.iterator();
+	
+		while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
+		{
+			Pregunta pregunta = it.next();
+	
+			if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
+				misPreguntas.add(pregunta);
+		}
+	
+		if(misPreguntas.size() != cantidadDePreguntas)
+			throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoPregunta +" en la materia "+materia.getNombre());
+	
+		return misPreguntas;
 	}
 
-	if(misPreguntas.size() != cantidadDePreguntas)
-		throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoPregunta +" en la materia "+materia.getNombre());
-
-	return misPreguntas;
-}
-
-private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
-{
-
-	Set<Ejercicio> ejerciciosPosibles = materia.getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
-	Set<Ejercicio> misEjercicios = new HashSet<Ejercicio>();
-	Iterator<Ejercicio> it = ejerciciosPosibles.iterator();
-
-	while(it.hasNext() && (misEjercicios.size() < cantidadDeEjercicios))
+	private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
 	{
-		Ejercicio ejercicio = it.next();
-
-		if(unidadesAbarcadas.contains(ejercicio.getUnidadTematica()))
-			misEjercicios.add(ejercicio);
+	
+		Set<Ejercicio> ejerciciosPosibles = materia.getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
+		Set<Ejercicio> misEjercicios = new HashSet<Ejercicio>();
+		Iterator<Ejercicio> it = ejerciciosPosibles.iterator();
+	
+		while(it.hasNext() && (misEjercicios.size() < cantidadDeEjercicios))
+		{
+			Ejercicio ejercicio = it.next();
+	
+			if(unidadesAbarcadas.contains(ejercicio.getUnidadTematica()))
+				misEjercicios.add(ejercicio);
+		}
+	
+		if(misEjercicios.size() != cantidadDeEjercicios)
+			throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoEjercicio +" en la materia "+materia.getNombre());      
+		return misEjercicios;
 	}
-
-	if(misEjercicios.size() != cantidadDeEjercicios)
-		throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoEjercicio +" en la materia "+materia.getNombre());      
-	return misEjercicios;
-}
 
 }
