@@ -1,5 +1,7 @@
 package tadp.techie.seis;
 
+import java.util.Set;
+
 public abstract class ItemExamen {
 	
     private String unidadTematica;
@@ -112,4 +114,6 @@ public abstract class ItemExamen {
     }
 
     public abstract void addTo(ItemAddable materia);
+    
+    public abstract Set<? extends ItemExamen> getItemsFrom(Materia materia);
 }
