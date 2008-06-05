@@ -2,241 +2,199 @@ package tadp.techie.seis;
 import java.util.*;
 
 
-public class Materia
+public class Materia implements ItemAddable
 {
-    private String nombre;
-    private Set<Pregunta> preguntas;
-    private List<Examen> examenes;
-    private Set<Ejercicio> ejercicios;
-    /**
-     * Instancia la nueva materia sin preguntas ni examanes
-     */
-    public Materia()
-    {
-        this("");
-    }
-    /**
-     * Instancia y le da un nombre
-     * @param nombre
-     */
-    public Materia(String nombre)
-    {
-        this.nombre = nombre;
-        preguntas = new TreeSet<Pregunta>(new UsoItemComparator());
-        examenes = new ArrayList<Examen>();	
-        ejercicios = new TreeSet<Ejercicio>(new UsoItemComparator());
-    }
+	private String nombre;
+	private Set<Pregunta> preguntas;
+	private List<Examen> examenes;
+	private Set<Ejercicio> ejercicios;
+	/**
+	 * Instancia la nueva materia sin preguntas ni examanes
+	 */
+	public Materia()
+	{
+		this("");
+	}
+	/**
+	 * Instancia y le da un nombre
+	 * @param nombre
+	 */
+	public Materia(String nombre)
+	{
+		this.nombre = nombre;
+		preguntas = new TreeSet<Pregunta>(new UsoItemComparator());
+		examenes = new ArrayList<Examen>();	
+		ejercicios = new TreeSet<Ejercicio>(new UsoItemComparator());
+	}
 
 
-    /**
-     * Filtra las materias de un determinado tipo y las ordena por el criterio
-     * del comparador que recibe
-     * @param tipo un tipo de pregunta
-     * @param comp un comparador de preguntas para ordenar
-     * @return la coleccion de materias filtradas y ordenadas
-     */
-    public Set<Pregunta> getPreguntasDeTipo(Pregunta.TiposItem tipo, Comparator<ItemExamen> comp)
-    {
-        Set<Pregunta> retval = new TreeSet<Pregunta>(comp);
 
-        for(Pregunta pregunta : preguntas)
-        {
-            if(pregunta.getTipo().equals(tipo))
-                retval.add(pregunta);
-        }
-
-        return retval;
-    }
-    public Set<Ejercicio> getEjerciciosDeTipo(ItemExamen.TiposItem tipo, Comparator<ItemExamen> comp)
-    {
-        Set<Ejercicio> retval = new TreeSet<Ejercicio>(comp);
-
-        for(Ejercicio ejercicio : ejercicios)
-        {
-            
-            if(ejercicio.getTipo().equals(tipo))
-                retval.add(ejercicio);
-	
-        }
-
-        return retval;
-    }
-   
-    /**
-     * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
-     * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
-     * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
-     * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
-     * y si furon tomadas igual cantidad de veces se elige al azar.<p>
-     * @param fechaQueSeraTomado cuando?
-     * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-     * @param cantidadPreguntasTeoricas cuantas teoricas?
-     * @param cantidadEjerciciosPracticos cuantos practicos?
-     * @return el examen con las preguntas
-     * @throws ExamenSinPreguntasNiEjerciciosException 
-     */
-    public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
-            throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
-    {
-    	 Set<Ejercicio> ejerciciosPracticos;
-         Set<Pregunta> preguntasTeoricas;      
-       
-             //Agrego las practicas
-             ejerciciosPracticos = obtenerEjercicios( ItemExamen.TiposItem.PRACTICO,  cantidadEjerciciosPracticos, unidadesAbarcadas);
-       
-             //Agrego las teoricas
-             preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas);
-        
-         
-         
-         //Mezclo todo
-         Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
-         preguntasParaElExamen.addAll(ejerciciosPracticos);
-         preguntasParaElExamen.addAll(preguntasTeoricas);
-
-
-         //Instancio
-         Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, preguntasTeoricas, ejerciciosPracticos);
-         examenes.add(examen);
-         return examen;
-    }
 
 	/**
-     * @author juan martin
-     * Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
-     * ante igualdad de uso la eleccion sera aleatoria. 
-     * @param tipoPregunta teorica, practica o practica-teorica?
-     * @param cantidadPreguntas cuantas preguntas de este tipo quiero?
-     * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-     * @return un conjunto de preguntas (sin repetidas)
-     */
-    private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposItem tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
-    {
-       
-    	Set<Pregunta> preguntasPosibles = getPreguntasDeTipo(tipoPregunta, new UsoItemComparator());
-        Set<Pregunta> misPreguntas = new HashSet<Pregunta>();
-        Iterator<Pregunta> it = preguntasPosibles.iterator();
-       
-       while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
-        {
-            Pregunta pregunta = it.next();
+	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
+	 * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
+	 * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
+	 * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
+	 * y si furon tomadas igual cantidad de veces se elige al azar.<p>
+	 * @param fechaQueSeraTomado cuando?
+	 * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
+	 * @param cantidadPreguntasTeoricas cuantas teoricas?
+	 * @param cantidadEjerciciosPracticos cuantos practicos?
+	 * @return el examen con las preguntas
+	 * @throws ExamenSinPreguntasNiEjerciciosException 
+	 */
+	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
+	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
+	{
+		ExamenBuilder examenBuilder = new ExamenBuilder();
+		return examenBuilder.generarExamen(fechaQueSeraTomado, unidadesAbarcadas, cantidadPreguntasTeoricas, cantidadEjerciciosPracticos, this);
 
-            if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-                misPreguntas.add(pregunta);
-        }
-        
-        if(misPreguntas.size() != cantidadDePreguntas)
-            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoPregunta +" en la materia "+nombre);
-      
-    	return misPreguntas;
-    }
-    
-    private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas) throws PreguntasInsuficientesException
-    {
-       
-    	Set<Ejercicio> ejerciciosPosibles = getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
-        Set<Ejercicio> misEjercicios = new HashSet<Ejercicio>();
-        Iterator<Ejercicio> it = ejerciciosPosibles.iterator();
-       
-       while(it.hasNext() && (misEjercicios.size() < cantidadDeEjercicios))
-        {
-    	   Ejercicio ejercicio = it.next();
-
-            if(unidadesAbarcadas.contains(ejercicio.getUnidadTematica()))
-            	misEjercicios.add(ejercicio);
-        }
-        
-        if(misEjercicios.size() != cantidadDeEjercicios)
-            throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoEjercicio +" en la materia "+nombre);      
-    	return misEjercicios;
-    }
-    
-    /**
-     * @return solo el nombre para no hacerlo tan denso
-     */
-    @Override
-    public String toString()
-    {
-        return nombre;
-    }
-    /**
-     * @return un string que describe mas detalladamente que toString
-     */
-    public String detalle()
-    {
-        String retval = nombre + "\n Preguntas:\n\t";
-
-        for(Pregunta pregunta : preguntas)
-            retval += pregunta + "\n\t";
-        for(Ejercicio ejercicio : ejercicios)
-        	retval += ejercicio + "\n\t";
-
-        retval += "Examenes:\n\t";
-        
-        for(Examen examen : examenes)
-            retval += examen + "\n\t";
-
-        return retval;
-    }
-    public Set<Pregunta> getPreguntas() 
-    {
-        return preguntas;
-    }
-    public List<Examen> getExamenes() 
-    {
-        return examenes;
-    }
-    public String getNombre()
-    {
-        return nombre;
-    }
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
-    public void addPregunta(Pregunta pregunta)
-    {
-            preguntas.add(pregunta);
-    }
-    public void borrarPreguntas()
-    {
-            preguntas.clear();
-    }
-	
-    /**
-    * Dos materias son iguales si tienen el mismo nombre.
-    */
-    @Override
-    public boolean equals (Object m)
-    {
-        if(m instanceof Materia)
-        {
-                 Materia materia = (Materia) m;
-         return this.nombre.equals(materia.getNombre());        
-        }
-
-        return false;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 23 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
-        return hash;
-    }
-	public void addEjercicio(Ejercicio ejercicio) {
-
-			ejercicios.add(ejercicio);
-		
 	}
+	/**
+	 * Filtra las materias de un determinado tipo y las ordena por el criterio
+	 * del comparador que recibe
+	 * @param tipo un tipo de pregunta
+	 * @param comp un comparador de preguntas para ordenar
+	 * @return la coleccion de materias filtradas y ordenadas
+	 */
+	public Set<Pregunta> getPreguntasDeTipo(Pregunta.TiposItem tipo, Comparator<ItemExamen> comp)
+	{
+		Set<Pregunta> retval = new TreeSet<Pregunta>(comp);
+
+		for(Pregunta pregunta : preguntas)
+		{
+			if(pregunta.getTipo().equals(tipo))
+				retval.add(pregunta);
+		}
+
+		return retval;
+	}
+	public Set<Ejercicio> getEjerciciosDeTipo(ItemExamen.TiposItem tipo, Comparator<ItemExamen> comp)
+	{
+		Set<Ejercicio> retval = new TreeSet<Ejercicio>(comp);
+
+		for(Ejercicio ejercicio : ejercicios)
+		{
+
+			if(ejercicio.getTipo().equals(tipo))
+				retval.add(ejercicio);
+
+		}
+
+		return retval;
+	}
+
+	/**
+	 * @return solo el nombre para no hacerlo tan denso
+	 */
+	 @Override
+	 public String toString()
+	 {
+		 return nombre;
+	 }
+	 /**
+	  * @return un string que describe mas detalladamente que toString
+	  */
+	 public String detalle()
+	 {
+		 String retval = nombre + "\n Preguntas:\n\t";
+
+		 for(Pregunta pregunta : preguntas)
+			 retval += pregunta + "\n\t";
+		 for(Ejercicio ejercicio : ejercicios)
+			 retval += ejercicio + "\n\t";
+
+		 retval += "Examenes:\n\t";
+
+		 for(Examen examen : examenes)
+			 retval += examen + "\n\t";
+
+		 return retval;
+	 }
+	 public Set<Pregunta> getPreguntas() 
+	 {
+		 return preguntas;
+	 }
+	 public List<Examen> getExamenes() 
+	 {
+		 return examenes;
+	 }
+	 public String getNombre()
+	 {
+		 return nombre;
+	 }
+	 public void setNombre(String nombre)
+	 {
+		 this.nombre = nombre;
+	 }
+	 public void addPregunta(Pregunta pregunta)
+	 {
+		 preguntas.add(pregunta);
+	 }
+
+
+	 /**
+	  * Dos materias son iguales si tienen el mismo nombre.
+	  */
+	 @Override
+	 public boolean equals (Object m)
+	 {
+		 if(m instanceof Materia)
+		 {
+			 Materia materia = (Materia) m;
+			 return this.nombre.equals(materia.getNombre());        
+		 }
+
+		 return false;
+	 }
+
+	 @Override
+	 public int hashCode()
+	 {
+		 int hash = 7;
+		 hash = 23 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+		 return hash;
+	 }
+	 public void addEjercicio(Ejercicio ejercicio) {
+
+		 ejercicios.add(ejercicio);
+
+	 }
 	 public Set<Ejercicio> getEjercicios()
-	    {
-	            return ejercicios;
-	    }
-	    public void borrarEjercicios()
-	    {
-	    	ejercicios.clear();
-	    }
-	
+	 {
+		 return ejercicios;
+	 }
+	 
+	 public Set<ItemExamen> getItems()
+	 {
+		 Set<ItemExamen> items = new HashSet<ItemExamen>();
+		
+		 items.addAll(preguntas);
+		 items.addAll(ejercicios);
+		 return items;
+	 }
+	 public void borrarPreguntas()
+	 {
+		 preguntas.clear();
+	 }
+	 public void borrarEjercicios()
+	 {
+		 ejercicios.clear();
+	 }
+	 public void borrarItems() {
+		 ejercicios.clear();
+		 preguntas.clear();
+	 }
+	 public void addItem(ItemExamen item) {
+		 item.addTo(this);
+
+	 }
+
+
+	 public void addExamen(Examen examen) {
+		 examenes.add(examen);
+
+	 }
+
+
 }

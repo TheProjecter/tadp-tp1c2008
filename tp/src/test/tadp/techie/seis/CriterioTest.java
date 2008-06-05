@@ -137,22 +137,22 @@ public class CriterioTest
 		unidadesAbarcadas.add("DFDTR");	
 	
 		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		ejercicio = new Ejercicio("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.PRACTICO);  
-		materia.addEjercicio(ejercicio);
+		materia.addItem(ejercicio);
 
 		ejercicio = new Ejercicio("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.PRACTICO);  
-		materia.addEjercicio(ejercicio);
+		materia.addItem(ejercicio);
 	            
 		ejercicio = new Ejercicio("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
-		materia.addEjercicio(ejercicio);
+		materia.addItem(ejercicio);
                 
                 
 

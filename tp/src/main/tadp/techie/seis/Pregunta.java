@@ -48,5 +48,8 @@ public abstract class Pregunta extends ItemExamen
         return super.hashCode();
     }
 
-	
+    public  void addTo(ItemAddable materia){
+    	
+    	materia.addPregunta(this);
+    }
 }

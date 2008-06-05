@@ -21,6 +21,9 @@ public class Ejercicio extends ItemExamen{
                    
 
     }
-	
+    public  void addTo(ItemAddable materia){
+    	
+    	materia.addEjercicio(this);
+    }
 }
 
