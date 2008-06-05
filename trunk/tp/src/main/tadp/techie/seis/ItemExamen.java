@@ -110,4 +110,6 @@ public abstract class ItemExamen {
         hash = 89 * hash + (this.textoEnunciado != null ? this.textoEnunciado.hashCode() : 0);
         return hash;
     }
+
+    public abstract void addTo(ItemAddable materia);
 }

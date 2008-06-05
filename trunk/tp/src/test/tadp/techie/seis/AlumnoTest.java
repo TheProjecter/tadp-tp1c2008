@@ -62,11 +62,11 @@ public class AlumnoTest implements Corrector {
 	public void examenNoEncontradoTest() throws ExamenSinPreguntasNiEjerciciosException 
 	{
 		ExamenCorregido ex = null;
-		Set<Pregunta> preguntas = new HashSet<Pregunta>();
-		Set<Ejercicio> ejercicios = new HashSet<Ejercicio>();
-		preguntas.add(new ADesarrollar("Filosofía", 75, "El Huevo o la Gallina?", ItemExamen.TiposItem.TEORICO));
+		Set<ItemExamen> items = new HashSet<ItemExamen>();
+		
+		items.add(new ADesarrollar("Filosofía", 75, "El Huevo o la Gallina?", ItemExamen.TiposItem.TEORICO));
 	    
-		ex = alumno.consultarNotaExamen(new Examen(Calendar.getInstance(), preguntas, ejercicios ));
+		ex = alumno.consultarNotaExamen(new Examen(Calendar.getInstance(), items));
 
 		assertNull(ex);
 		
@@ -100,24 +100,24 @@ public class AlumnoTest implements Corrector {
 		unidadesAbarcadas.add("DFDTR");	
 	
 		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.PRACTICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 		
 		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.PRACTICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 	            
 	    
 		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
 
 
 		try 

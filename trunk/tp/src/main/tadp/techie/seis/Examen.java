@@ -2,7 +2,7 @@ package tadp.techie.seis;
 
 import java.util.*;
 
-public class Examen
+public class Examen implements ItemAddable
 {
 
     private Calendar fecha;
@@ -26,11 +26,11 @@ public class Examen
      * @param ejercicios ejercicios a incluir
      * @throws ExamenSinPreguntasNiEjerciciosException 
      */
-    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) 
-    		throws ExamenSinPreguntasNiEjerciciosException 
+    public Examen(Calendar fecha, Collection<String> unidadesAbarcadas, Collection<ItemExamen> items) 
+                throws ExamenSinPreguntasNiEjerciciosException 
     {
       
-    	this(fecha, preguntas, ejercicios);
+    	this(fecha, items);
    	    	
         //Si me mandan null null
         if(unidadesAbarcadas == null)
@@ -51,34 +51,31 @@ public class Examen
      * @param preguntas preguntas a incluir
      * @throws ExamenSinPreguntasNiEjerciciosException 
      */
-    public Examen(Calendar fecha, Set<Pregunta> preguntas, Set<Ejercicio> ejercicios) throws ExamenSinPreguntasNiEjerciciosException 
+    public Examen(Calendar fecha, Collection<ItemExamen> items) throws ExamenSinPreguntasNiEjerciciosException 
     {
-    	if(preguntas == null && preguntas == null) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
+    	if(items == null) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
           	throw new ExamenSinPreguntasNiEjerciciosException("No se puede crear un examen sin preguntas ni ejercicios.");
     	
     	
         this.fecha = fecha;
-        this.preguntas = preguntas;
-        this.ejercicios = ejercicios;
         this.unidadesAbarcadas = new HashSet<String>();
+
+        this.ejercicios = new HashSet<Ejercicio>();
+        this.preguntas  = new HashSet<Pregunta>();
         
-        for(Pregunta pregunta : preguntas)
-        {
-           
-        	//Incremento la cantidad de veces que se uso
-            pregunta.incrementarUso();
+        this.addAllItems(items);
+        
+        for(ItemExamen item : this.getItems())
+        {  
+            //Incremento la cantidad de veces que se uso
+            item.incrementarUso();
             //Incluyo la unidad tematica
-            this.unidadesAbarcadas.add(pregunta.getUnidadTematica());
-        }
-        
-        for(Ejercicio ejercicio : ejercicios){
-        	ejercicio.incrementarUso();
-        	this.unidadesAbarcadas.add(ejercicio.getUnidadTematica());
+            this.unidadesAbarcadas.add(item.getUnidadTematica());
         }
     }
     
 
-	public void setFecha(Calendar fecha)
+    public void setFecha(Calendar fecha)
     {
         this.fecha = fecha;
     }
@@ -102,12 +99,21 @@ public class Examen
     }
     public void addPregunta(Pregunta pregunta)
     {
-            preguntas.add(pregunta);
+        preguntas.add(pregunta);
     }
     public void borrarPreguntas()
-	{
-		preguntas.clear();
-	}
+    {
+        preguntas.clear();
+    }
+    public void borrarEjercicios()
+    {
+        ejercicios.clear();
+    }
+    public void borrarItems()
+    {
+        this.borrarPreguntas();
+        this.borrarEjercicios();
+    }
     /*
      * compara por la fecha, las unidades tematicas y la cantidad de preguntas y ejercicios
      * @param otro examen
@@ -117,14 +123,14 @@ public class Examen
     public boolean equals (Object e)
     {
 
-        if(e instanceof Examen)
+        if(e != null && e instanceof Examen)
         {
-        	Examen examen = (Examen) e;
+            Examen examen = (Examen) e;
 
             return this.fecha.equals(examen.getFecha())
-                    && this.unidadesAbarcadas.equals(examen.getUnidades())
-                    && (this.preguntas.equals(examen.getPreguntas()))
-                    && (this.ejercicios.equals(examen.getEjercicios()));
+                && this.unidadesAbarcadas.equals(examen.getUnidades())
+                && (this.preguntas.equals(examen.getPreguntas()))
+                && (this.ejercicios.equals(examen.getEjercicios()));
             
         }
 
@@ -132,27 +138,58 @@ public class Examen
 
     }
 
-	public Set<Ejercicio> getEjercicios() {
-		return ejercicios;
-	}
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 83 * hash + (this.fecha != null ? this.fecha.hashCode() : 0);
+        hash = 83 * hash + (this.unidadesAbarcadas != null ? this.unidadesAbarcadas.hashCode() : 0);
+        hash = 83 * hash + (this.preguntas != null ? this.preguntas.hashCode() : 0);
+        hash = 83 * hash + (this.ejercicios != null ? this.ejercicios.hashCode() : 0);
+        return hash;
+    }
 
-	public void setEjercicios(Set<Ejercicio> ejercicios) {
-		this.ejercicios = ejercicios;
-	}
-        /**
-         * 
-         * @return  todos los items, preguntas mas ejercicios
-         * en una sola coleccion
-         */
-   public Collection<ItemExamen> getItems()
-        {
-            HashSet<ItemExamen> retval = new HashSet<ItemExamen>();
-            
-            retval.addAll(getEjercicios());
-            retval.addAll(getPreguntas());
-            
-            return retval;
-        }
+    public Set<Ejercicio> getEjercicios()
+    {
+            return ejercicios;
+    }
+
+    public void setEjercicios(Set<Ejercicio> ejercicios)
+    {
+            this.ejercicios = ejercicios;
+    }
+    /**
+     * 
+     * @return  todos los items, preguntas mas ejercicios
+     * en una sola coleccion
+     */
+    public Collection<ItemExamen> getItems()
+    {
+        HashSet<ItemExamen> retval = new HashSet<ItemExamen>();
+
+        retval.addAll(getEjercicios());
+        retval.addAll(getPreguntas());
+
+        return retval;
+    }
+   
+   
+
+    private void addAllItems(Collection<ItemExamen> items)
+    {
+        for( ItemExamen item : items )
+            item.addTo(this);
+    }
+
+    public void addItem(ItemExamen item)
+    {
+        item.addTo(this);
+    }
+
+    public void addEjercicio(Ejercicio ejercicio)
+    {
+        ejercicios.add(ejercicio);
+    }
         
         
 }

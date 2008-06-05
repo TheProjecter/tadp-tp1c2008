@@ -45,36 +45,36 @@ public class MateriaTest {
 
                 //Esta la use muchas veces.
 		pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
                 itemsMuyUsados.add(pregunta);                
                 
                 //Solo dos veces
 		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
                 itemsPocoUsados.add(pregunta);
                 //Solo una
 		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 pregunta.incrementarUso();
                 itemsPocoUsados.add(pregunta);
                 //Solo tres
 		pregunta = new ADesarrollar("Estructurado", 75, "Que es un trampolin de datos?", ItemExamen.TiposItem.TEORICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();                
                 itemsPocoUsados.add(pregunta);
 
 		pregunta = new ADesarrollar("Ciclos de Vida", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICOPRACTICO);  
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 
         //3 veces
-		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
-		materia.addPregunta(pregunta);
+		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.TEORICO);  
+		materia.addItem(pregunta);
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
                 pregunta.incrementarUso();
@@ -88,7 +88,7 @@ public class MateriaTest {
                 
         //Muchas veces
 		pregunta = new Choice("Ciclos de Vida", 40, "Que ciclo conviene utilizar cuando no se posee experiencia?", ItemExamen.TiposItem.PRACTICO, opcionesChoice);
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
                 for(int i = 0; i < 20; i++)
                     pregunta.incrementarUso();
                 itemsMuyUsados.add(pregunta);    
@@ -96,7 +96,7 @@ public class MateriaTest {
                 
 		//2 veces                
 		pregunta = new Choice("Ciclos de Vida", 30, "Que ciclo conviene utilizar cuando no se sabe exactamente que se busca?", ItemExamen.TiposItem.PRACTICO, opcionesChoice);
-		materia.addPregunta(pregunta);
+		materia.addItem(pregunta);
         pregunta.incrementarUso();
         itemsPocoUsados.add(pregunta);
         
@@ -105,26 +105,40 @@ public class MateriaTest {
         ejercicio = new Ejercicio("Ciclos de Vida", 50, "De un ejemplo de modelo en espiral.", ItemExamen.TiposItem.PRACTICO);
         for(int i = 0; i < 20; i++)
         	ejercicio.incrementarUso();
-        materia.addEjercicio(ejercicio);  
+        materia.addItem(ejercicio);  
+        itemsMuyUsados.add(ejercicio);
         itemsMuyUsados.add(ejercicio);
         
         ejercicio = new Ejercicio("Ciclos de Vida", 30, "De un ejemplo de modelo en cascada.", ItemExamen.TiposItem.PRACTICO);
         for(int i = 0; i < 20; i++)
         	ejercicio.incrementarUso();
-        materia.addEjercicio(ejercicio);
+        materia.addItem(ejercicio);
         itemsMuyUsados.add(ejercicio);
         
         ejercicio = new Ejercicio("Ciclos de Vida", 45, "De un ejemplo de modelo de prototipos.", ItemExamen.TiposItem.PRACTICO);
         for(int i = 0; i < 20; i++)
         	ejercicio.incrementarUso();
-        materia.addEjercicio(ejercicio);
+        materia.addItem(ejercicio);
         itemsMuyUsados.add(ejercicio);
         
-        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patrón Observer.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patr?n Observer.", ItemExamen.TiposItem.PRACTICO);
+        materia.addItem(ejercicio);
+        itemsPocoUsados.add(ejercicio);
+        
+        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicaci?n de Command.", ItemExamen.TiposItem.PRACTICO);
+        materia.addItem(ejercicio);
+        itemsPocoUsados.add(ejercicio);
+       
+    /*    ejercicio = new Ejercicio("Patrones", 20, "ejemplo de aplicacion de Strategy.", ItemExamen.TiposItem.PRACTICO);
+        materia.addItem(ejercicio);
+        itemsPocoUsados.add(ejercicio);*/
+        itemsMuyUsados.add(ejercicio);
+        
+        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patr?n Observer.", ItemExamen.TiposItem.PRACTICO);
         materia.addEjercicio(ejercicio);
         itemsPocoUsados.add(ejercicio);
         
-        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicación de Command.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicaci?n de Command.", ItemExamen.TiposItem.PRACTICO);
         materia.addEjercicio(ejercicio);
         itemsPocoUsados.add(ejercicio);
        
@@ -135,7 +149,7 @@ public class MateriaTest {
 
 	@After
 	public void tearDown() throws Exception {
-		materia.borrarPreguntas();
+		materia.borrarItems();
 		unidadesAbarcadas.clear();
 		itemsMuyUsados.clear();
 		itemsPocoUsados.clear();
@@ -144,7 +158,7 @@ public class MateriaTest {
 	@Test()
 	public final void testGetPreguntasDeTipo() throws Exception {
 		
-		assertNotNull("No hay preguntas cargadas", materia.getPreguntas());
+		assertNotNull("No hay preguntas cargadas", materia.getItems());
 	}
 
 	@Test
