@@ -32,23 +32,23 @@ public class Materia implements ItemAddable
 
 	/**
 	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
-	 * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
-	 * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
-	 * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
-	 * y si furon tomadas igual cantidad de veces se elige al azar.<p>
+	 * y las preguntas. Las preguntas y ejercicios se eligen según correspondan a las unidades
+	 * que se quieran abarcar y una cantidad determinada de teóricas y prácticas.<p>
+	 * <p>Al elegir preguntas/ejercicios se priorizan los que menos veces se tomaron en examenes anteriores
+	 * y si fueron tomadas igual cantidad de veces se elige al azar.<p>
 	 * @param fechaQueSeraTomado cuando?
 	 * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-	 * @param cantidadPreguntasTeoricas cuantas teoricas?
-	 * @param cantidadEjerciciosPracticos cuantos practicos?
+	 * @param cantidadPreguntas cuantas teoricas?
+	 * @param cantidadEjercicios cuantos practicos?
 	 * @return el examen con las preguntas
 	 * @throws ExamenSinPreguntasNiEjerciciosException 
 	 */
-	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
+	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntas, int cantidadEjercicios)
 	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
 	{
 		//delego la responsanilidad de la construccion del examen en otro objeto: examenBuilder
 		ExamenBuilder examenBuilder = new ExamenBuilder();
-		return examenBuilder.generarExamen(fechaQueSeraTomado, unidadesAbarcadas, cantidadPreguntasTeoricas, cantidadEjerciciosPracticos, this);
+		return examenBuilder.generarExamen(fechaQueSeraTomado, unidadesAbarcadas, cantidadPreguntas, cantidadEjercicios, this);
 
 	}
 	/**
