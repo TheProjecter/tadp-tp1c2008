@@ -21,8 +21,8 @@ public class ExamenCorregidoBuilder {
 	/**
 	 * Este es el Constructor del Builder del examen corregido
 	 * 
-	 * @param al: Alumno al cual se corregira el Examen
-	 * @param ex: Examen que sera corregido
+	 * @param al Alumno al cual se corregira el Examen
+	 * @param ex Examen que sera corregido
 	 */
 	public ExamenCorregidoBuilder(Alumno al, Examen ex, Corrector cor)
 	{

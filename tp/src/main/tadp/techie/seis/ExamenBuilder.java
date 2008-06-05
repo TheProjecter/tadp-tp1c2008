@@ -83,30 +83,30 @@ public class ExamenBuilder
 	
 	/**
 	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
-	 * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
-	 * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
-	 * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
+	 * y las preguntas/ejercicios. Las preguntas/ejercicios se elijen segun correspondan a las unidades
+	 * que se quieran abarcar y una cantidad determinada de preguntas y ejercicios.<p>
+	 * <p>Al elegir preguntas/ejercicios se priorizan las que menos veces se tomaron en examenes anteriores
 	 * y si furon tomadas igual cantidad de veces se elige al azar.<p>
 	 * @param fechaQueSeraTomado cuando?
 	 * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-	 * @param cantidadPreguntasTeoricas cuantas teoricas?
-	 * @param cantidadEjerciciosPracticos cuantos practicos?
+	 * @param cantidadPreguntas cuantas preguntas?
+	 * @param cantidadEjercicios cuantos ejercicios?
 	 * @param materia materia del examen ?
 	 * @return el examen con las preguntas
 	 * @throws ExamenSinPreguntasNiEjerciciosException 
 	 */
 	
-	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos, Materia materia)
+	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntas, int cantidadEjercicios, Materia materia)
 	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
 	{
 		Set<Ejercicio> ejerciciosPracticos;
 		Set<Pregunta> preguntasTeoricas;      
 
 		//Agrego las practicas
-		ejerciciosPracticos = obtenerEjercicios( ItemExamen.TiposItem.PRACTICO,  cantidadEjerciciosPracticos, unidadesAbarcadas, materia);
+		ejerciciosPracticos = obtenerEjercicios( ItemExamen.TiposItem.PRACTICO,  cantidadEjercicios, unidadesAbarcadas, materia);
 
 		//Agrego las teoricas
-		preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas, materia);
+		preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntas, unidadesAbarcadas, materia);
 
 		//Mezclo todo
 		Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
@@ -124,8 +124,8 @@ public class ExamenBuilder
 	* @author juan martin
 	* Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
 	* ante igualdad de uso la eleccion sera aleatoria. 
-	* @param tipoPregunta teorica, practica o practica-teorica?
-	* @param cantidadPreguntas cuantas preguntas de este tipo quiero?
+	* @param tipoItem teorico, practico o practico-teorico?
+	* @param cantidadDePreguntas cuantas preguntas de este tipo quiero?
 	* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
 	* @return un conjunto de preguntas (sin repetidas)
 	*/
@@ -149,7 +149,15 @@ public class ExamenBuilder
 	
 		return misPreguntas;
 	}
-
+	/**
+	* @author juan martin
+	* Genero un conjunto de ejercicios para el examen. Tendran prioridad los menos utilizadas y 
+	* ante igualdad de uso la eleccion sera aleatoria. 
+	* @param tipoItem teorico, practico o practica-teorico?
+	* @param cantidadDeEjercicios cuantas preguntas de este tipo quiero?
+	* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
+	* @return un conjunto de ejercicios (sin repetidos)
+	*/
 	private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
 	{
 	

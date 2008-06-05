@@ -40,8 +40,8 @@ public class Alumno {
 	}
 	
 	/**
-	 * Consulta de un alumno para conoce
-	 * 
+	 * Consulta de un alumno para conocer la nota de un examen
+	 * Si el examen no se encuentra corregido se devuelve null.
 	 * @param ex: El examen por el que se consulto
 	 * @return El Examen Corregido
 	 */
@@ -54,7 +54,7 @@ public class Alumno {
                 if (examenBuscado.equals(ex.getExamen()))
                     return ex; 
             }
-		// TODO No habria que tirar una Exception???
+            
 		return null;
 	}
 	
