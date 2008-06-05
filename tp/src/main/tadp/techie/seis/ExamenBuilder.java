@@ -10,7 +10,20 @@ import java.util.Set;
 public class ExamenBuilder {
 	
 	
-	
+	/**
+	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
+	 * y las preguntas. Las preguntas se elijen las que correspondan a las unidades
+	 * que se queran abarcar y una cantidad determinada de teoricas y practicas.<p>
+	 * <p>Al elegir preguntas se priorizan las que menos veces se tomaron en examenes anteriores
+	 * y si furon tomadas igual cantidad de veces se elige al azar.<p>
+	 * @param fechaQueSeraTomado cuando?
+	 * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
+	 * @param cantidadPreguntasTeoricas cuantas teoricas?
+	 * @param cantidadEjerciciosPracticos cuantos practicos?
+	 * @param materia materia del examen ?
+	 * @return el examen con las preguntas
+	 * @throws ExamenSinPreguntasNiEjerciciosException 
+	 */
 	
 	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos, Materia materia)
 	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
@@ -24,13 +37,10 @@ public class ExamenBuilder {
 		//Agrego las teoricas
 		preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntasTeoricas, unidadesAbarcadas, materia);
 
-
-
 		//Mezclo todo
 		Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
 		preguntasParaElExamen.addAll(ejerciciosPracticos);
 		preguntasParaElExamen.addAll(preguntasTeoricas);
-
 
 		//Instancio
 		Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, preguntasParaElExamen);

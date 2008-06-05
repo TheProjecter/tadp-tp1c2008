@@ -185,7 +185,10 @@ public class MateriaTest {
 
 		return;
 	}
-	    
+	 /**
+	  * Verifico que un examen se genere con las preguntas y ejercicios menos usados
+	  * @throws Exception
+	  */   
 	@Test
 	public final void testItemsExamen() throws Exception{
 	

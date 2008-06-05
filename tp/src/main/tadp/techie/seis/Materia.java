@@ -46,6 +46,7 @@ public class Materia implements ItemAddable
 	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntasTeoricas, int cantidadEjerciciosPracticos)
 	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
 	{
+		//delego la responsanilidad de la construccion del examen en otro objeto: examenBuilder
 		ExamenBuilder examenBuilder = new ExamenBuilder();
 		return examenBuilder.generarExamen(fechaQueSeraTomado, unidadesAbarcadas, cantidadPreguntasTeoricas, cantidadEjerciciosPracticos, this);
 
@@ -83,7 +84,26 @@ public class Materia implements ItemAddable
 
 		return retval;
 	}
+	
+	public Set<ItemExamen> getItemsDeTipo(ItemExamen.TiposItem tipo, Comparator<ItemExamen> comp)
+	{
+	
+		Set<ItemExamen> retval = new TreeSet<ItemExamen>(comp);
 
+		for(Ejercicio ejercicio : ejercicios)
+		{
+
+			if(ejercicio.getTipo().equals(tipo))
+				retval.add(ejercicio);
+
+		}
+		for(Pregunta pregunta : preguntas)
+		{
+			if(pregunta.getTipo().equals(tipo))
+				retval.add(pregunta);
+		}
+		return retval;
+	}
 	/**
 	 * @return solo el nombre para no hacerlo tan denso
 	 */
