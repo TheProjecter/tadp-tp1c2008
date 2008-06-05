@@ -129,9 +129,9 @@ public class MateriaTest {
         materia.addItem(ejercicio);
         itemsPocoUsados.add(ejercicio);
        
-    /*    ejercicio = new Ejercicio("Patrones", 20, "ejemplo de aplicacion de Strategy.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 20, "ejemplo de aplicacion de Strategy.", ItemExamen.TiposItem.PRACTICO);
         materia.addItem(ejercicio);
-        itemsPocoUsados.add(ejercicio);*/
+        itemsPocoUsados.add(ejercicio);
         itemsMuyUsados.add(ejercicio);
         
         ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patr?n Observer.", ItemExamen.TiposItem.PRACTICO);
