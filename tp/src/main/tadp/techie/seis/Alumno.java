@@ -48,12 +48,12 @@ public class Alumno {
 	public ExamenCorregido consultarNotaExamen(Examen examenBuscado)
 	{
 
-		for(ExamenCorregido ex : examenesCorregidos)
-        {
-            //Incluyo la unidad tematica
-            if (examenBuscado.equals(ex.getExamen()))
-            	return ex; 
-        }
+            for(ExamenCorregido ex : examenesCorregidos)
+            {
+                //Incluyo la unidad tematica
+                if (examenBuscado.equals(ex.getExamen()))
+                    return ex; 
+            }
 		// TODO No habria que tirar una Exception???
 		return null;
 	}
