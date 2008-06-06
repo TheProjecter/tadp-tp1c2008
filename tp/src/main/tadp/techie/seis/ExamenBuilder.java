@@ -12,18 +12,19 @@ import java.util.TreeSet;
 /**
  * ExamenBuilder sirve para crear examenes cargados de ItemExamen seleccionados
  * automaticamente por los criterios indicados. Los criterios se crean formando
- * prototipos de items a traves de la clase {@link}PrototipoItem y de cada prototipo
+ * prototipos de items a traves de la clase {@link PrototipoItem} y de cada prototipo
  * la cantidad de items
- * 
+ * <p>
  * Pasos para la creacion de un Examen
  * - Instanciar ExamenBuilder con la materia, las unidades abarcadas y la fecha
  * - Con el metodo putPrototipo() cargar todos los prototipos que sean necesarios
  *   indicando cuantos items que respondan a ese prototipo deben aparecer
  * - Opcionalmente se puede setear un Comparator<ItemExamen> para indicarle al builder
  *   la prioridad con la que se seleccionaran los items. Si no se le setea ninguno tomara
- *   el UsoItemComparator por defecto (ver javadoc para mas detalles)
+ *   el {@link UsoItemComparator} por defecto (ver javadoc para mas detalles)
  * - Invocar al metodo generarExamen() para obtener el examen     
  * 
+ * @see PrototipoItem, UsoItemComparator
  * @author xuan
  *
  */
