@@ -1,17 +1,12 @@
 package tadp.techie.seis;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.*;
 
 
 
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.extended.FileConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class SerializacionXStream {
@@ -22,7 +17,8 @@ public class SerializacionXStream {
 	
 	Set<ItemExamen> items;
 	
-		private void convertirXMLBasico(){//Este es el que crea el XML
+		private void convertirXMLBasico(){
+			//Este es el que crea el XML
 						 
 			 XStream xstream = new XStream(new DomDriver());
 			 String xml = xstream.toXML(new ADesarrollar("Geografia",3,"Cual es la Capital de Brazil?", ItemExamen.TiposItem.TEORICO));

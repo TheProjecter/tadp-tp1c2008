@@ -1,7 +1,5 @@
 package tadp.techie.seis;
 
-import java.util.Set;
-
 import tadp.techie.seis.ItemExamen.TiposItem;
 /**
  * Representa un modelo de {@link ItemExamen} por el cual se pueden seleccionar
