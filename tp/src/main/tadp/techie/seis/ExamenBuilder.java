@@ -9,20 +9,42 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
+/**
+ * ExamenBuilder sirve para crear examenes cargados de ItemExamen seleccionados
+ * automaticamente por los criterios indicados. Los criterios se crean formando
+ * prototipos de items a traves de la clase {@link}PrototipoItem y de cada prototipo
+ * la cantidad de items
+ * 
+ * Pasos para la creacion de un Examen
+ * - Instanciar ExamenBuilder con la materia, las unidades abarcadas y la fecha
+ * - Con el metodo putPrototipo() cargar todos los prototipos que sean necesarios
+ *   indicando cuantos items que respondan a ese prototipo deben aparecer
+ * - Opcionalmente se puede setear un Comparator<ItemExamen> para indicarle al builder
+ *   la prioridad con la que se seleccionaran los items. Si no se le setea ninguno tomara
+ *   el UsoItemComparator por defecto (ver javadoc para mas detalles)
+ * - Invocar al metodo generarExamen() para obtener el examen     
+ * 
+ * @author xuan
+ *
+ */
 public class ExamenBuilder
 {
 
     private Materia materia;
     private Set<String> unidadesAbarcadas;
     private Calendar fecha;
-    private Comparator comp = new UsoItemComparator();
+    private Comparator<ItemExamen> comparator = new UsoItemComparator();
 
-    public ExamenBuilder()
+    private ExamenBuilder()
     {
         this.setUnidadesAbarcadas(new HashSet<String>());
     }
-
+    /**
+     * Instancia un nuevo Builder para poder generar el examen con items seleccionados automaticamente
+     * @param materia la materia a la que pertenecera el examen
+     * @param unidadesAbarcadas un colleccion de String que contiene los nombres de las unidades
+     * @param fecha la fecha en que se tomara el examen
+     */
     public ExamenBuilder(Materia materia, Collection<String> unidadesAbarcadas, Calendar fecha)
     {
         this();
@@ -31,12 +53,27 @@ public class ExamenBuilder
         this.fecha = fecha;
     }
     HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
-
+    /**
+     * Agrega el prototipo a la lista de los prototipos que se usaran para seleccionar los items
+     * Si se indica dos veces el mismo prototipo y dos prototipos iguales se tomara la ultima cantidad
+     * 
+     * @param proto
+     * @param cantidad
+     */
     public void putPrototipo(PrototipoItem<? extends ItemExamen> proto, int cantidad)
     {
         mapaPrototipos.put(proto, new Integer(cantidad));
     }
 
+    /**
+     * Crea el examen seleccionando de la materia cargada los items que respondan a los
+     * prototipos cargados. Elije por prioridad indicada por el Comparator (por defecto se usa
+     * el UsoItemComparator, si no se indico ninguno)
+     * @return La instancia del Examen con los items seleccionados
+     * @throws PreguntasInsuficientesException Si la cantidad de Items pedidos es mayor a los que
+     * 	se encontraron en la materia y no se pudo crear el examen con la catidad de items deseada
+     * @throws ExamenSinPreguntasNiEjerciciosException Si se intento intanciar sin items
+     */
     public Examen generarExamen() throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
     {
         Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
@@ -59,12 +96,21 @@ public class ExamenBuilder
      */
     private Set<ItemExamen> getSortedItems()
     {
-        Set<ItemExamen> retval = new TreeSet<ItemExamen>(comp);
+        Set<ItemExamen> retval = new TreeSet<ItemExamen>(getComparator());
 
         retval.addAll(materia.getItems());
         return retval;
     }
-
+    /**
+     * De la coleccion de items origen selecciona los primeros cantidad de items que
+     * responden al protoripo y ademas el item es de una unidad tematica contenida en
+     * la coleccion de unidades
+     * @param origen Una coleccion de Items
+     * @param cantidad La cantidad a seleccionar
+     * @param proto El prototipo que se usa para ejejir items
+     * @return
+     * @throws PreguntasInsuficientesException
+     */
     private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<? extends ItemExamen> proto)
             throws PreguntasInsuficientesException
     {
@@ -127,4 +173,12 @@ public class ExamenBuilder
     {
         unidadesAbarcadas.addAll(unidades);
     }
+
+	public void setComparator(Comparator<ItemExamen> comparator) {
+		this.comparator = comparator;
+	}
+
+	public Comparator<ItemExamen> getComparator() {
+		return comparator;
+	}
 }
