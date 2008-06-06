@@ -1,0 +1,30 @@
+<java.util.Set>
+	<ADesarrollar>
+	  <unidadTematica>Geografia</unidadTematica>
+	  <complejidad>3</complejidad>
+	  <cantidadDeVecesQueSeUso>0</cantidadDeVecesQueSeUso>
+	  <tipo>TEORICO</tipo>
+	  <TextoEnunciado>Cual es la Capital de Brazil?</TextoEnunciado>
+	</ADesarrollar>
+	<ADesarrollar>
+	  <unidadTematica>Lengua</unidadTematica>
+	  <complejidad>1</complejidad>
+	  <cantidadDeVecesQueSeUso>0</cantidadDeVecesQueSeUso>
+	  <tipo>PRACTICO</tipo>
+	  <TextoEnunciado>Verbos modo imperativo</TextoEnunciado>
+	</ADesarrollar>
+	<ADesarrollar>
+	  <unidadTematica>Matematica</unidadTematica>
+	  <complejidad>2</complejidad>
+	  <cantidadDeVecesQueSeUso>0</cantidadDeVecesQueSeUso>
+	  <tipo>TEORICO</tipo>
+	  <TextoEnunciado>Cuanto mide un angulo recto?</TextoEnunciado>
+	</ADesarrollar>
+	<ADesarrollar>
+	  <unidadTematica>Naturales</unidadTematica>
+	  <complejidad>3</complejidad>
+	  <cantidadDeVecesQueSeUso>0</cantidadDeVecesQueSeUso>
+	  <tipo>TEORICO</tipo>
+	  <TextoEnunciado>Que es un factor abiotico?</TextoEnunciado>
+	</ADesarrollar>
+</java.util.Set>
