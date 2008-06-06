@@ -12,6 +12,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import tadp.techie.seis.ItemExamen.TiposItem;
 import static org.junit.Assert.*;
 /**
  *
@@ -154,12 +155,18 @@ public class CriterioTest
 		ejercicio = new Ejercicio("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
 		materia.addItem(ejercicio);
                 
-                
-
-
+          
+		PrototipoItem<Pregunta> protoPregunta = new PrototipoItem<Pregunta>(Pregunta.class);
+		protoPregunta.setTipo(TiposItem.TEORICO);
+		PrototipoItem<Ejercicio> protoEjercicio = new PrototipoItem<Ejercicio>(Ejercicio.class);
+		protoEjercicio.setTipo(TiposItem.PRACTICO);
+		ExamenBuilder builder = new ExamenBuilder(materia,unidadesAbarcadas,Calendar.getInstance());
+		builder.putPrototipo(protoPregunta, 3);
+		builder.putPrototipo(protoEjercicio, 3);
+		
 		try 
 		{
-			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 3);
+			ex = builder.generarExamen();
 		}
 		catch (Exception e)
 		{

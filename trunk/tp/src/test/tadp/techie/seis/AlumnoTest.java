@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import tadp.techie.seis.ItemExamen.TiposItem;
 
 
 public class AlumnoTest implements Corrector {
@@ -119,10 +120,14 @@ public class AlumnoTest implements Corrector {
 		pregunta = new ADesarrollar("Ciclos de Vida", 75, "Indique los pasos que aplicaria con que ciclo de vida para implementar un Sistema Contable", ItemExamen.TiposItem.PRACTICO);  
 		materia.addItem(pregunta);
 
-
+		PrototipoItem<Pregunta> proto = new PrototipoItem<Pregunta>(Pregunta.class);
+		proto.setTipo(TiposItem.TEORICO);
+		ExamenBuilder builder = new ExamenBuilder(materia,unidadesAbarcadas,Calendar.getInstance());
+		builder.putPrototipo(proto, 3);
+		
 		try 
 		{
-			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 0);
+			ex = builder.generarExamen();
 		}
 		catch (Exception e)
 		{

@@ -8,6 +8,8 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import tadp.techie.seis.ItemExamen.TiposItem;
 import static org.junit.Assert.*;
 
 /**
@@ -157,9 +159,14 @@ public class ExamenCorregidoBuilderTest implements Corrector {
 		materia.addItem(pregunta);
 
 
+		PrototipoItem<Pregunta> proto = new PrototipoItem<Pregunta>(Pregunta.class);
+		proto.setTipo(TiposItem.TEORICO);
+		ExamenBuilder builder = new ExamenBuilder(materia,unidadesAbarcadas,Calendar.getInstance());
+		builder.putPrototipo(proto, 3);
+		
 		try 
 		{
-			ex = materia.generarExamen(Calendar.getInstance(), unidadesAbarcadas, 3, 0);
+			ex = builder.generarExamen();
 		}
 		catch (Exception e)
 		{
