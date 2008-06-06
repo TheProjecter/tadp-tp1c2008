@@ -31,8 +31,6 @@ public class ExamenBuilderTest extends AbstractMateriaTest
         builder.putPrototipo(protoPreguntaTeorica, 3);
         
         Examen examen = builder.generarExamen();
-        
-//        Examen examen = materia.generarExamen(ahora, unidadesAbarcadas, 3, 2);
 
         Set<ItemExamen> itemsExamen = new HashSet<ItemExamen>();
 
@@ -49,11 +47,30 @@ public class ExamenBuilderTest extends AbstractMateriaTest
         {
             assertFalse(itemsMuyUsados.contains(item));
         }
-
-
-
     }
     
-	
+
+    @Test(expected = ExamenSinPreguntasNiEjerciciosException.class)
+    public final void testGenerarExamenItems() throws Exception
+    {
+        ExamenBuilder builder = new ExamenBuilder(materia,unidadesAbarcadas,ahora);
+        builder.generarExamen();   
+    }
+
+    @Test(expected = PreguntasInsuficientesException.class)
+    public final void testFalloExamenPorPocosItems() throws Exception
+    {
+        //Prototipo de una ejercicio practico
+        PrototipoItem<Ejercicio> protoEjercicioPractico = new PrototipoItem<Ejercicio>(Ejercicio.class);
+        protoEjercicioPractico.setTipo(ItemExamen.TiposItem.PRACTICO);
+        ExamenBuilder builder = new ExamenBuilder(materia,unidadesAbarcadas,ahora);
+        
+        builder.putPrototipo(protoEjercicioPractico, 20);
+        
+        assertNotNull(builder.generarExamen());
+    }
+
+  
+    
 
 }

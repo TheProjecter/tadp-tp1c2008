@@ -53,7 +53,7 @@ public class Examen implements ItemAddable
      */
     public Examen(Calendar fecha, Collection<ItemExamen> items) throws ExamenSinPreguntasNiEjerciciosException 
     {
-    	if(items == null) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
+    	if(items == null || items.size() == 0) // ver: hacer otra excepcion para el caso de que no ahay ejercicios o generalizar apra cuando no haya ni preguntas ni ejercicios
           	throw new ExamenSinPreguntasNiEjerciciosException("No se puede crear un examen sin preguntas ni ejercicios.");
     	
     	
