@@ -3,10 +3,12 @@ package tadp.techie.seis;
 import java.util.Calendar;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 public class ExamenBuilder
@@ -15,7 +17,7 @@ public class ExamenBuilder
 	private Materia materia;
 	private Set<String> unidadesAbarcadas;
 	private Calendar fecha;
-	
+	private Comparator comp = new UsoItemComparator();
 	public ExamenBuilder()
 	{
 		this.setUnidadesAbarcadas(new HashSet<String>());
@@ -31,10 +33,10 @@ public class ExamenBuilder
 	
 	
 	
-	HashMap<PrototipoItem<ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<ItemExamen>, Integer>();
+	HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
 	
 	
-	public void putPrototipo(PrototipoItem<ItemExamen> proto, int cantidad)
+	public void putPrototipo(PrototipoItem<? extends ItemExamen> proto, int cantidad)
 	{
 		mapaPrototipos.put(proto, new Integer(cantidad));
 	}
@@ -44,18 +46,32 @@ public class ExamenBuilder
 	{
 		Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
 		
-		for(PrototipoItem<ItemExamen> proto : mapaPrototipos.keySet())
+		for(PrototipoItem<? extends ItemExamen> proto : mapaPrototipos.keySet())
 		{
-			itemsTotales.addAll(obtenerItems(getMateria().getItems(), mapaPrototipos.get(proto), proto));
+			itemsTotales.addAll(obtenerItems(getSortedItems(), mapaPrototipos.get(proto), proto));
 		}
 		//Instancio
 		Examen examen = new Examen(fecha, unidadesAbarcadas, itemsTotales);
 		materia.addExamen(examen);
 		return examen;
 	}
+        
+        /**
+         * Devuelve todos los items de la materia ordenados en el Set
+         * segun el criterio de ordenamiento dado por el comparator
+         * Por defecto es los menos usados primero
+         * @return Los items de la materia ordenados
+         */
+        private Set<ItemExamen> getSortedItems()
+        {
+            Set<ItemExamen> retval = new TreeSet<ItemExamen>(comp);
+
+            retval.addAll(materia.getItems());
+            return retval;
+        }
 	
 	
-	private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<ItemExamen> proto)
+	private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<? extends ItemExamen> proto)
 		throws PreguntasInsuficientesException
 	{
 		Set<ItemExamen> retval = new HashSet<ItemExamen>();
