@@ -10,223 +10,121 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 public class ExamenBuilder
 {
-	
-	private Materia materia;
-	private Set<String> unidadesAbarcadas;
-	private Calendar fecha;
-	private Comparator comp = new UsoItemComparator();
-	public ExamenBuilder()
-	{
-		this.setUnidadesAbarcadas(new HashSet<String>());
-	}
-	
-	public ExamenBuilder(Materia materia, Collection<String> unidadesAbarcadas, Calendar fecha)
-	{
-		this();
-		this.setMateria(materia);
-		this.getUnidadesAbarcadas().addAll(unidadesAbarcadas);
-		this.fecha = fecha;
-	}
-	
-	
-	
-	HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
-	
-	
-	public void putPrototipo(PrototipoItem<? extends ItemExamen> proto, int cantidad)
-	{
-		mapaPrototipos.put(proto, new Integer(cantidad));
-	}
-	
-	
-	public Examen generarExamen() throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
-	{
-		Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
-		
-		for(PrototipoItem<? extends ItemExamen> proto : mapaPrototipos.keySet())
-		{
-			itemsTotales.addAll(obtenerItems(getSortedItems(), mapaPrototipos.get(proto), proto));
-		}
-		//Instancio
-		Examen examen = new Examen(fecha, unidadesAbarcadas, itemsTotales);
-		materia.addExamen(examen);
-		return examen;
-	}
-        
-        /**
-         * Devuelve todos los items de la materia ordenados en el Set
-         * segun el criterio de ordenamiento dado por el comparator
-         * Por defecto es los menos usados primero
-         * @return Los items de la materia ordenados
-         */
-        private Set<ItemExamen> getSortedItems()
+
+    private Materia materia;
+    private Set<String> unidadesAbarcadas;
+    private Calendar fecha;
+    private Comparator comp = new UsoItemComparator();
+
+    public ExamenBuilder()
+    {
+        this.setUnidadesAbarcadas(new HashSet<String>());
+    }
+
+    public ExamenBuilder(Materia materia, Collection<String> unidadesAbarcadas, Calendar fecha)
+    {
+        this();
+        this.setMateria(materia);
+        this.getUnidadesAbarcadas().addAll(unidadesAbarcadas);
+        this.fecha = fecha;
+    }
+    HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
+
+    public void putPrototipo(PrototipoItem<? extends ItemExamen> proto, int cantidad)
+    {
+        mapaPrototipos.put(proto, new Integer(cantidad));
+    }
+
+    public Examen generarExamen() throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
+    {
+        Set<ItemExamen> itemsTotales = new HashSet<ItemExamen>();
+
+        for(PrototipoItem<? extends ItemExamen> proto : mapaPrototipos.keySet())
         {
-            Set<ItemExamen> retval = new TreeSet<ItemExamen>(comp);
-
-            retval.addAll(materia.getItems());
-            return retval;
+            itemsTotales.addAll(obtenerItems(getSortedItems(), mapaPrototipos.get(proto), proto));
         }
-	
-	
-	private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<? extends ItemExamen> proto)
-		throws PreguntasInsuficientesException
-	{
-		Set<ItemExamen> retval = new HashSet<ItemExamen>();
-		
-		Iterator<ItemExamen> it = origen.iterator();
-	
-		while(it.hasNext() && (retval.size() < cantidad))
-		{
-			ItemExamen item = it.next();
-	
-			//Lo tengo que agregar si es de una unidad tematica que quiero y ademas se parece al prototipo
-			//Si el campo del prototipo por el que comparo es null o 0 no lo tengo que comprar entonces lo tomo
-			//como verdadero
-			if(		getUnidadesAbarcadas().contains(item.getUnidadTematica())
-				&&	proto.itemSeParece(item)
-				)
-				retval.add(item);
-		}
-	
-		if(retval.size() != cantidad)
-			throw new PreguntasInsuficientesException("No hay suficientes items de tipo "+ proto.getTipo() +" en la materia "+getMateria().getNombre());
-	
-		return retval;
-	}
-	
-	/**
-	 * Genera un nuevo examen para esta materia con la fecha en que se va a tomar,
-	 * y las preguntas/ejercicios. Las preguntas/ejercicios se elijen segun correspondan a las unidades
-	 * que se quieran abarcar y una cantidad determinada de preguntas y ejercicios.<p>
-	 * <p>Al elegir preguntas/ejercicios se priorizan las que menos veces se tomaron en examenes anteriores
-	 * y si furon tomadas igual cantidad de veces se elige al azar.<p>
-	 * @param fechaQueSeraTomado cuando?
-	 * @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-	 * @param cantidadPreguntas cuantas preguntas?
-	 * @param cantidadEjercicios cuantos ejercicios?
-	 * @param materia materia del examen ?
-	 * @return el examen con las preguntas
-	 * @throws ExamenSinPreguntasNiEjerciciosException 
-	 */
-	
-	public Examen generarExamen(Calendar fechaQueSeraTomado,Set<String> unidadesAbarcadas, int cantidadPreguntas, int cantidadEjercicios, Materia materia)
-	throws PreguntasInsuficientesException, ExamenSinPreguntasNiEjerciciosException
-	{
-		Set<Ejercicio> ejerciciosPracticos;
-		Set<Pregunta> preguntasTeoricas;      
+        //Instancio
+        Examen examen = new Examen(fecha, unidadesAbarcadas, itemsTotales);
+        materia.addExamen(examen);
+        return examen;
+    }
 
-		//Agrego las practicas
-		ejerciciosPracticos = obtenerEjercicios( ItemExamen.TiposItem.PRACTICO,  cantidadEjercicios, unidadesAbarcadas, materia);
+    /**
+     * Devuelve todos los items de la materia ordenados en el Set
+     * segun el criterio de ordenamiento dado por el comparator
+     * Por defecto es los menos usados primero
+     * @return Los items de la materia ordenados
+     */
+    private Set<ItemExamen> getSortedItems()
+    {
+        Set<ItemExamen> retval = new TreeSet<ItemExamen>(comp);
 
-		//Agrego las teoricas
-		preguntasTeoricas = obtenerPreguntas(ItemExamen.TiposItem.TEORICO, cantidadPreguntas, unidadesAbarcadas, materia);
+        retval.addAll(materia.getItems());
+        return retval;
+    }
 
-		//Mezclo todo
-		Set<ItemExamen> preguntasParaElExamen = new HashSet<ItemExamen>();
-		preguntasParaElExamen.addAll(ejerciciosPracticos);
-		preguntasParaElExamen.addAll(preguntasTeoricas);
+    private Set<ItemExamen> obtenerItems(Set<ItemExamen> origen, int cantidad, PrototipoItem<? extends ItemExamen> proto)
+            throws PreguntasInsuficientesException
+    {
+        Set<ItemExamen> retval = new HashSet<ItemExamen>();
 
-		//Instancio
-		Examen examen = new Examen(fechaQueSeraTomado, unidadesAbarcadas, preguntasParaElExamen);
-		materia.addExamen(examen);
-		return examen;
-	}
-   
-    
-	/**
-	* @author juan martin
-	* Genero un conjunto de preguntas para el examen. Tendran prioridad las menos utilizadas y 
-	* ante igualdad de uso la eleccion sera aleatoria. 
-	* @param tipoItem teorico, practico o practico-teorico?
-	* @param cantidadDePreguntas cuantas preguntas de este tipo quiero?
-	* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-	* @return un conjunto de preguntas (sin repetidas)
-	*/
-	private  Set<Pregunta> obtenerPreguntas(Pregunta.TiposItem tipoPregunta, int cantidadDePreguntas, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
-	{
-	
-		Set<Pregunta> preguntasPosibles = materia.getPreguntasDeTipo(tipoPregunta, new UsoItemComparator());
-		Set<Pregunta> misPreguntas = new HashSet<Pregunta>();
-		Iterator<Pregunta> it = preguntasPosibles.iterator();
-	
-		while(it.hasNext() && (misPreguntas.size() < cantidadDePreguntas))
-		{
-			Pregunta pregunta = it.next();
-	
-			if(unidadesAbarcadas.contains(pregunta.getUnidadTematica()))
-				misPreguntas.add(pregunta);
-		}
-	
-		if(misPreguntas.size() != cantidadDePreguntas)
-			throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoPregunta +" en la materia "+materia.getNombre());
-	
-		return misPreguntas;
-	}
-	/**
-	* @author juan martin
-	* Genero un conjunto de ejercicios para el examen. Tendran prioridad los menos utilizadas y 
-	* ante igualdad de uso la eleccion sera aleatoria. 
-	* @param tipoItem teorico, practico o practica-teorico?
-	* @param cantidadDeEjercicios cuantas preguntas de este tipo quiero?
-	* @param unidadesAbarcadas una coleccion con strings indicando las unidades (case sensitive)
-	* @return un conjunto de ejercicios (sin repetidos)
-	*/
-	private  Set<Ejercicio> obtenerEjercicios( ItemExamen.TiposItem tipoEjercicio, int cantidadDeEjercicios, Set<String> unidadesAbarcadas, Materia materia) throws PreguntasInsuficientesException
-	{
-	
-		Set<Ejercicio> ejerciciosPosibles = materia.getEjerciciosDeTipo(tipoEjercicio, new UsoItemComparator());
-		Set<Ejercicio> misEjercicios = new HashSet<Ejercicio>();
-		Iterator<Ejercicio> it = ejerciciosPosibles.iterator();
-	
-		while(it.hasNext() && (misEjercicios.size() < cantidadDeEjercicios))
-		{
-			Ejercicio ejercicio = it.next();
-	
-			if(unidadesAbarcadas.contains(ejercicio.getUnidadTematica()))
-				misEjercicios.add(ejercicio);
-		}
-	
-		if(misEjercicios.size() != cantidadDeEjercicios)
-			throw new PreguntasInsuficientesException("No hay suficientes preguntas de tipo "+ tipoEjercicio +" en la materia "+materia.getNombre());      
-		return misEjercicios;
-	}
+        Iterator<ItemExamen> it = origen.iterator();
 
-	public void setMateria(Materia materia)
-	{
-		this.materia = materia;
-	}
+        while(it.hasNext() && (retval.size() < cantidad))
+        {
+            ItemExamen item = it.next();
 
-	public Materia getMateria()
-	{
-		return materia;
-	}
+            //Lo tengo que agregar si es de una unidad tematica que quiero y ademas se parece al prototipo
+            //Si el campo del prototipo por el que comparo es null o 0 no lo tengo que comprar entonces lo tomo
+            //como verdadero
+            if(getUnidadesAbarcadas().contains(item.getUnidadTematica()) && proto.itemSeParece(item))
+            {
+                retval.add(item);
+            }
+        }
 
-	private void setUnidadesAbarcadas(Set<String> unidadesAbarcadas)
-	{
-		this.unidadesAbarcadas = unidadesAbarcadas;
-	}
+        if(retval.size() != cantidad)
+        {
+            throw new PreguntasInsuficientesException("No hay suficientes items de tipo " + proto.getTipo() + " en la materia " + getMateria().getNombre());
+        }
 
-	private Set<String> getUnidadesAbarcadas()
-	{
-		return unidadesAbarcadas;
-	}
-	
-	public void addUnidadAbarcada(String unidad)
-	{
-		unidadesAbarcadas.add(unidad);
-	}
-	
-	public void clearUnidadesAbarcadas()
-	{
-		unidadesAbarcadas.clear();
-	}
-	
-	public void addAllUnidadesAbarcadas(Collection<String> unidades)
-	{
-		unidadesAbarcadas.addAll(unidades);		
-	}
+        return retval;
+    }
 
+    public void setMateria(Materia materia)
+    {
+        this.materia = materia;
+    }
+
+    public Materia getMateria()
+    {
+        return materia;
+    }
+
+    private void setUnidadesAbarcadas(Set<String> unidadesAbarcadas)
+    {
+        this.unidadesAbarcadas = unidadesAbarcadas;
+    }
+
+    private Set<String> getUnidadesAbarcadas()
+    {
+        return unidadesAbarcadas;
+    }
+
+    public void addUnidadAbarcada(String unidad)
+    {
+        unidadesAbarcadas.add(unidad);
+    }
+
+    public void clearUnidadesAbarcadas()
+    {
+        unidadesAbarcadas.clear();
+    }
+
+    public void addAllUnidadesAbarcadas(Collection<String> unidades)
+    {
+        unidadesAbarcadas.addAll(unidades);
+    }
 }
