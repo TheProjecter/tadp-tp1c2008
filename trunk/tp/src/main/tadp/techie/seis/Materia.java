@@ -1,4 +1,5 @@
 package tadp.techie.seis;
+import java.io.FileInputStream;
 import java.util.*;
 
 
@@ -8,6 +9,7 @@ public class Materia implements ItemAddable
 	private Set<Pregunta> preguntas;
 	private List<Examen> examenes;
 	private Set<Ejercicio> ejercicios;
+	private SerializacionXStream instanceXStream;
 	/**
 	 * Instancia la nueva materia sin preguntas ni examanes
 	 */
@@ -25,6 +27,7 @@ public class Materia implements ItemAddable
 		preguntas = new TreeSet<Pregunta>(new UsoItemComparator());
 		examenes = new ArrayList<Examen>();	
 		ejercicios = new TreeSet<Ejercicio>(new UsoItemComparator());
+		instanceXStream = new SerializacionXStream();
 	}
 
 
@@ -62,6 +65,37 @@ public class Materia implements ItemAddable
 	{
 		Set<Pregunta> retval = new TreeSet<Pregunta>(comp);
 
+	try{
+		
+    	Set<ItemExamen> items = instanceXStream.itemsExamenFromXML(new FileInputStream(" "));
+	
+    	for(ItemExamen item : items ){
+    		
+    		if (item instanceof Pregunta){
+    		
+    			Pregunta pregunta = (Pregunta) item;
+    			
+    			preguntas.add(pregunta);
+    			
+    		}
+    		
+    			
+    		
+    	}
+    	
+	
+	
+	
+	
+	}
+	catch(Exception e){
+		
+		e.printStackTrace();
+	}
+		
+    	
+		
+		
 		for(Pregunta pregunta : preguntas)
 		{
 			if(pregunta.getTipo().equals(tipo))
@@ -74,6 +108,48 @@ public class Materia implements ItemAddable
 	{
 		Set<Ejercicio> retval = new TreeSet<Ejercicio>(comp);
 
+		
+		try{
+			
+	    	Set<ItemExamen> items = instanceXStream.itemsExamenFromXML(new FileInputStream(" "));
+		
+	    	for(ItemExamen item : items ){
+	    		
+	    		if (item instanceof Ejercicio){
+	    		
+	    			Ejercicio ejercicio = (Ejercicio) item;
+	    			
+	    			ejercicios.add(ejercicio);
+	    			
+	    		}
+	    		
+	    			
+	    		
+	    	}
+	    	
+		
+		
+		
+		
+		}
+		catch(Exception e){
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		for(Ejercicio ejercicio : ejercicios)
 		{
 
