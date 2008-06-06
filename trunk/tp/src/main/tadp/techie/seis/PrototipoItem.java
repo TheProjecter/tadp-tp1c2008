@@ -3,7 +3,25 @@ package tadp.techie.seis;
 import java.util.Set;
 
 import tadp.techie.seis.ItemExamen.TiposItem;
-
+/**
+ * Representa un modelo de {@link ItemExamen} por el cual se pueden seleccionar
+ * items reales que se parezcan a este prototipo
+ * El prototipo tiene un tipo generico que es una clase que extiende a ItemExamen
+ * Puede ser Ejercicio, Pregunta, ADesarrollar, Choice o cualquier otra.
+ * Cuando se instancia el prototipo el contructor recibe una clase que tiene que
+ * ser la mismo del generic
+ * <p>
+ * El prototipo dira si un item cumple con los requisitos para parecerce con el metodo
+ * itemSeParece(). Para esto compara el item con los datos que tenga cargados.
+ * Si un dato no se cargo se omite y se asume que cumple y se usaran los otros datos.
+ * Para que se parezca tiene que complir con todos los que se hayan cargado.
+ * <p>
+ * El PrototipoItem es usado por {@link ExamenBuilder} para seleccionar los items
+ * @author xuan
+ *
+ * @param <T> La clase que extiende a ItemPregunta a la cual tienen que parecerce los items
+ * @see {@link ItemExamen}, {@link ExamenBuilder}
+ */
 public class PrototipoItem<T extends ItemExamen>
 {
 	private TiposItem tipo;
@@ -16,10 +34,7 @@ public class PrototipoItem<T extends ItemExamen>
 	 * Hay que indicarle que implementacion de ItemExamen tiene que usar.
 	 * Hay que hacerlo dos veces por el generico y pasandole la clase por
 	 * el constructor.
-	 * FIXME
-	 * La clase que se le indica no puede ser abstracta (para las preguntas pasarle una
-	 * que extienda Pregunta, pero lo va a tomar como si fuera pregunta
-	 * @param subClase
+	 * @param subClase La misma clase que se uso en el generic
 	 */
 	public PrototipoItem(Class<T> subClase)
 	{
@@ -27,34 +42,6 @@ public class PrototipoItem<T extends ItemExamen>
 		setUnidadTemantica(null);
 		setComplejidad(0);
 		this.subClase = subClase;
-	}
-	/**
-	 * Este metodo no sirve, le dejo pero hay que borrarlo
-	 * Dado una una implementacion de ItemExamen (p.e Pregunta o Ejercicio)
-	 * especificado al instanciar el Prototipo este metodo devuelve la
-	 * coleccion de esos items que contiene la materia.
-	 * Para eso instancia uno de esos items y le pide la coleccion
-	 * (este item sabe que le tiene que pedir a la materia)
-	 * 
-	 * Lo tuve que hacer con reflection porque no pude usar el generic
-	 * para instanciarlo (era la idea original)
-	 * 
-	 * @param materia la materia que contiene los items
-	 * @return el set con los items de este tipo
-	 */
-	@Deprecated
-	@SuppressWarnings("unchecked")
-	public Set<T> getItemsSetFrom0(Materia materia)
-	{
-		ItemExamen item;
-		try {
-			item = subClase.getConstructor().newInstance();
-			return (Set<T>)item.getItemsFrom(materia);
-		} catch(Exception e) {
-			// TODO
-			return null;
-		}
-		
 	}
 	
 	/**
