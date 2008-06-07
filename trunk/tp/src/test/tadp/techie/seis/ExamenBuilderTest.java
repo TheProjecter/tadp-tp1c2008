@@ -48,8 +48,15 @@ public class ExamenBuilderTest extends AbstractMateriaTest
             assertFalse(itemsMuyUsados.contains(item));
         }
     }
-    
 
+
+    /**
+     * testGenerarExamenItems
+     * Verifica que, en caso de pretender generar el examen sin preguntas,
+     * arroje la excepcion: ExamenSinPreguntasNiEjerciciosException
+     * 
+     * @throws Exception
+     */
     @Test(expected = ExamenSinPreguntasNiEjerciciosException.class)
     public final void testGenerarExamenItems() throws Exception
     {
@@ -57,6 +64,12 @@ public class ExamenBuilderTest extends AbstractMateriaTest
         builder.generarExamen();   
     }
 
+    /**
+     * testFalloExamenPorPocosItems
+     * 
+     * Verifica que, en caso de no tener preguntas suficientes, arroje
+     * la excepcion: PreguntasInsuficientesException 
+     */
     @Test(expected = PreguntasInsuficientesException.class)
     public final void testFalloExamenPorPocosItems() throws Exception
     {

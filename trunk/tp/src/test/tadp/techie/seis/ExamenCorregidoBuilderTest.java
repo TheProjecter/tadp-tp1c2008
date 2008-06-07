@@ -179,19 +179,6 @@ public class ExamenCorregidoBuilderTest implements Corrector {
 	}
 
 	/**
-	 * Metodo auxiliar para dar todas las preguntas del examen corregidas como Bien-
-	 * @throws Exception
-	 */
-/*
-	public void corregirPreguntasAll () throws Exception
-	{
-		for(Pregunta preg : examen.getPreguntas())
-			builder.addCorreccionPregunta(preg, ExamenCorregido.RespuestaPregunta.BIENMENOS);
-
-	}
-*/
-
-	/**
 	 * Implementacion de la interfaz Corrector, para que devuelva la correccion
 	 * de una pregunta especifica 
 	 * 
