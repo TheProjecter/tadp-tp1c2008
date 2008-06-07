@@ -56,6 +56,12 @@ public class CriterioTest
             return generarExamenCorregido(new CorrectorBuenaOnda(), criterio);
         }
         
+        /**
+         * Metodo: Criterio60NoCumpleTest
+         * 
+         * Este Test verifica que si no se alcanza el 60% de las preguntas bien,
+         * no este en condiciones de aprobar 
+         */
         @Test
         public void Criterio60NoCumpleTest()
         {
@@ -66,6 +72,11 @@ public class CriterioTest
             assertEquals(corregido.getNota(), 0);
         }
         
+        /**
+         * Test: Criterio60SiCumpleTest
+         * 
+         * Verifica que si cumple el 60% de las correcciones, se corrija y ser asigne nota
+         */
         @Test
         public void Criterio60SiCumpleTest()
         {
@@ -76,6 +87,12 @@ public class CriterioTest
             assertEquals(corregido.getNota(), 4);
         }
         
+        
+        /**
+         * Test: CriterioTipoNoCumple
+         * 
+         * Verifica que si no tiene una pregunta de cada tipo bien (Teorico y Practico), no permita asignar nota
+         */
         @Test
         public void CriterioTipoNoCumple()
         {
@@ -85,7 +102,13 @@ public class CriterioTest
             assertFalse(criterio.cumple(corregido.getNotasPregunta()));
             assertEquals(corregido.getNota(), 0);            
         }
+
         
+        /**
+         * Test: CriterioTipoNoCumple
+         * 
+         * Verifica que si tiene una pregunta de cada tipo bien (Teorico y Practico), lo apruebe y permita asignar nota
+         */
         @Test
         public void CriterioTipoSiCumple()
         {
@@ -96,6 +119,12 @@ public class CriterioTest
             assertEquals(corregido.getNota(), 4);            
         }
         
+
+        /**
+         * Test: CriterioUnidadNoCumple()
+         * 
+         * Verifica que si el examen no tiene una pregunta de cada Unidad bien, no permita asignarle nota
+         */
         @Test
         public void CriterioUnidadNoCumple()
         {
@@ -103,9 +132,15 @@ public class CriterioTest
             ExamenCorregido corregido = generarExamenCorregidoNoAprobado(criterio);
             
             assertFalse(criterio.cumple(corregido.getNotasPregunta()));
-            assertEquals(corregido.getNota(), 0);              
+            assertEquals(corregido.getNota(), 0);
         }
+
         
+        /**
+         * Test: CriterioUnidadNoCumple()
+         * 
+         * Verifica que si el examen tiene una pregunta de cada Unidad bien, lo apruebe y asigne nota
+         */
         @Test
         public void CriterioUnidadSiCumple()
         {
@@ -117,7 +152,7 @@ public class CriterioTest
         }
         
         
-        /**
+     /**
 	 * Metodo auxiliar del SetUp para crear el Examen de referencia
 	 * 
 	 * @return
@@ -177,19 +212,6 @@ public class CriterioTest
 		return ex;
 
 	}
-
-	/**
-	 * Metodo auxiliar para dar todas las preguntas del examen corregidas como Bien-
-	 * @throws Exception
-	 */
-/*
-	public void corregirPreguntasAll () throws Exception
-	{
-		for(Pregunta preg : examen.getPreguntas())
-			builder.addCorreccionPregunta(preg, ExamenCorregido.RespuestaPregunta.BIENMENOS);
-
-	}
-*/
 
 	/**
 	 * Implementacion de la interfaz Corrector, para que devuelva la correccion
