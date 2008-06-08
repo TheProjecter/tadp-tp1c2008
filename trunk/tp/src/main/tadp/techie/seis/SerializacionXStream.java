@@ -17,17 +17,20 @@ public class SerializacionXStream {
 	
 	Set<ItemExamen> items;
 	
-		private void convertirXMLBasico(){
+		private void convertirXMLBasico()
+		{
 			//Este es el que crea el XML
 						 
 			 XStream xstream = new XStream(new DomDriver());
 			 String xml = xstream.toXML(new ADesarrollar("Geografia",3,"Cual es la Capital de Brazil?", ItemExamen.TiposItem.TEORICO));
 			 System.out.println(xml);
-					try {
+		 try 
+		 {
 	            FileOutputStream fs = new FileOutputStream("Preguntas.xml");
 	            xstream.toXML(xml, fs);
 	     } 
-		 catch (Exception e1) {
+		 catch (Exception e1) 
+		 {
 	            e1.printStackTrace();
 	     }
 
