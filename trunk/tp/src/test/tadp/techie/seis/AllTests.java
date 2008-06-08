@@ -10,8 +10,9 @@ import org.junit.runners.Suite;
         ExamenCorregidoBuilderTest.class,
         ExamenTest.class,
         MateriaTest.class,
-        PreguntaTest.class
-        })
+        PreguntaTest.class,
+        SerializacionXStreamTest.class
+		})
 public class AllTests {
 
 }

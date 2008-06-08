@@ -26,12 +26,18 @@ public abstract class AbstractMateriaTest
     protected Ejercicio ejercicio;
     protected Set<ItemExamen> itemsMuyUsados;
     protected Set<ItemExamen> itemsPocoUsados;
-	
+	protected SerializacionXStream instanceXStream;
+    
     @Before
     public void setUp() throws Exception
     {
         //Pregunta		pregunta;
-        List<String>	opcionesChoice;
+        
+    	//Creo objeto XML
+    	
+    	 instanceXStream = new SerializacionXStream();
+    	
+    	List<String>	opcionesChoice;
 
         ahora		= Calendar.getInstance();
         opcionesChoice  =  new ArrayList<String>();
