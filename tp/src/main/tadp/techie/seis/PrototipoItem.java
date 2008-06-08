@@ -12,7 +12,7 @@ import tadp.techie.seis.ItemExamen.TiposItem;
  * El prototipo dira si un item cumple con los requisitos para parecerce con el metodo
  * itemSeParece(). Para esto compara el item con los datos que tenga cargados.
  * Si un dato no se cargo se omite y se asume que cumple y se usaran los otros datos.
- * Para que se parezca tiene que complir con todos los que se hayan cargado.
+ * Para que se parezca tiene que cumplir con todos los que se hayan cargado.
  * <p>
  * El PrototipoItem es usado por {@link ExamenBuilder} para seleccionar los items
  * @author xuan

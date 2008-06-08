@@ -35,7 +35,9 @@ public class ExamenBuilder
     private Set<String> unidadesAbarcadas;
     private Calendar fecha;
     private Comparator<ItemExamen> comparator = new UsoItemComparator();
-
+    private HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
+    
+    
     private ExamenBuilder()
     {
         this.setUnidadesAbarcadas(new HashSet<String>());
@@ -53,7 +55,7 @@ public class ExamenBuilder
         this.getUnidadesAbarcadas().addAll(unidadesAbarcadas);
         this.fecha = fecha;
     }
-    HashMap<PrototipoItem<? extends ItemExamen>, Integer> mapaPrototipos = new HashMap<PrototipoItem<? extends ItemExamen>, Integer>();
+    
     /**
      * Agrega el prototipo a la lista de los prototipos que se usaran para seleccionar los items
      * Si se indica dos veces el mismo prototipo y dos prototipos iguales se tomara la ultima cantidad

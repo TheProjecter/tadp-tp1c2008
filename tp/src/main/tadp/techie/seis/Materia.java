@@ -1,6 +1,12 @@
 package tadp.techie.seis;
 
 import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+ 
 
 public class Materia
         implements ItemAddable
@@ -159,6 +165,32 @@ public class Materia
 
     }
 
+    public Set<ItemExamen> getItemsXML(String archivo) throws IOException
+    {
+        Set<ItemExamen> items = new HashSet<ItemExamen>();
+        
+         items.addAll(instanceXStream.itemsExamenFromXML(new FileInputStream(archivo)));
+   
+         addAllItems(items);
+         
+         return items;
+    
+    }
+    public void addAllItems(Collection<ItemExamen> items)
+    {
+    	
+    	for(ItemExamen item :items)
+    	{
+    		
+    		addItem(item);
+    		
+    	}
+    	
+    	
+    }
+    
+    
+    
     public void addExamen(Examen examen)
     {
         examenes.add(examen);
