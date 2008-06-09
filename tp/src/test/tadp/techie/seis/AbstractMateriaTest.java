@@ -5,13 +5,19 @@
 
 package tadp.techie.seis;
 
+import java.io.FileOutputStream;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import org.junit.After;
+import org.junit.Before;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.junit.After;
-import org.junit.Before;
+
 
 /**
  *
@@ -27,7 +33,7 @@ public abstract class AbstractMateriaTest
     protected Set<ItemExamen> itemsMuyUsados;
     protected Set<ItemExamen> itemsPocoUsados;
 	protected SerializacionXStream instanceXStream;
-    
+	protected Set<ItemExamen> col= new HashSet<ItemExamen>();
     @Before
     public void setUp() throws Exception
     {
@@ -35,9 +41,16 @@ public abstract class AbstractMateriaTest
         
     	//Creo objeto XML
     	
-    	 instanceXStream = new SerializacionXStream();
+    	instanceXStream = new SerializacionXStream();
     	
-    	List<String>	opcionesChoice;
+    	XStream xstream = new XStream(new DomDriver());
+    	col.add(new ADesarrollar("Geografia",3,"Cual es la Capital de Brazil?", ItemExamen.TiposItem.TEORICO));
+ 		col.add(new ADesarrollar("TADP",3,"Explique el concepto de reflection", ItemExamen.TiposItem.TEORICO));
+ 		col.add(new ADesarrollar("TADP",3,"Enuncie ventajas del uso de JUnit", ItemExamen.TiposItem.TEORICO));
+ 		col.add(new Ejercicio("JUNIT",1,"Aplique JUNIT en ...",ItemExamen.TiposItem.TEORICO));		
+ 		xstream.toXML(col,new FileOutputStream("items.xml")); 
+    	
+ 		List<String>	opcionesChoice;
 
         ahora		= Calendar.getInstance();
         opcionesChoice  =  new ArrayList<String>();
