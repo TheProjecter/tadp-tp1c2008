@@ -1,5 +1,7 @@
 package ar.utn.tadp.techie.seis;
 
+
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
