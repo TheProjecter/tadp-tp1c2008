@@ -1,6 +1,9 @@
 package ar.utn.tadp.techie.seis;
 
 
+
+
+import ar.utn.tadp.techie.seis.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
