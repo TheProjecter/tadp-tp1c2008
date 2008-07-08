@@ -1,10 +1,10 @@
-package ar.utn.tadp.techie.seis;
+package main.ar.utn.tadp.techie.seis;
 
 /**
  *
  * @author Juan Martin
  */
-class ExamenSinPreguntasNiEjerciciosException extends Exception
+public class ExamenSinPreguntasNiEjerciciosException extends Exception
 {
 	
 	

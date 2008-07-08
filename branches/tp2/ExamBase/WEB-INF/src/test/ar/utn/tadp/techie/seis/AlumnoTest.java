@@ -1,9 +1,9 @@
-package ar.utn.tadp.techie.seis;
+package test.ar.utn.tadp.techie.seis;
 
+import main.ar.utn.tadp.techie.seis.*;
+import main.ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import main.ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 
-
-
-import ar.utn.tadp.techie.seis.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
@@ -13,10 +13,6 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
-import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
-
 
 public class AlumnoTest implements Corrector {
 

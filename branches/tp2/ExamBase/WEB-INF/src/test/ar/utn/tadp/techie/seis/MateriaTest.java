@@ -1,6 +1,4 @@
-package ar.utn.tadp.techie.seis;
-
-
+package test.ar.utn.tadp.techie.seis;
 
 import static org.junit.Assert.*;
 

@@ -1,6 +1,6 @@
-package ar.utn.tadp.techie.seis;
+package main.ar.utn.tadp.techie.seis;
 
-import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
+import main.ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 /**
  * Representa un modelo de {@link ItemExamen} por el cual se pueden seleccionar
  * items reales que se parezcan a este prototipo

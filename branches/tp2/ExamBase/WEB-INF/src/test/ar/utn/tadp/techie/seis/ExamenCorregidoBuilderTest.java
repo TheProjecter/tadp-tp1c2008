@@ -1,6 +1,7 @@
-package ar.utn.tadp.techie.seis;
+package test.ar.utn.tadp.techie.seis;
 
-
+import main.ar.utn.tadp.techie.seis.*;
+import main.ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -10,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 import static org.junit.Assert.*;
 
 /**

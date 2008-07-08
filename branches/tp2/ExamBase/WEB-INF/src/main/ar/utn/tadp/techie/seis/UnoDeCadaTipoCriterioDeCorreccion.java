@@ -1,7 +1,7 @@
-package ar.utn.tadp.techie.seis;
+package main.ar.utn.tadp.techie.seis;
 
 import java.util.Map;
-import ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import main.ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
 
 /**
  *

@@ -11,17 +11,19 @@
 		<br><br><br><br>
 		 Seleccione una Materia
 	
-	<form action="" method="post" enctype="multipart/form-data">
-			<select name = "selectMateria">
-				<option>TADP
-				<option>PARADIGMAS
+	<!--<form jwcid="materiaForm@Form" listener ="listener:onBuscar">-->
+	<form >
+			<select name="selectMateria">
+				<option value="0">TADP</option>
+				<option value="1">PARADIGMAS</option>
 			</select>
 				<br><br><br><br>
-           <input type = "submit" value = "Buscar">
+           <!--<input jwcid = "buscar@Submit" lsitener = "listener:buscar" value = "Buscar"/>-->
+           <input type = "submit" value = "Buscar"/>
 				<span>&nbsp;</span><span>&nbsp;</span>
-           <input type = "submit" value = "Generar Ex&aacute;men">
+           <input type = "submit" value = "Generar Ex&aacute;men"/>
 				<span>&nbsp;</span><span>&nbsp;</span>
-           <input type = "submit" value = "Unidades">
+           <input jwcid = "unidades@Submit" listener = "listener:unidadesPage" />
       </form>
 	  
 		<br><br><br><br>
