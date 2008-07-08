@@ -1,6 +1,4 @@
-package ar.utn.tadp.techie.seis;
-
-
+package test.ar.utn.tadp.techie.seis;
 
 import java.io.FileInputStream;
 import org.junit.Test;

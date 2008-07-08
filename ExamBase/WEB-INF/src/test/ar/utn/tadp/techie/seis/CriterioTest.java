@@ -1,16 +1,16 @@
-package ar.utn.tadp.techie.seis;
+package test.ar.utn.tadp.techie.seis;
 
+import main.ar.utn.tadp.techie.seis.*;
+import main.ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import main.ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 
-
-import ar.utn.tadp.techie.seis.*;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-import ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
-import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
+
 import static org.junit.Assert.*;
 /**
  *
@@ -263,5 +263,6 @@ class CorrectorBuenaOnda implements Corrector
         //No era tan buena onda
         return 4;
     }
+
 
 }

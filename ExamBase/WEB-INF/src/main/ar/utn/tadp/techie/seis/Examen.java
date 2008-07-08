@@ -1,4 +1,4 @@
-package ar.utn.tadp.techie.seis;
+package main.ar.utn.tadp.techie.seis;
 
 import java.util.*;
 

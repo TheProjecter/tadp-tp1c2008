@@ -1,6 +1,6 @@
-package ar.utn.tadp.techie.seis;
+package test.ar.utn.tadp.techie.seis;
 
-
+import main.ar.utn.tadp.techie.seis.*;
 
 /**
  * @author Juanmi
@@ -11,9 +11,6 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import ar.utn.tadp.techie.seis.ADesarrollar;
-
 
 
 public class PreguntaTest {
