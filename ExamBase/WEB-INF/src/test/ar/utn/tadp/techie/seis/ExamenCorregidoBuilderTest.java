@@ -1,7 +1,6 @@
-package test.ar.utn.tadp.techie.seis;
+package ar.utn.tadp.techie.seis;
 
-import main.ar.utn.tadp.techie.seis.*;
-import main.ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
+import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 
 import java.util.Calendar;
 import java.util.HashSet;

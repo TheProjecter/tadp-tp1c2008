@@ -1,8 +1,8 @@
-package main.ar.utn.tadp.techie.seis;
+package ar.utn.tadp.techie.seis;
 
 
 import java.util.Map;
-import main.ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
+import ar.utn.tadp.techie.seis.ExamenCorregido.CalificacionPregunta;
 
 /**
  *  El criterio se cumple cuando la cantidad de items bien/bien- es >= al 60%
