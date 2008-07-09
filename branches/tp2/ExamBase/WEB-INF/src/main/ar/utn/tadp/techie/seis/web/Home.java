@@ -1,4 +1,5 @@
-package ar.utn.tadp.techie.seis;
+package ar.utn.tadp.techie.seis.web;
+
 
 import org.apache.tapestry.IPage;
 import org.apache.tapestry.IRequestCycle;
