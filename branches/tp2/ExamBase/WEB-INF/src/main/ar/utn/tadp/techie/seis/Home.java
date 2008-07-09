@@ -8,7 +8,6 @@ import org.apache.tapestry.html.BasePage;
 public abstract class Home extends BasePage {
 	
 	
-	
 	@InjectPage("ABMUnidades")
 	abstract public ABMUnidades getUnidadesPage() ;	
 	/*
