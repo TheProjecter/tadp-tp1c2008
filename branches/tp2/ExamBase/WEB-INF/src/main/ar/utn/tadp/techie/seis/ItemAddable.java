@@ -1,8 +1,4 @@
-package main.ar.utn.tadp.techie.seis;
-
-import main.ar.utn.tadp.techie.seis.Ejercicio;
-import main.ar.utn.tadp.techie.seis.ItemExamen;
-import main.ar.utn.tadp.techie.seis.Pregunta;
+package ar.utn.tadp.techie.seis;
 
 /**
 *
