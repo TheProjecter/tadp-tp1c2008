@@ -1,10 +1,8 @@
 <html>
   <head>
     <title>Exam Base - ABM de Preguntas</title>
-    <!--<link rel=stylesheet type="text/css" href="eb.css"> no estoy usando el stylesheet pero si alguien kiere usarlo puede servir -->
   </head>
-  <body bgcolor="#F3EFFE">
-	
+<body bgcolor="#F3EFFE">	
 	<br>
    <center>
 		<font face="Verdana, Arial, Helvetica, sans-serif"><font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>ABM de Preguntas</b></font>
@@ -17,10 +15,10 @@
 						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Materia</b></font>
 					</td>
 					<td align="left" >
-						<input name="materia" type = "text"  readonly="readonly" value = "TADP" >
+						<input name="materia" type = "text"  readonly="readonly" value = "TADP" />
 					</td>
 					<td align="left" >
-						<input name="teorica" type = "checkbox"  value = "TADP" >
+						<input name="teorica" type = "checkbox" />
 						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="1" color="#000000" face="Arial, Helvetica, sans-serif"><b>Teorica</b></font>
 					</td>
 				<tr/>
@@ -31,12 +29,12 @@
 					<td align="left" >
 						<select name = "unidad">
 								<option>Presentacion
-								<option>Persistecia
+								<option>Persistencia
 						</select>
 					</td>
 					<td align="left" >
-						<input name="practica" type = "checkbox"  value = "TADP" >
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="1" color="#000000" face="Arial, Helvetica, sans-serif"><b>Teorica</b></font>
+						<input name= "practica" type = "checkbox"  />
+						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="1" color="#000000" face="Arial, Helvetica, sans-serif"><b>Pr&aacute;ctica</b></font>
 					</td>
 
 				<tr/>
@@ -53,7 +51,7 @@
 						</select>
 					</td>
 					<td align="left" >
-						<input name="teoricoPractica" type = "checkbox"  value = "TADP" >
+						<input name="teoricoPractica" type = "checkbox"  />
 						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="1" color="#000000" face="Arial, Helvetica, sans-serif"><b>Teorico-Pr&aacute;ctica</b></font>
 					</td>
 
@@ -63,10 +61,12 @@
 		<textarea name="pregunta" rows="20" cols="80">Escriba su Pregunta</textarea>
 
 		<br>
-			<center><input name = "guardar" type = "submit" value = "Guardar">
+			<center><input name = "guardar" type = "submit" value = "Guardar"/>
 			&nbsp;&nbsp;
-			<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"></center>
-		</center>
+			<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/></center>
+		
 	</form>
+	<font size="1" color="#000000" face="Arial, Helvetica, sans-serif">ExamBase &copy;2008 :: TADP Techie - Grupo 6</font>
+	</center>
   </body>
 </html>

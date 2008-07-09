@@ -3,5 +3,5 @@
 "-//Apache Software Foundation//Tapestry Specification 4.1//EN"
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_1.dtd">
 
-<page-specification class="ar.utn.tadp.techie.seis.ABMUnidades">
+<page-specification class="ar.utn.tadp.techie.seis.web.ABMUnidades">
 </page-specification>

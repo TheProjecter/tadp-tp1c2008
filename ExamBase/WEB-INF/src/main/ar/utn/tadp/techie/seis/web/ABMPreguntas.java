@@ -1,9 +1,9 @@
-package ar.utn.tadp.techie.seis;
+package ar.utn.tadp.techie.seis.web;
 
 import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
-public class ABMUnidades extends BasePage {
+public class ABMPreguntas extends BasePage {
 
 	@Override
 	public String getClientId() {
@@ -24,4 +24,3 @@ public class ABMUnidades extends BasePage {
 	}
 
 }
-
