@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
-
-	<!-- Este archivo es el archivo de contexto que va en servidor 
-		Copienlo en	../tomcat/conf/catalina/localhost/ y despues de levantar el tomcat accedan a http://localhost:8080/ExamBase/app?
-		deberian ver la pantalla principal del proyecto: Home.html
-	-->
-
-	<Context docBase="D:/workspace/ExamBase">
-	</Context>
