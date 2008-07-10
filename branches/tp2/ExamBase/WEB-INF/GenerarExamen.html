@@ -5,14 +5,14 @@
 <body bgcolor="#F3EFFE">
 	<br>
    <center>
-		<font face="Verdana, Arial, Helvetica, sans-serif"><font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>Generar Examen</b></font>
+		<font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>Generar Examen</b></font>
 		<br><br><br><br>
 
-		<form action="" method="post" enctype="multipart/form-data">
+		<form>
 		 <table border="0" cellpadding="6" width="35%" >
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Materia</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Materia</b></font>
 					</td>
 					<td align="right">
 						<input name="materia" type = "text"  readonly="readonly" value = "TADP" />
@@ -22,7 +22,7 @@
 		
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
 					</td>
 					<td align="right">
 						<input name="cantTeoricas" type = "text"   value = "3" />
@@ -31,7 +31,7 @@
 
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
 					</td>
 					<td align="right">
 						<input name="cantPracticas" type = "text"   value = "3" />
@@ -40,7 +40,7 @@
 			
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
 					</td>
 					<td align="right">
 							<input name="cantTeoricos" type = "text"   value = "3" />
@@ -49,7 +49,7 @@
 				
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
 					</td>	
 					<td align="right">
 						<input name="cantPracticos" type = "text"   value = "3" />
@@ -58,7 +58,7 @@
 				
 				<tr>
 					<td align="left">
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cantidad de Unidades</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cantidad de Unidades</b></font>
 					</td>
 					<td align="right">
 						<input name="cantUnidades" type = "text"   value = "1" />
@@ -68,7 +68,7 @@
 				<tr>
 					<!-- Aca van tantos comobos como unidades haya elegido... hay que generarlo dinamicamente! =) -->
 					<td align="left" >
-						<font face="Verdana, Arial, Helvetica, sans-serif"><font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione Una Unidad</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione Una Unidad</b></font>
 					</td>
 					<td align="right">
 						<select name = "complejidad">
@@ -84,10 +84,10 @@
 		
 		<input name="generar" type="Submit" value="Generar"/>
 		&nbsp;&nbsp;
-		<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"></center>
+		<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/>
 		
-		<br><br>
-					
+		
+		<br><br>			
 		<font size="1" color="#000000" face="Arial, Helvetica, sans-serif">ExamBase &copy;2008 :: TADP Techie - Grupo 6</font>
 	</form>
     </center>
