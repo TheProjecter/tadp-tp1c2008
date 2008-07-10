@@ -10,7 +10,13 @@ public abstract class Home extends BasePage {
 	
 	
 	@InjectPage("ABMUnidades")
-	abstract public ABMUnidades getUnidadesPage() ;	
+	abstract public ABMUnidades getUnidadesPage() ;
+	
+	@InjectPage("ABMPreguntas")
+	abstract public ABMPreguntas getPreguntasPage() ;
+	
+	@InjectPage("GenerarExamen")
+	abstract public GenerarExamen getGenerarExamenPage() ;
 	/*
 	abstract public String getMateriaId();
 	
@@ -22,6 +28,18 @@ public abstract class Home extends BasePage {
 	{
 		ABMUnidades abmUnidadesPage = getUnidadesPage();
 		return abmUnidadesPage;
+		
+	}
+	public IPage preguntasPage(IRequestCycle cycle)
+	{
+		ABMPreguntas preguntasPage = getPreguntasPage();
+		return preguntasPage;
+		
+	}
+	public IPage generarExamenPage(IRequestCycle cycle)
+	{
+		GenerarExamen examenPage = getGenerarExamenPage();
+		return examenPage;
 		
 	}
 }
