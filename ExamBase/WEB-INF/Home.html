@@ -12,19 +12,20 @@
 	
 	 <!--<form jwcid="materiaForm@Form" listener ="listener:onBuscar">-->
 	 <form jwcid="materiaForm@Form" >
-			<select name="selectMateria">
-				<option value="0">TADP</option>
-				<option value="1">PARADIGMAS</option>
-			</select> 
-			<!--<input jwcid = "buscar@Submit" lsitener = "listener:buscar" value = "Buscar"/>-->
+			<select jwcid="materia">
+				<option value="0">N/A</option>
+			</select>
+			<!--<input jwcid = "buscar@Submit" listener = "listener:buscar" value = "Buscar"/>-->
 			<input type = "submit" value = "Ver Preguntas"/>
+	 </form>
 				<br><br><br><br>
+	 <form jwcid="navForm@Form" >		
            <input jwcid = "generarExamen@Submit" listener = "listener:generarExamenPage" value = "Generar Examen"/>
 				&nbsp;&nbsp;
            <input jwcid = "unidades@Submit" listener = "listener:unidadesPage" value="ABM Unidades" />
            		&nbsp;&nbsp;
            <input jwcid = "preguntas@Submit" listener = "listener:preguntasPage" value="ABM Preguntas" />
-      </form>
+     </form>
 	  
 		<br><br><br><br>
 

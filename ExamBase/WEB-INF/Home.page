@@ -5,9 +5,12 @@
 <page-specification class="ar.utn.tadp.techie.seis.web.Home">
 <!--<component id="materiaForm" type="Form">
 </component>
-<component id="materiaId" type="Select">
-</component>
+
 <component id="unidades" type="Submit">
 <binding name="value" value ="ognl:unidadesPage"/>
 </component>-->
+<component id="materia" type="PropertySelection">
+        <binding name="model" value="materiasModel"/>
+        <binding name="value" value="materia"/>
+ </component>
 </page-specification>

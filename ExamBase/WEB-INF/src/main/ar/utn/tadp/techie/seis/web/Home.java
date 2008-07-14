@@ -1,14 +1,18 @@
 package ar.utn.tadp.techie.seis.web;
 
 
+//import org.apache.tapestry.annotations.InitialValue;
+//import org.apache.tapestry.annotations.InjectState;
+import org.apache.tapestry.form.IPropertySelectionModel;
+import org.apache.tapestry.form.StringPropertySelectionModel;
+import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.IPage;
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.InjectPage;
-import org.apache.tapestry.html.BasePage;
+
 
 public abstract class Home extends BasePage {
-	
-	
+	 
 	@InjectPage("ABMUnidades")
 	abstract public ABMUnidades getUnidadesPage() ;
 	
@@ -24,6 +28,13 @@ public abstract class Home extends BasePage {
 	{
 		
 	}*/
+	public IPropertySelectionModel getMateriasModel() {
+		// para prueba ...las materias van a venir de un resultado del query a la base
+		 String[] materias = {"TADP", "Paradigmas", "Diseño"}; 
+        return new StringPropertySelectionModel(materias);
+    }
+	
+	
 	public IPage unidadesPage(IRequestCycle cycle)
 	{
 		ABMUnidades abmUnidadesPage = getUnidadesPage();
