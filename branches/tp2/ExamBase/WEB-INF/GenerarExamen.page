@@ -4,4 +4,8 @@
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_0.dtd">
 
 <page-specification class="ar.utn.tadp.techie.seis.web.GenerarExamen">
+<component id="materias" type="PropertySelection">
+        <binding name="model" value="materiasModel"/>
+        <binding name="value" value="materias"/>
+ </component>
 </page-specification>
