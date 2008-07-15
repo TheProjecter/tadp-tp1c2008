@@ -8,7 +8,7 @@ import org.apache.tapestry.form.StringPropertySelectionModel;
 import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.IPage;
 import org.apache.tapestry.IRequestCycle;
-import org.apache.tapestry.annotations.InjectPage;
+import org.apache.tapestry.annotations.*;
 
 
 public abstract class Home extends BasePage {
@@ -28,8 +28,12 @@ public abstract class Home extends BasePage {
 	{
 		
 	}*/
+	//@Store(store=session)
+	//public abstract String getMateria();
+
+	
 	public IPropertySelectionModel getMateriasModel() {
-		// para prueba ...las materias van a venir de un resultado del query a la base
+		// para prueba ...las materias van a venir del resultado de un query a la base
 		 String[] materias = {"TADP", "Paradigmas", "Diseño"}; 
         return new StringPropertySelectionModel(materias);
     }
