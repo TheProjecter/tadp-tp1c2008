@@ -14,4 +14,22 @@
         <binding name="model" value="materiasModel"/>
         <binding name="value" value="materia"/>
  </component>
+ <property name="currentItem"/>
+	<component id="cadaItem" type="For">
+		<binding name="source" value="items"/>
+		<binding name="element" value="literal:tr"/>
+		<binding name="value" value="currentItem"/>
+	</component>
+	<component id="unidadTematica" type="Insert">
+		<binding name="value" value="currentItem.unidadTematica"/>
+	</component>
+	<component id="complejidad" type="Insert">
+		<binding name="value" value="currentItem.complejidad"/>
+	</component>
+	<component id="textoEnunciado" type="Insert">
+		<binding name="value" value="currentItem.textoEnunciado"/>
+	</component>
+	<component id="cantidadDeVecesQueSeUso" type="Insert">
+		<binding name="value" value="currentItem.cantidadDeVecesQueSeUso"/>
+	</component>
 </page-specification>
