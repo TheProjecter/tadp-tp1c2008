@@ -4,8 +4,24 @@
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_0.dtd">
 
 <page-specification class="ar.utn.tadp.techie.seis.web.GenerarExamen">
-<component id="materias" type="PropertySelection">
-        <binding name="model" value="materiasModel"/>
-        <binding name="value" value="materias"/>
+
+ <component id="cantidadPreguntasTeoricas" type="TextField">
+        <binding name="value" value="cantidadPreguntasTeoricas"/>
+ </component>
+  <component id="cantidadPreguntasPracticas" type="TextField">
+        <binding name="value" value="cantidadPreguntasPracticas"/>
+ </component>
+   <component id="cantidadEjerciciosTeoricos" type="TextField">
+        <binding name="value" value="cantidadEjerciciosTeoricos"/>
+ </component>
+ <component id="cantidadEjerciciosPracticos" type="TextField">
+        <binding name="value" value="cantidadEjerciciosPracticos"/>
+ </component>
+  <component id="cantidadUnidades" type="TextField">
+        <binding name="value" value="cantidadUnidades"/>
+ </component>
+ <component id="unidad" type="PropertySelection">
+        <binding name="model" value="unidadesModel"/>
+        <binding name="value" value="unidad"/>
  </component>
 </page-specification>

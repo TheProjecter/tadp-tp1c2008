@@ -8,7 +8,7 @@
 		<font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>Generar Examen</b></font>
 		<br><br><br><br>
 
-		<form>
+	 <form jwcid="generarExamenForm@Form" >
 		 <table border="0" cellpadding="6" width="35%" >
 				<tr>
 					<td align="left">
@@ -16,7 +16,6 @@
 					</td>
 					<td align="right">
 						<input name="materia" type = "text"  readonly="readonly" value = "TADP" />
-					
 					</td>
 				</tr>
 		
@@ -25,16 +24,16 @@
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
 					</td>
 					<td align="right">
-						<input  name="cantTeoricas" type = "text"   value = "3" size="2" />
+						<input type="text" jwcid="cantidadPreguntasTeoricas"  size="2"/>
 					</td>
 				</tr>
 
 				<tr>
 					<td align="left">
-						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Te&oacute;ricas</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Pregs. Pr&aacute;cticas</b></font>
 					</td>
 					<td align="right">
-						<input name="cantPracticas" type = "text"   value = "3" size="2" />
+						<input type="text" jwcid="cantidadPreguntasPracticas" size="2"/>
 					</td>
 				<tr/>
 			
@@ -43,16 +42,16 @@
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
 					</td>
 					<td align="right">
-							<input name="cantTeoricos" type = "text"   value = "3" size="2" />
+							<input type="text" jwcid="cantidadEjerciciosTeoricos"  size="2"/>
 					</td>
 				</tr>
 				
 				<tr>
 					<td align="left">
-						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Te&oacute;ricos</b></font>
+						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cant. Ejs. Pr&aacute;cticos</b></font>
 					</td>	
 					<td align="right">
-						<input name="cantPracticos" type = "text"   value = "3" size="2" />
+						<input type="text" jwcid="cantidadEjerciciosPracticos"  size="2"/>
 					</td>
 				<tr/>
 				
@@ -61,35 +60,37 @@
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Cantidad de Unidades</b></font>
 					</td>
 					<td align="right">
-						<input name="cantUnidades" type = "text"   value = "1" size="2" />
+						<input type="text" jwcid="cantidadUnidades"  size="2"/>
 					</td>
 				<tr/>
 				
 				<tr>
-					<!-- Aca van tantos comobos como unidades haya elegido... hay que generarlo dinamicamente! =) -->
+					<!-- Aca van tantos combos como unidades haya elegido... hay que generarlo dinamicamente! =) -->
 					<td align="left" >
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione Una Unidad</b></font>
 					</td>
 					<td align="right">
-						<select name = "complejidad">
-								<option>Persistencia</option>
-								<option>Presentacion</option>
+						<select jwcid="unidad">
+							<option value="0">N/A</option>
 						</select>
 					</td>
-				<tr/>
+				</tr>
 
-		<table/>
+		</table>
 
 		<br><br>
 		
 		<input name="generar" type="Submit" value="Generar"/>
+		
+		</form>	
+		
 		&nbsp;&nbsp;
+		
 		<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/>
 		
-		
 		<br><br>			
-		<font size="1" color="#000000" face="Arial, Helvetica, sans-serif">ExamBase &copy;2008 :: TADP Techie - Grupo 6</font>
-	</form>
+		<font size="1" color="#000000" face="Arial, Helvetica, sans-serif">ExamBase &copy;2008 | TADP Techie - Grupo 6</font>
+	
     </center>
   </body>
 </html>
