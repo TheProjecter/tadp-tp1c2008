@@ -1,10 +1,8 @@
 package ar.utn.tadp.techie.seis.web;
 
 
-//import org.apache.tapestry.annotations.InitialValue;
-//import org.apache.tapestry.annotations.InjectState;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.tapestry.form.IPropertySelectionModel;
 import org.apache.tapestry.form.StringPropertySelectionModel;
@@ -16,12 +14,13 @@ import org.apache.tapestry.annotations.*;
 import ar.utn.tadp.techie.seis.ADesarrollar;
 import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Pregunta;
+import ar.utn.tadp.techie.seis.persistencia.BuscadorDePreguntasMock;
 
 
 public abstract class Home extends BasePage {
 	 
 	
-	private List<ItemExamen> items;
+	private Set<ItemExamen> items=null;
 	
 	
 	@InjectPage("ABMUnidades")
@@ -42,7 +41,7 @@ public abstract class Home extends BasePage {
 	//@Store(store=session)
 	//public abstract String getMateria();
 
-	
+	public abstract String getMateria();
 	public IPropertySelectionModel getMateriasModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
 		 String[] materias = {"TADP", "Paradigmas", "Diseño"}; 
@@ -70,21 +69,29 @@ public abstract class Home extends BasePage {
 	}
 	
 	//TODO --este metodo deberia devolver las preguntas de la materia seleccionada
-	public List<ItemExamen> getItems() 
+	public Set<ItemExamen> getItems() 
 	{
-		items = new ArrayList<ItemExamen>();
-		 
-		Pregunta pregunta = new ADesarrollar("Patrones", 75, "Por que necesitamos a los patrones en las estancias?", ItemExamen.TiposItem.TEORICO);   
+		if(items == null) {
+			
+		items = new HashSet<ItemExamen>();
+				
+		Pregunta pregunta = new ADesarrollar(" ", 0, " ", ItemExamen.TiposItem.TEORICO);   
 		items.add(pregunta);
-
-		pregunta = new ADesarrollar("Estructurado", 10, "Alguien usa estructurado hoy en Dia?", ItemExamen.TiposItem.TEORICO);  
-		items.add(pregunta);
-
-		pregunta = new ADesarrollar("Estructurado", 40, "Cuantos modos de Cohesion Existe?", ItemExamen.TiposItem.TEORICO);  
-		items.add(pregunta);
-		 
-		 
+		
+		}
+	
 		return items;
 		
+	}
+	public void buscarPreguntas(IRequestCycle cycle)
+	{
+		String materiaSeleccionada = (String)getMateria();
+		//String diseño = "Diseño";
+
+		items = BuscadorDePreguntasMock.getInstance().getItems(materiaSeleccionada);
+		//con la materia que seleccione genero el query para buscar las preguntas de la misma
+		
+			
+		cycle.activate("Home");
 	}
 }

@@ -3,8 +3,8 @@
     <title>Exam Base</title>   
     <!--<link rel=stylesheet type="text/css" href="eb.css"/>--> 
   </head>
-<body bgcolor="#F3EFFE">	
-<br>
+	<body bgcolor="#F3EFFE">	
+	<br>
    <center>
 		<font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>Exam Base</b></font>
 		<br><br><br><br>
@@ -15,8 +15,8 @@
 			<select jwcid="materia">
 				<option value="0">N/A</option>
 			</select>
-			<!--<input jwcid = "buscar@Submit" listener = "listener:buscar" value = "Buscar"/>-->
-			<input type = "submit" value = "Ver Preguntas"/>
+			<input jwcid = "buscar@Submit" listener = "listener:buscarPreguntas" value = "Ver Preguntas"/>
+			<!--<input type = "submit" value = "Ver Preguntas"/>-->
 	 </form>
 				<br><br><br><br>
 	 <form jwcid="navForm@Form" >		
@@ -28,65 +28,7 @@
      </form>
 	  
 		<br><br><br><br>
-		<!-- ----------- tabla con headers de las cols ------------- 
-			<table border="3" cellpadding="4" width="75%" >
-				<tr>
-					<td align="center">
-						<font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Unidad</b></font>
-					</td>
-					<td align="center" >
-						<font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Complejidad</b></font>
-					</td>
-					<td align="center" >
-							<font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Pregunta</b></font>
-					</td>
-					<td align="center" >
-						<font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Veces</b></font>
-					</td>
-				<tr/>
-				
-			<table/>-->
-			<!-- ----------- tabla con data de las preguntas -------------
-			
-			<table jwcid="tableView@contrib:TableView" 
-				source="ognl:preguntas"
-				columns="name:preguntaRow,
-				unidad:Unidad:getPreguntaDisplay(0),
-				complejidad:Complejidad:getPreguntaDisplay(1),
-				pregunta:Pregunta:getPreguntaDisplay(2),
-				veces:Veces:getPreguntaDisplay(3)"
-			>
-				    <tr>
-				     <span jwcid="@contrib:TableColumns" />
-				    </tr>
-				   
-				   <tr jwcid="tableRows@contrib:TableRows" class="ognl:beans.evenOdd.next">
-				     <td align="left">
-				      <span jwcid="@Insert" value="ognl:components.tableRows.tableRow.preguntaRow" />
-				     </td>
-				     <td align="right">
-				       <span jwcid="@Insert" value="ognl:components.tableRows.tableRow.getPreguntaDisplay(0)" />
-				     </td>
-				     <td align="right">
-				       <span jwcid="@Insert" value="ognl:components.tableRows.tableRow.getPreguntaDisplay(1)" />
-				     </td>
-				     <td align="right">
-				       <span jwcid="@Insert" value="ognl:components.tableRows.tableRow.getPreguntaDisplay(2)" />
-				     </td>
-				     <td align="right">
-				       <span jwcid="@Insert" value="ognl:components.tableRows.tableRow.getPreguntaDisplay(3)" />
-				     </td>
-				   </tr>
-				        
-				  <tr>
-				    <td colspan="4" class="tablePages">
-				      <span jwcid="tablePages@contrib:TablePages"/>
-				    </td>
-				  </tr>
-				</table>
-			
-			 ------------------------------------------------------- -->
-			
+					
 			<table border="3" cellpadding="4" width="75%" >
 				<font size="2" color="#000000" face="Arial, Helvetica, sans-serif">
 				<tr><th>Unidad</th><th>Complejidad</th><th>Pregunta</th><th>Veces</th></tr>
