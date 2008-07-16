@@ -1,4 +1,4 @@
-package ar.utn.tadp.techie.seis.persistencia;
+package ar.utn.tadp.techie.seis.pools;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -9,17 +9,16 @@ import java.util.Set;
 
 import ar.utn.tadp.techie.seis.*;
 
-public class BuscadorDePreguntasMock {
+public class MateriasPoolMock extends MateriasPool{
 	
 	Collection<Materia> materias;
-	private static BuscadorDePreguntasMock singleton =null;
-	
+		
 	/** @author juanmi
 	 * 
 	 * @param materia
 	 * Recibo una materia como string y devuelvo las preguntas de esa materia.
 	 */
-	public BuscadorDePreguntasMock()
+	private MateriasPoolMock()
 	{
 		materias = new HashSet<Materia>();
 
@@ -119,11 +118,11 @@ public class BuscadorDePreguntasMock {
         materia.addItem(ejercicio);
         itemsMuyUsados.add(ejercicio);
 
-        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patr?n Observer.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patron Observer.", ItemExamen.TiposItem.PRACTICO);
         materia.addItem(ejercicio);
         itemsPocoUsados.add(ejercicio);
 
-        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicaci?n de Command.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 65, "Ejemplo de aplicacion de Command.", ItemExamen.TiposItem.PRACTICO);
         materia.addItem(ejercicio);
         itemsPocoUsados.add(ejercicio);
 
@@ -132,7 +131,7 @@ public class BuscadorDePreguntasMock {
         itemsPocoUsados.add(ejercicio);
         itemsMuyUsados.add(ejercicio);
 
-        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patr?n Observer.", ItemExamen.TiposItem.PRACTICO);
+        ejercicio = new Ejercicio("Patrones", 50, "De un ejemplo de uso del patron Observer.", ItemExamen.TiposItem.PRACTICO);
         materia.addEjercicio(ejercicio);
         itemsPocoUsados.add(ejercicio);
 
@@ -146,14 +145,13 @@ public class BuscadorDePreguntasMock {
 		
 		materias.add(materia);
 	}
-	
-	public static BuscadorDePreguntasMock getInstance()
+	public static MateriasPool getInstance()
 	{
-		if(singleton == null) 
-			singleton = new BuscadorDePreguntasMock();
-		return singleton;
+		if(instance == null)
+			instance = new MateriasPoolMock();
+    	return  instance;
 	}
-	
+	@Override
 	public Set<ItemExamen> getItems(String materia){
 		
 		for(Materia mat : materias)

@@ -14,7 +14,7 @@ import org.apache.tapestry.annotations.*;
 import ar.utn.tadp.techie.seis.ADesarrollar;
 import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Pregunta;
-import ar.utn.tadp.techie.seis.persistencia.BuscadorDePreguntasMock;
+import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 
 public abstract class Home extends BasePage {
@@ -64,6 +64,7 @@ public abstract class Home extends BasePage {
 	public IPage generarExamenPage(IRequestCycle cycle)
 	{
 		GenerarExamen examenPage = getGenerarExamenPage();
+		examenPage.setMateria(this.getMateria());
 		return examenPage;
 		
 	}
@@ -79,18 +80,21 @@ public abstract class Home extends BasePage {
 		items.add(pregunta);
 		
 		}
-	
 		return items;
 		
 	}
+	/**
+	 * @author juanmi
+	 * Este metodo stea la lista de items pertenecientes
+	 *  a una materia seleccionada en el combo box de la pagina
+	 * **/
 	public void onBuscarPreguntas(IRequestCycle cycle)
 	{
 		String materiaSeleccionada = (String)getMateria();
 		//String diseño = "Diseño";
 
-		items = BuscadorDePreguntasMock.getInstance().getItems(materiaSeleccionada);
+		items = MateriasPoolMock.getInstance().getItems(materiaSeleccionada);
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
-		
 			
 		cycle.activate("Home");
 	}

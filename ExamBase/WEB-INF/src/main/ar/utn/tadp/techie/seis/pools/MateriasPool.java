@@ -5,10 +5,12 @@
 
 package ar.utn.tadp.techie.seis.pools;
 
+import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -17,11 +19,11 @@ import java.util.Map;
 public class MateriasPool
 {
 
-    private static MateriasPool instance;
+    protected static MateriasPool instance;
     
-    private Map<Materia,Boolean> mapaMaterias;
-    private int size;
-    private MateriaDAO dao;
+    protected Map<Materia,Boolean> mapaMaterias;
+    protected int size;
+    protected MateriaDAO dao;
     
     protected MateriasPool()
     {
@@ -60,4 +62,9 @@ public class MateriasPool
     public void forceWrite() {
         
     }
+
+	public Set<ItemExamen> getItems(String materia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
