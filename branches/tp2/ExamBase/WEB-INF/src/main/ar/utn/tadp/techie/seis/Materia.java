@@ -1,8 +1,8 @@
 package ar.utn.tadp.techie.seis;
 
 import java.util.*;
-import java.io.FileInputStream;
-import java.io.IOException;
+//**import java.io.FileInputStream;
+//**import java.io.IOException;
  
 
 public class Materia  implements ItemAddable
@@ -12,7 +12,7 @@ public class Materia  implements ItemAddable
     private Set<Pregunta> preguntas;
     private List<Examen> examenes;
     private Set<Ejercicio> ejercicios;
-    private SerializacionXStream instanceXStream;
+    //**private SerializacionXStream instanceXStream;
 
     /**
      * Instancia la nueva materia sin preguntas ni examanes
@@ -32,7 +32,7 @@ public class Materia  implements ItemAddable
         preguntas = new TreeSet<Pregunta>(new UsoItemComparator());
         examenes = new ArrayList<Examen>();
         ejercicios = new TreeSet<Ejercicio>(new UsoItemComparator());
-        instanceXStream = new SerializacionXStream();
+       //**instanceXStream = new SerializacionXStream();
     }
 
     /**
@@ -160,7 +160,7 @@ public class Materia  implements ItemAddable
         item.addTo(this);
 
     }
-
+/*
     public Set<ItemExamen> getItemsXML(String archivo) throws IOException
     {
         Set<ItemExamen> items = new HashSet<ItemExamen>();
@@ -171,7 +171,7 @@ public class Materia  implements ItemAddable
          
          return items;
     
-    }
+    }*/
     public void addAllItems(Collection<ItemExamen> items)
     {
     	

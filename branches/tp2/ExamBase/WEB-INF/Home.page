@@ -10,6 +10,10 @@
 	<binding name="value" value ="ognl:unidadesPage"/>
 	</component>
 -->
+<component id="materiaForm" type="Form">
+<binding name="listener" value="listener:onBuscarPreguntas"/>
+</component>
+
  <component id="materia" type="PropertySelection">
         <binding name="model" value="materiasModel"/>
         <binding name="value" value="materia"/>

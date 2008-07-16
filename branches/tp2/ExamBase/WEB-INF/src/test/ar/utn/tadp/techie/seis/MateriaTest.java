@@ -12,11 +12,11 @@ public class MateriaTest extends AbstractMateriaTest
     {
         assertNotNull(materia.getItems());
     }
-    @Test()
+   /* @Test()
     public final void testgetItemsXML() throws Exception
     {
     	assertEquals(col.size(),materia.getItemsXML("items.xml").size());
-    }
+    }*/
     
 
 }
