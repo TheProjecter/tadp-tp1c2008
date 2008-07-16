@@ -83,7 +83,7 @@ public abstract class Home extends BasePage {
 		return items;
 		
 	}
-	public void buscarPreguntas(IRequestCycle cycle)
+	public void onBuscarPreguntas(IRequestCycle cycle)
 	{
 		String materiaSeleccionada = (String)getMateria();
 		//String diseño = "Diseño";
