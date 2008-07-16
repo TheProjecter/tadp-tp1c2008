@@ -8,14 +8,15 @@
 		<font size="5" color="#000000" face="Arial, Helvetica, sans-serif"><b>Generar Examen</b></font>
 		<br><br><br><br>
 
-	 <form jwcid="generarExamenForm@Form" >
+	 <form jwcid="generarExamenForm" >
 		 <table border="0" cellpadding="6" width="35%" >
 				<tr>
 					<td align="left">
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Materia</b></font>
 					</td>
 					<td align="right">
-						<input name="materia" type = "text"  readonly="readonly" value = "TADP" />
+						<!--<input jwcid="materia" readonly="readonly" />-->	
+						<input type="text" jwcid="materia@TextField" value="ognl:materia" readonly="readonly" />				
 					</td>
 				</tr>
 		
@@ -80,7 +81,7 @@
 
 		<br><br>
 		
-		<input name="generar" type="Submit" value="Generar"/>
+		<input name="generarExamen" type="Submit" value="Generar"/>
 		
 		</form>	
 		
