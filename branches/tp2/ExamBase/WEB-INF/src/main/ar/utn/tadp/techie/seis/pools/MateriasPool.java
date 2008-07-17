@@ -79,8 +79,9 @@ public class MateriasPool
 	/**
 	 * Guarda una nueva unidad en la materia seleccionada
 	 * @param materiaSeleccionada
+	 * @param string 
 	 */
-	public void setUnidad(String materiaSeleccionada) {
+	public void setUnidad(String materiaSeleccionada, String string) {
 		// TODO Auto-generated method stub
 		
 	}
