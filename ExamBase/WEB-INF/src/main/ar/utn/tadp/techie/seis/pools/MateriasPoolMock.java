@@ -158,17 +158,16 @@ public class MateriasPoolMock extends MateriasPool{
 		{
 			//encuentro la materia y devuelvo las preguntas	
 			if(materia.compareTo(mat.getNombre())==0)
-				return mat.getItems();
-			
+				return mat.getItems();		
 		}
-		
 		return null;
 		
 	}
 	@Override
 	public String[] getUnidades(String materia) {
-		String[] unidades = {"Unidad 1","Unidad 2","Unidad 3"} ;
+		String[] unidades = {"Unidad 1",  "Unidad 2", "Unidad 3"} ;
 		return unidades;
 	}
+	
 
 }

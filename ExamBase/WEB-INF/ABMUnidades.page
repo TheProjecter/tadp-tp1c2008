@@ -6,17 +6,17 @@
 <page-specification class="ar.utn.tadp.techie.seis.web.ABMUnidades">
 
 <component id="unidadesForm" type="Form">
-<binding name="listener" value="listener:onGuardar"/>
+	<binding name="listener" value="listener:onGuardar"/>
 </component>
 
 <property name="currentUnidad"/>
 	<component id="cadaUnidad" type="For">
-		<binding name="source" value="items"/>
+		<binding name="source" value="unidades"/>
 		<binding name="element" value="literal:tr"/>
 		<binding name="value" value="currentUnidad"/>
 	</component>
-	<component id="nombreUnidad" type="Insert">
-		<binding name="value" value="currentUnidad.unidadTematica"/>
+	<component id="unidadTematica" type="Insert">
+		<binding name="value" value="currentUnidad"/>
 	</component>
 	
 </page-specification>

@@ -40,19 +40,18 @@ public abstract class Home extends BasePage {
 	{
 		this.materia=m;
 	}
-	
-	
+
 	
 	public IPropertySelectionModel getMateriasModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
 		Set<String> materiasSet = MateriaDAOMock.getInstance().listarMaterias(); 
 		
-		String materias = "Seleccione...";
+		String materias = "";//= "Seleccione...";
 		
 		//convierto el set en un array de strings para poder pasarlo al componente
 		for(String m: materiasSet)
 		{
-			materias += "," + m;
+			materias +=  m + ",";
 		}
 			
         return new StringPropertySelectionModel((String[])materias.split(","));
