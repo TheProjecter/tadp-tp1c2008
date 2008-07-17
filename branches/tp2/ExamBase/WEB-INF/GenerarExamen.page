@@ -26,10 +26,18 @@
  </component>
   <component id="cantidadUnidades" type="TextField">
         <binding name="value" value="cantidadUnidades"/>
+        <binding name="listener" value="listener:onSetCantidadUnidades"/>
  </component>
- <component id="unidad" type="PropertySelection">
+
+ <property name="currentUnidad"/>
+	<component id="cadaUnidad" type="For">
+		<binding name="source" value="combosUnidades"/>
+		<binding name="element" value="literal:tr"/>
+		<binding name="value" value="currentUnidad"/>
+	</component>
+	  <component id="comboUnidad" type="PropertySelection">
         <binding name="model" value="unidadesModel"/>
-        <binding name="value" value="unidad"/>
- </component>
- 
+        <binding name="value" value="currentUnidad"/>
+ 	</component>
+
 </page-specification>

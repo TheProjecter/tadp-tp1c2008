@@ -12,7 +12,8 @@ import ar.utn.tadp.techie.seis.*;
 public class MateriasPoolMock extends MateriasPool{
 	
 	Collection<Materia> materias;
-		
+	
+	
 	/** @author juanmi
 	 * 
 	 * @param materia
@@ -168,6 +169,6 @@ public class MateriasPoolMock extends MateriasPool{
 		String[] unidades = {"Unidad 1",  "Unidad 2", "Unidad 3"} ;
 		return unidades;
 	}
-	
+
 
 }

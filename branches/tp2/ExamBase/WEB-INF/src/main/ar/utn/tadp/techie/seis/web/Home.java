@@ -19,7 +19,7 @@ import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 
 public abstract class Home extends BasePage {
-	 
+	
 	private String materia; 
 	
 	private Set<ItemExamen> items=null;
@@ -33,6 +33,7 @@ public abstract class Home extends BasePage {
 	//public abstract String getMateria();
 	//public abstract void setMateria(String m);
 	/** tuve que desistir de  abstract porke no pude hacer ke pase la materia a las otras paginas **/
+	//@Persist("session")
 	public String getMateria(){ 
 		return this.materia; 
 	}
