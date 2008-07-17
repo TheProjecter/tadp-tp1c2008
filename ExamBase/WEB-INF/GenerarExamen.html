@@ -65,9 +65,9 @@
 						<input type="text" jwcid="cantidadUnidades"  size="2"/>
 					</td>
 				<tr/>
-				
-				<tr>
-					<!-- Aca van tantos combos como unidades haya elegido... hay que generarlo dinamicamente! =) -->
+			</table>	
+				<!--<tr>
+					 Aca van tantos combos como unidades haya elegido... hay que generarlo dinamicamente!
 					<td align="left" >
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione Una Unidad</b></font>
 					</td>
@@ -76,9 +76,16 @@
 							<option value="0">N/A</option>
 						</select>
 					</td>
+				</tr>-->
+			<table border="3" cellpadding="4" width="75%" >
+				<!--<font size="2" color="#000000" face="Arial, Helvetica, sans-serif">
+				  <tr><th>Unidad</th></tr>
+				</font>-->
+				<tr jwcid="cadaUnidad">
+					<td><span jwcid="comboUnidadTematica"></span></td>
 				</tr>
-
-		</table>
+			</table>
+		
 
 		<br><br>
 		

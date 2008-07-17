@@ -1,5 +1,9 @@
 package ar.utn.tadp.techie.seis.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.*;
 import org.apache.tapestry.form.IPropertySelectionModel;
@@ -7,10 +11,11 @@ import org.apache.tapestry.form.StringPropertySelectionModel;
 import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
+import ar.utn.tadp.techie.seis.persistance.MateriaDAOMock;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
-
+/*
 	private String materia;
 	
 	public String getMateria(){
@@ -19,10 +24,11 @@ public abstract class GenerarExamen extends BasePage {
 	public void setMateria(String m)
 	{
 		this.materia=m;
-	}
+	}*/
 	
-	//public abstract void setMateria(String m);
-
+	public abstract String getMateria();
+	public abstract void setMateria(String materia);
+	private ArrayList<IPropertySelectionModel> combosUnidades;
 	
 	@InitialValue("literal:3")
 	public abstract String getCantidadPreguntasTeoricas();
@@ -73,7 +79,28 @@ public abstract class GenerarExamen extends BasePage {
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
         return new StringPropertySelectionModel(unidades);
     }
+	
+	/**
+	 * @author juanmi
+	 * cuando se define la cantidad de unidades que se incluiran en
+	 *  el examen se deben mostrar la cantidad de combos 
+	 *  correspondiente a esa cantidad definida.
+	 * @param cycle
+	 */
+	public void onSetCantidadUnidades(IRequestCycle cycle){
+		
+		int cantUnidades = Integer.parseInt(getCantidadUnidades());
+		IPropertySelectionModel auxUnidadesSelectionModel = getUnidadesModel();
+		
+		for(int i=0;i<cantUnidades;i++) 
+			combosUnidades.add(auxUnidadesSelectionModel);
+		
+		cycle.activate("GenerarExamen");
+	}
+	
 	public void onGenerarExamen(IRequestCycle cycle){
 		//TODO --juanmi
 	}
+	
+	
 }
