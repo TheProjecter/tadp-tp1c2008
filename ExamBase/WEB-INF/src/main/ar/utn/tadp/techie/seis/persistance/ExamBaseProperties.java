@@ -41,6 +41,8 @@ public class ExamBaseProperties extends Properties
         defaultProperties.setProperty("db.host", "localhost");
         defaultProperties.setProperty("db.loginUser", "sa");
         defaultProperties.setProperty("db.loginPass", "Feedback.512");
+        defaultProperties.setProperty("db.connectionsCached", "3");
+        
         
         try
         {
