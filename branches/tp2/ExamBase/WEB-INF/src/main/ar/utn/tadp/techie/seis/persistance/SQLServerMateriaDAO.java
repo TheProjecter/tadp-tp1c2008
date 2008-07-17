@@ -46,7 +46,7 @@ public class SQLServerMateriaDAO implements MateriaDAO
                 String query = "SELECT materia_id FROM Materia";
                 Statement stat = conn.createStatement();
                 results = stat.executeQuery(query);
-                
+               
                 Set<String> retval = new HashSet<String>();
                 while(results.next())
                 {

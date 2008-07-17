@@ -165,6 +165,10 @@ public class MateriasPoolMock extends MateriasPool{
 		return null;
 		
 	}
-	
+	@Override
+	public String[] getUnidades(String materia) {
+		String[] unidades = {"Unidad 1","Unidad 2","Unidad 3"} ;
+		return unidades;
+	}
 
 }

@@ -67,4 +67,21 @@ public class MateriasPool
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * 
+	 * @param materia
+	 * @return devuelve una lista de las unidades pertenecientes a la materia
+	 */
+	public String[] getUnidades(String materia) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * Guarda una nueva unidad en la materia seleccionada
+	 * @param materiaSeleccionada
+	 */
+	public void setUnidad(String materiaSeleccionada) {
+		// TODO Auto-generated method stub
+		
+	}
 }
