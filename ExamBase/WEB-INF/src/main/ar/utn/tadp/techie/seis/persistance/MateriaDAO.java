@@ -14,7 +14,6 @@ import java.util.Set;
 public interface MateriaDAO
 {
 
-    Set<String> listarMaterias();
-    
+    public Set<String> listarMaterias();
     
 }
