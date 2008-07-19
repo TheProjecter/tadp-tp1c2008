@@ -12,7 +12,7 @@ import ar.utn.tadp.techie.seis.*;
 public class MateriasPoolMock extends MateriasPool{
 	
 	Collection<Materia> materias;
-	
+	Set<String> unidades;
 	
 	/** @author juanmi
 	 * 
@@ -145,6 +145,9 @@ public class MateriasPoolMock extends MateriasPool{
         itemsPocoUsados.add(ejercicio);
 		
 		materias.add(materia);
+		
+		////////////
+		unidades = unidadesAbarcadas;
 	}
 	public static MateriasPool getInstance()
 	{
@@ -165,10 +168,27 @@ public class MateriasPoolMock extends MateriasPool{
 		
 	}
 	@Override
-	public String[] getUnidades(String materia) {
-		String[] unidades = {"Unidad 1",  "Unidad 2", "Unidad 3"} ;
+	public Set<String>  getUnidades(String materia) {
+		
 		return unidades;
 	}
-
-
+	@Override
+	public void setUnidad(String materiaSeleccionada, String string) {
+		
+		unidades.add(string);
+		
+	}
+	@Override
+	public String[] getUnidadesAsStringArray(String materia){
+		
+		String unids = "";
+		
+		//convierto el set en un array de strings para poder pasarlo al componente
+		for(String u: unidades)
+		{
+			unids +=  u + ",";
+		}
+		return unids.split(",");
+		
+	}
 }

@@ -1,8 +1,7 @@
 package ar.utn.tadp.techie.seis.web;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.*;
@@ -11,7 +10,7 @@ import org.apache.tapestry.form.StringPropertySelectionModel;
 import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
-import ar.utn.tadp.techie.seis.persistance.MateriaDAOMock;
+
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
@@ -75,7 +74,7 @@ public abstract class GenerarExamen extends BasePage {
 	 */
 	public IPropertySelectionModel getUnidadesModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
-		 String[] unidades = MateriasPoolMock.getInstance().getUnidades(getMateria()); 
+		 String[] unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria()); 
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
         return new StringPropertySelectionModel(unidades);
     }
@@ -87,6 +86,16 @@ public abstract class GenerarExamen extends BasePage {
 	 *  correspondiente a esa cantidad definida.
 	 * @param cycle
 	 */
+	/*public void onSetCantidadUnidades(IRequestCycle cycle){
+		
+		int cantUnidades = Integer.parseInt(getCantidadUnidades());
+		IPropertySelectionModel auxUnidadesSelectionModel = getUnidadesModel();
+		
+		for(int i=0;i<cantUnidades;i++) 
+			combosUnidades.add(auxUnidadesSelectionModel);
+		
+		cycle.activate("GenerarExamen");
+	}*/
 	public void onSetCantidadUnidades(IRequestCycle cycle){
 		
 		int cantUnidades = Integer.parseInt(getCantidadUnidades());

@@ -1,13 +1,11 @@
 package ar.utn.tadp.techie.seis.web;
 
-import java.util.Set;
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.InitialValue;
 import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
-import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class ABMUnidades extends BasePage {
@@ -17,14 +15,18 @@ public abstract class ABMUnidades extends BasePage {
 	
 	public ABMUnidades(){
 		
-		unidades = MateriasPoolMock.getInstance().getUnidades(getMateria());		
+		
+		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());		
 	}
-	
 	
 	
 	@InitialValue("literal:Ingrese una unidad")
 	public abstract String getUnidad();
-	public abstract void setUnidad(String s);
+	public void setUnidad(String s){
+		
+		MateriasPoolMock.getInstance().setUnidad(getUnidad(),getMateria());
+		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());
+	}
 	
 	
 	@Override
@@ -55,7 +57,7 @@ public abstract class ABMUnidades extends BasePage {
 		}
 		return unidades;
 	}
-	public void setItems(String[] u){
+	public void setUnidades(String[] u){
 		unidades = u;
 	}
 	
@@ -69,7 +71,7 @@ public abstract class ABMUnidades extends BasePage {
 		String materiaSeleccionada = (String)getMateria();
 		//String diseño = "Diseño";
 		MateriasPoolMock.getInstance().setUnidad(materiaSeleccionada, getUnidad());
-		unidades = MateriasPoolMock.getInstance().getUnidades(materiaSeleccionada);
+		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(materiaSeleccionada);
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
 			
 		cycle.activate("ABMUnidades");
