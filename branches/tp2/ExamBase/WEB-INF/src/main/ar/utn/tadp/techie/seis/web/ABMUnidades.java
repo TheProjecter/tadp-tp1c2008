@@ -15,7 +15,6 @@ public abstract class ABMUnidades extends BasePage {
 	
 	public ABMUnidades(){
 		
-		
 		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());		
 	}
 	

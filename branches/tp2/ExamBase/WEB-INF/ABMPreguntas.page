@@ -4,4 +4,26 @@
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_1.dtd">
 
 <page-specification class="ar.utn.tadp.techie.seis.web.ABMPreguntas">
+<!-- formulario -->
+<component id="preguntaForm" type="Form">
+	<binding name="listener" value="listener:onGuardar"/>
+</component>
+<!-- combo boxes -->
+ <component id="unidades" type="PropertySelection">
+        <binding name="model" value="unidadesModel"/>
+        <binding name="value" value="unidad"/>
+ </component>
+ <component id="tiposItem" type="PropertySelection">
+        <binding name="model" value="tiposItemModel"/>
+        <binding name="value" value="tipoItem"/>
+ </component>
+  <component id="tiposContenidoItem" type="PropertySelection">
+        <binding name="model" value="tiposContenidoItemModel"/>
+        <binding name="value" value="tiposContenidoItemAsString"/>
+ </component>
+  <component id="complejidades" type="PropertySelection">
+        <binding name="model" value="complejidadesModel"/>
+        <binding name="value" value="complejidad"/>
+ </component>
+ <!-- text area -->
 </page-specification>
