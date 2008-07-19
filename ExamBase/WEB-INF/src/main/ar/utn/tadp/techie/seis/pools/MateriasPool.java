@@ -8,6 +8,7 @@ package ar.utn.tadp.techie.seis.pools;
 import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -72,7 +73,7 @@ public class MateriasPool
 	 * @param materia
 	 * @return devuelve una lista de las unidades pertenecientes a la materia
 	 */
-	public String[] getUnidades(String materia) {
+	public Set<String> getUnidades(String materia) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,5 +85,10 @@ public class MateriasPool
 	public void setUnidad(String materiaSeleccionada, String string) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String[] getUnidadesAsStringArray(String materia) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
