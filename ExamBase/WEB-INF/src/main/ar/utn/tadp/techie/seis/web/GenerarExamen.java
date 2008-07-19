@@ -1,6 +1,7 @@
 package ar.utn.tadp.techie.seis.web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 import org.apache.tapestry.IRequestCycle;
@@ -24,11 +25,16 @@ public abstract class GenerarExamen extends BasePage {
 	{
 		this.materia=m;
 	}*/
-	
+	//private String cantidadUnidades;
 	public abstract String getMateria();
 	public abstract void setMateria(String materia);
-	private ArrayList<IPropertySelectionModel> combosUnidades;
+	private List<IPropertySelectionModel> combosUnidades;
 	
+	/*
+	public GenerarExamen(){
+		setCombosUnidades();
+	}
+	*/
 	@InitialValue("literal:3")
 	public abstract String getCantidadPreguntasTeoricas();
 	@InitialValue("literal:3")
@@ -39,6 +45,9 @@ public abstract class GenerarExamen extends BasePage {
 	public abstract String getCantidadEjerciciosPracticos();
 	@InitialValue("literal:1")
 	public abstract String getCantidadUnidades();
+	public abstract void setCantidadUnidades(String cu);
+	/*public String getCantidadUnidades(){return cantidadUnidades;}
+	public void setCantidadUnidades(String cu){cantidadUnidades=cu;}*/
 	
 	//**@InitialValue("literal:N/A")
 	//**@InjectAsset("readonly")
@@ -98,13 +107,25 @@ public abstract class GenerarExamen extends BasePage {
 	}*/
 	public void onSetCantidadUnidades(IRequestCycle cycle){
 		
+		setCombosUnidades();
+		cycle.activate("GenerarExamen");
+	}
+	public List<IPropertySelectionModel> getCombosUnidades(){
+		return combosUnidades;
+	}
+	/**
+	 * setCombosUnidades
+	 * setea tantos combos como undiades se hayan elegido para agregar al examen
+	 */
+	public void setCombosUnidades(){
+		
 		int cantUnidades = Integer.parseInt(getCantidadUnidades());
+		combosUnidades = new ArrayList<IPropertySelectionModel>();
 		IPropertySelectionModel auxUnidadesSelectionModel = getUnidadesModel();
 		
 		for(int i=0;i<cantUnidades;i++) 
 			combosUnidades.add(auxUnidadesSelectionModel);
 		
-		cycle.activate("GenerarExamen");
 	}
 	
 	public void onGenerarExamen(IRequestCycle cycle){

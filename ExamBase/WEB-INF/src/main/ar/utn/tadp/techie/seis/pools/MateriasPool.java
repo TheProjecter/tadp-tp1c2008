@@ -91,4 +91,9 @@ public class MateriasPool
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void setNewItem(String materia, ItemExamen item) {
+		// TODO Auto-generated method stub
+		
+	}
 }
