@@ -25,10 +25,10 @@ public class SQLServerMateriaDAO implements MateriaDAO
     
     public SQLServerMateriaDAO()
     {
-        String dbHost = Config.getInstance().getProperty("db.host");
-        String dbLoginUser = Config.getInstance().getProperty("db.loginUser");
-        String dbLoginPass = Config.getInstance().getProperty("db.loginPass");
-        int dbConnectionsCached = Integer.parseInt(Config.getInstance().getProperty("db.connectionsCached"));
+        String dbHost = ExamBaseProperties.getInstance().getProperty("db.host");
+        String dbLoginUser = ExamBaseProperties.getInstance().getProperty("db.loginUser");
+        String dbLoginPass = ExamBaseProperties.getInstance().getProperty("db.loginPass");
+        int dbConnectionsCached = Integer.parseInt(ExamBaseProperties.getInstance().getProperty("db.connectionsCached"));
         
         pool = new SQLServerConnectionPool(dbConnectionsCached, dbHost, dbLoginUser, dbLoginPass);
     }
