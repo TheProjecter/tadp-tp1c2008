@@ -1,8 +1,5 @@
 package ar.utn.tadp.techie.seis.web;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.*;
@@ -15,49 +12,32 @@ import org.apache.tapestry.record.PropertyChangeObserver;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
-/*
-	private String materia;
+
+	private String unidadesString; //para mantener unidades agregadas y poder agregar nuevas
+	private String[]  unidades = {""}; //para mostrar en la tabla
+
 	
-	public String getMateria(){
-		return this.materia; 
-	}
-	public void setMateria(String m)
-	{
-		this.materia=m;
-	}*/
-	//private String cantidadUnidades;
 	public abstract String getMateria();
 	public abstract void setMateria(String materia);
-	private List<IPropertySelectionModel> combosUnidades;
 	
-	/*
+	
 	public GenerarExamen(){
-		setCombosUnidades();
+		//unidadesSet = new HashSet<String>();
+		unidadesString = "";
+		
 	}
-	*/
 	@InitialValue("literal:3")
 	public abstract String getCantidadPreguntasTeoricas();
-	@InitialValue("literal:3")
+	@InitialValue("literal:2")
 	public abstract String getCantidadPreguntasPracticas();
 	@InitialValue("literal:3")
 	public abstract String getCantidadEjerciciosTeoricos();
-	@InitialValue("literal:1")
+	@InitialValue("literal:2")
 	public abstract String getCantidadEjerciciosPracticos();
-	@InitialValue("literal:1")
-	public abstract String getCantidadUnidades();
-	public abstract void setCantidadUnidades(String cu);
-	/*public String getCantidadUnidades(){return cantidadUnidades;}
-	public void setCantidadUnidades(String cu){cantidadUnidades=cu;}*/
+	public abstract String getUnidad();
+	public abstract void setUnidad(String u);
 	
-	//**@InitialValue("literal:N/A")
-	//**@InjectAsset("readonly")
-	/*@InjectComponent("materia")
-	@Persist("session")
-	public abstract String getMateria();
 	
-	public abstract void setMateria(String materia);
-
-	*/
 	@Override
 	public String getClientId() {
 		// TODO Auto-generated method stub
@@ -88,48 +68,46 @@ public abstract class GenerarExamen extends BasePage {
         return new StringPropertySelectionModel(unidades);
     }
 	
-	/**
-	 * @author juanmi
-	 * cuando se define la cantidad de unidades que se incluiran en
-	 *  el examen se deben mostrar la cantidad de combos 
-	 *  correspondiente a esa cantidad definida.
-	 * @param cycle
-	 */
-	/*public void onSetCantidadUnidades(IRequestCycle cycle){
+	public String[] getUnidades(){	       
 		
-		int cantUnidades = Integer.parseInt(getCantidadUnidades());
-		IPropertySelectionModel auxUnidadesSelectionModel = getUnidadesModel();
+			return unidades;
 		
-		for(int i=0;i<cantUnidades;i++) 
-			combosUnidades.add(auxUnidadesSelectionModel);
+	}
+	public void setUnidades(String[] u){
+		unidades = u;
+	}
+	/*
+	public Set<String> getUnidadesSet(){	       
 		
-		cycle.activate("GenerarExamen");
+		return unidadesSet;
+		
+	}
+	public void setUnidadesSet(Set<String> u){
+		unidadesSet = u;
 	}*/
-	public void onSetCantidadUnidades(IRequestCycle cycle){
-		
-		setCombosUnidades();
-		cycle.activate("GenerarExamen");
-	}
-	public List<IPropertySelectionModel> getCombosUnidades(){
-		return combosUnidades;
-	}
+	
+	//////////////////////////
 	/**
-	 * setCombosUnidades
-	 * setea tantos combos como undiades se hayan elegido para agregar al examen
+	 * Cada vez que se agrega una unidad al Examen se invoca este metodo.
+	 * Agrega la unidad seleccionada al Set de Unidades y actualiza el array De unidades para mostrar en la tabla.
 	 */
-	public void setCombosUnidades(){
-		
-		int cantUnidades = Integer.parseInt(getCantidadUnidades());
-		combosUnidades = new ArrayList<IPropertySelectionModel>();
-		IPropertySelectionModel auxUnidadesSelectionModel = getUnidadesModel();
-		
-		for(int i=0;i<cantUnidades;i++) 
-			combosUnidades.add(auxUnidadesSelectionModel);
-		
+	public void onSelectUnidad(IRequestCycle cycle){
+
+	
+		unidadesString += getUnidad() + ",";
+		//probe usando un set y el mensaje toArray pero despues de agregar una unidad no cambia.. =(... 
+		//por eso opte por esta solucion
+		setUnidades(unidadesString.split(","));
 	}
 	
+	/**
+	 * Genera y guarda un examen con los requisitos definidos en la pagina.
+	 * @param cycle
+	 */
 	public void onGenerarExamen(IRequestCycle cycle){
+		
 		//TODO --juanmi
+		
 	}
 	
 	
