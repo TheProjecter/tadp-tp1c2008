@@ -26,14 +26,14 @@
 						<input type="text" jwcid="unidad@TextField" value="ognl:unidad" />
 					</td>
 					<td align="center" >
-						<input name = "guardar" type = "submit" value = "Guardar"/>
+						<input jwcid="guardar@Submit" listener="listener:onGuardar" value = "Guardar"/>
 					</td>
 					<!--  <td align="center" >
 						<input name = "borrar" type = "submit" value = "Borrar">
 					</td>-->
 				<tr/>
 		<table/>
-         </form> 
+         
 
 		<br><br><br><br>
 
@@ -46,10 +46,11 @@
 				</tr>
 			</table>
 			
-			<br><br><input type="button" value="Volver" onclick="history.go(-1)">
+			<br><br><input jwcid = "volver@Submit" type = "button" value = "Volver" listener="listener:onVolver"/>
 			<br><br>
-		</center>
-		<span jwcid="copyright@Copyright">Copyright notice</span>			
+		</form> 
 
+		<span jwcid="copyright@Copyright">Copyright notice</span>			
+	</center>
   </body>
 </html>

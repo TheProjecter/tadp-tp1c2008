@@ -84,12 +84,14 @@
 				
 			</table>
 
+		<br><font size="3" color="red" face="Arial, Helvetica, sans-serif">
+            <b><input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/></b>	</font>
 		<br><br>
-		
-		<input name="generarExamen" type="Submit" value="Generar"/>	
+		<input name="generarExamen" type="Submit" value="Generar" title="Generar y Guardar el Examen con los parámetros solicitados."/>	
 	
 		&nbsp;&nbsp;
-		<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/>
+		<!--  <input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/> -->
+		<input jwcid = "volver@Submit" type = "button" value = "Volver" listener="listener:onVolver"/>
 		
 		</form>
 		<br><br>			

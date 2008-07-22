@@ -1,6 +1,8 @@
 package ar.utn.tadp.techie.seis.web;
 
 
+import java.util.Calendar;
+
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.*;
 import org.apache.tapestry.form.IPropertySelectionModel;
@@ -26,6 +28,7 @@ public abstract class GenerarExamen extends BasePage {
 		unidadesString = "";
 		
 	}
+	
 	@InitialValue("literal:3")
 	public abstract String getCantidadPreguntasTeoricas();
 	@InitialValue("literal:2")
@@ -37,6 +40,9 @@ public abstract class GenerarExamen extends BasePage {
 	public abstract String getUnidad();
 	public abstract void setUnidad(String u);
 	
+	@InitialValue("literal:")
+	public abstract String getMensaje(); //mensaje de aviso al generar un examen
+	public abstract void setMensaje(String m);
 	
 	@Override
 	public String getClientId() {
@@ -89,7 +95,7 @@ public abstract class GenerarExamen extends BasePage {
 	//////////////////////////
 	/**
 	 * Cada vez que se agrega una unidad al Examen se invoca este metodo.
-	 * Agrega la unidad seleccionada al Set de Unidades y actualiza el array De unidades para mostrar en la tabla.
+	 * Agrega la unidad seleccionada al String de Unidades y actualiza el array De unidades para mostrar en la tabla.
 	 */
 	public void onSelectUnidad(IRequestCycle cycle){
 
@@ -107,8 +113,21 @@ public abstract class GenerarExamen extends BasePage {
 	public void onGenerarExamen(IRequestCycle cycle){
 		
 		//TODO --juanmi
+		int cantTeoricos  = Integer.parseInt(getCantidadEjerciciosTeoricos());
+		int cantPracticos = Integer.parseInt(getCantidadEjerciciosPracticos());
+		int cantTeoricas  = Integer.parseInt(getCantidadPreguntasTeoricas());
+		int cantPracticas = Integer.parseInt(getCantidadPreguntasPracticas());
+
+		
+		MateriasPoolMock.getInstance().generarExamen( getMateria(), cantTeoricos, cantPracticos, 
+				cantTeoricas, cantPracticas, getUnidades(), Calendar.getInstance()
+				);
 		
 	}
-	
-	
+	/**
+	 * retorna a la pagina principal (Home)
+	 */
+	public void onVolver(IRequestCycle cycle){
+		cycle.activate("Home");
+	}
 }

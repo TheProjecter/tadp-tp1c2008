@@ -9,6 +9,7 @@ import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -95,5 +96,13 @@ public class MateriasPool
 	public void setNewItem(String materia, ItemExamen item) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void generarExamen(String materia, int cantEjerciciosTeoricos,
+			int cantEjerciciosPracticos, int cantPreguntasTeoricas,
+			int cantPreguntasPracticas, String[] strings,
+			Calendar fecha) {
+		// TODO Auto-generated method stub
+		return;
 	}
 }

@@ -16,16 +16,18 @@
 				<option value="0">N/A</option>
 			</select>
 			<!--<span jwcid = "buscar@Submit" listener = "listener:onBuscarPreguntas" value = "Ver Preguntas"/>-->
-			<input type = "submit" value = "OK"/>
+			<input type = "submit" value = "OK" title="Seleccionar Materia para comenzar a trabajar."/>
 	  </form>
 				<br><br>
 				<br><br>
 	  <form jwcid="navForm@Form" >		
            <span jwcid = "generarExamen@Submit" listener = "listener:generarExamenPage" value = "Generar Examen"/>
 				&nbsp;&nbsp;
-           <span jwcid = "unidades@Submit" listener = "listener:unidadesPage" value="ABM Unidades" />
+           <span jwcid = "unidades@Submit" listener = "listener:unidadesPage" value="ABM Unidades" 
+           title="Cargar unidades para la materia seleccionada."/>
            		&nbsp;&nbsp;
-           <span jwcid = "preguntas@Submit" listener = "listener:preguntasPage" value="ABM Preguntas" />
+           <span jwcid = "preguntas@Submit" listener = "listener:preguntasPage" value="ABM Preguntas" 
+           title= "Cargar preguntas y ejercicios para la materia seleccionada." />
            <br><br><font size="3" color="red" face="Arial, Helvetica, sans-serif">
            <input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/>	</font>
      </form>
