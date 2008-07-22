@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Exam Base</title>   
-    <!--<link rel=stylesheet type="text/css" href="eb.css"/>--> 
+    
   </head>
 	<body bgcolor="#F3EFFE">	
 	<br>
@@ -10,18 +10,19 @@
 		<br><br><br><br>
 		<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione una Materia</b></font>
 	
-	 <!--<form jwcid="materiaForm@Form" listener ="listener:onBuscar">-->
+
 	 <form jwcid="materiaForm" >
 			<select jwcid="materia">
 				<option value="0">N/A</option>
 			</select>
-			<!--<span jwcid = "buscar@Submit" listener = "listener:onBuscarPreguntas" value = "Ver Preguntas"/>-->
+			
 			<input type = "submit" value = "OK" title="Seleccionar Materia para comenzar a trabajar."/>
 	  </form>
 				<br><br>
 				<br><br>
 	  <form jwcid="navForm@Form" >		
-           <span jwcid = "generarExamen@Submit" listener = "listener:generarExamenPage" value = "Generar Examen"/>
+           <span jwcid = "generarExamen@Submit" listener = "listener:generarExamenPage" value = "Generar Examen"
+            title="Generar Examenes para la materia seleccionada."/>
 				&nbsp;&nbsp;
            <span jwcid = "unidades@Submit" listener = "listener:unidadesPage" value="ABM Unidades" 
            title="Cargar unidades para la materia seleccionada."/>
