@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.Properties;
 
@@ -24,7 +24,11 @@ import java.util.Properties;
 public class ExamBaseProperties extends Properties
 {
 
-    private static ExamBaseProperties instance;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static ExamBaseProperties instance;
     
     public static ExamBaseProperties getInstance()
     {

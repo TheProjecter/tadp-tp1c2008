@@ -4,11 +4,11 @@
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_0.dtd">
 
 <page-specification class="ar.utn.tadp.techie.seis.web.GenerarExamen">
-<!--    
- <component id="materia" type="TextField">
-        <binding name="value" value="materia"/>
- </component> 
- -->
+<!--
+<component id="cargarDatosForm" type="Form">
+  <binding name="listener" value="listener:onGenerarExamen"/>
+</component>
+-->
 <component id="generarExamenForm" type="Form">
 	<binding name="listener" value="listener:onGenerarExamen"/>
 </component>
@@ -24,23 +24,24 @@
 <component id="cantidadEjerciciosPracticos" type="TextField">
         <binding name="value" value="cantidadEjerciciosPracticos"/>
 </component>
-<component id="setCantidadUnidadesForm" type="Form">
-	<binding name="listener" value="listener:onSetCantidadUnidades"/>
-</component> 
-<component id="cantidadUnidades" type="TextField">
-       <binding name="value" value="cantidadUnidades"/>
-       <binding name="listener" value="listener:onSetCantidadUnidades"/>
-</component>
 
- <property name="currentComboUnidad"/>
-	<component id="cadaComboUnidad" type="For">
-		<binding name="source" value="combosUnidades"/>
-		<binding name="element" value="literal:tr"/>
-		<binding name="value" value="currentComboUnidad"/>
-	</component>
-	<component id="comboUnidad" type="PropertySelection">
+<!--
+<component id="agregarUnidadForm" type="Form">
+	<binding name="listener" value="listener:onSelectUnidad"/>
+</component>-->
+ <component id="unidad" type="PropertySelection">
         <binding name="model" value="unidadesModel"/>
-        <binding name="value" value="currentComboUnidad"/>
- 	</component>
+        <binding name="value" value="unidad"/>
+ </component>
+ <!-- Tabla de Unidades Agregadas -->
+<property name="currentUnidad"/>
+	<component id="cadaUnidad" type="For">
+		<binding name="source" value="ognl:unidades"/>
+		<binding name="element" value="literal:tr"/>
+		<binding name="value" value="currentUnidad"/>
+	</component>
+	<component id="unidadTematica" type="Insert">
+		<binding name="value" value="currentUnidad"/>
+	</component>
 
 </page-specification>
