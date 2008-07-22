@@ -21,8 +21,8 @@ public abstract class ABMPreguntas extends BasePage {
 
 	private String[] unidades;
 	private String[] complejidades = {"1","2","3","4","5"};
-	private String[] tiposItem = {Pregunta.class.toString(), Ejercicio.class.toString()};
-	private String[] tiposContenidoItem = {ItemExamen.TiposItem.TEORICO.toString(),
+	private String[] tiposItem = {Pregunta.getAlias(), Ejercicio.getAlias()};
+	private String[] tiposContenidoItemAsString = {ItemExamen.TiposItem.TEORICO.toString(),
 										   ItemExamen.TiposItem.PRACTICO.toString(),
 										   ItemExamen.TiposItem.TEORICOPRACTICO.toString()
 										   };												
@@ -32,23 +32,18 @@ public abstract class ABMPreguntas extends BasePage {
 		
 	}
 	
-	@Override
-	public String getClientId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract String getUnidad();
+	public abstract String getTipoItem();
+	public abstract String getComplejidad();
+	public abstract String getTipoContenidoItemAsString();
+	@InitialValue("literal:Escriba aquí el enunciado.")
+	public abstract String getTextoItem();
+	@InitialValue("literal:")
+	public abstract String getMensaje();
+	public abstract void setMensaje(String m);
 
-	@Override
-	public void setClientId(String id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public PropertyChangeObserver getPropertyChangeObserver() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 	
 	public abstract String getMateria();
 	public abstract  void setMateria(String materia);
@@ -68,19 +63,22 @@ public abstract class ABMPreguntas extends BasePage {
     }
 	public IPropertySelectionModel getTiposContenidoItemModel() {
 		
-        return new StringPropertySelectionModel(tiposContenidoItem);
+        return new StringPropertySelectionModel(tiposContenidoItemAsString);
     }
 	
-	public abstract String getUnidad();
-	public abstract String getTipoItem();
-	public abstract String getComplejidad();
-	public abstract String getTipoContenidoItemAsString();
-	@InitialValue("literal:Escriba aquí el enunciado.")
-	public abstract String getTextoItem();
-	@InitialValue("literal:")
-	public abstract String getMensaje();
-	public abstract void setMensaje(String m);
-
+	/**
+	 * 
+	 * @return
+	 */
+	private TiposItem getTipoContenidoItem(){
+		
+		if(getTipoContenidoItemAsString().equals(ItemExamen.TiposItem.TEORICO.toString()))
+			return ItemExamen.TiposItem.TEORICO;
+		else if (getTipoContenidoItemAsString().equals(ItemExamen.TiposItem.PRACTICO.toString()))
+			return ItemExamen.TiposItem.PRACTICO;
+		else return ItemExamen.TiposItem.TEORICOPRACTICO;
+		
+	}
 	
 	/**
 	 * Genera el item (pregunta o ejercicio) con los parametros elegidos.
@@ -103,15 +101,19 @@ public abstract class ABMPreguntas extends BasePage {
 				item = new Ejercicio(getUnidad(), complejidad, getTextoItem(),getTipoContenidoItem());
 		
 		MateriasPoolMock.getInstance().setNewItem(getMateria(),item);
+		
+		setMensaje("Item Guardado Correctamente.");
+		
+		cycle.activate("ABMPreguntas");
 	}
 	
 	private boolean esEjercicio() {
-		return getTipoItem().equals(Ejercicio.class.toString());
+		return getTipoItem().equals(Ejercicio.getAlias());
 	}
 
 	private boolean esPregunta() {
 		
-		return getTipoItem().equals(Pregunta.class.toString());
+		return getTipoItem().equals(Pregunta.getAlias());
 	}
 
 	private boolean noHayTextoEnunciado() {
@@ -120,16 +122,27 @@ public abstract class ABMPreguntas extends BasePage {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * retorna a la pagina principal (Home)
 	 */
-	private TiposItem getTipoContenidoItem(){
-		
-		if(getTipoContenidoItemAsString().equals("Teórico"))
-			return ItemExamen.TiposItem.TEORICO;
-		else if (getTipoContenidoItemAsString().equals("Práctico"))
-			return ItemExamen.TiposItem.PRACTICO;
-		else return ItemExamen.TiposItem.TEORICOPRACTICO;
-		
+	public void onVolver(IRequestCycle cycle){
+		cycle.activate("Home");
+	}
+	
+	@Override
+	public String getClientId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setClientId(String id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public PropertyChangeObserver getPropertyChangeObserver() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

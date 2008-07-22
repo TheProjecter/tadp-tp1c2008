@@ -1,6 +1,7 @@
 package ar.utn.tadp.techie.seis.pools;
 import java.util.ArrayList;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -191,4 +192,12 @@ public class MateriasPoolMock extends MateriasPool{
 		return unids.split(",");
 		
 	}
+	@Override
+	public void generarExamen(String materia, int cantEjerciciosTeoricos,
+			int cantEjerciciosPracticos, int cantPreguntasTeoricas
+			, int cantPreguntasPracticas, String[]unidades, Calendar fecha){
+		
+		
+	}
+	
 }

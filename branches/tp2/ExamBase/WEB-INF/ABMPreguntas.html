@@ -36,7 +36,7 @@
 					</td>
 					<td align="left" >
 						<font size="2" color="#000000" face="Arial, Helvetica, sans-serif"><b>Seleccione Tipo del Contenido</b></font>
-						<select jwcid="tiposContenidoItem"> <!--  teorica-practica-teoricoPractica -->
+						<select jwcid="tipoContenidoItemAsString"> <!--  teorica-practica-teoricoPractica -->
 							<option value="0">N/A</option>
 						</select>
 					</td>
@@ -64,12 +64,13 @@
 		<br>
 			<center>
 			
-			<br><br><font size="3" color="red" face="Arial, Helvetica, sans-serif">
-            <input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/>	</font>
+			<br><font size="3" color="red" face="Arial, Helvetica, sans-serif">
+            <b><input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/></b>	</font>
+			<br><br>
 			
-			<input name = "guardar" type = "submit" value = "Guardar"/>
+			<input name = "guardar" type = "submit" value = "Guardar" title="Generar y Grabar item en la base de datos."/>
 			&nbsp;&nbsp;
-			<input name = "volver" type="button" value="Volver" onclick="history.go(-1)"/>
+			<input jwcid = "volver@Submit" type = "button" value = "Volver" listener="listener:onVolver"/>
 			
 			</center>
 	</form>

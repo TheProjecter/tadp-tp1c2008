@@ -75,5 +75,12 @@ public abstract class ABMUnidades extends BasePage {
 			
 		cycle.activate("ABMUnidades");
 	}	
+	/**
+	 * retorna a la pagina principal (Home)
+	 */
+	public void onVolver(IRequestCycle cycle){
+		cycle.activate("Home");
+	}
+	
 }
 

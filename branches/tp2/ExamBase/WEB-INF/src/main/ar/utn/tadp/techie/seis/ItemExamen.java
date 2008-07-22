@@ -113,5 +113,6 @@ public abstract class ItemExamen {
     public abstract void addTo(ItemAddable materia);
     
     public abstract Set<? extends ItemExamen> getItemsFrom(Materia materia);
+   
 }
 

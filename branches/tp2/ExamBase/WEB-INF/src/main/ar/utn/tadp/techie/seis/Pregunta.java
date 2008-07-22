@@ -5,7 +5,7 @@ import java.util.Set;
 
 public abstract class Pregunta extends ItemExamen
 {
-
+	
 	/**
 	 * Pregunta.<p>
 	 * @param unidadTematica   	que unidad tematica?
@@ -60,4 +60,8 @@ public abstract class Pregunta extends ItemExamen
     {
     	return materia.getPreguntas();
     }
+   
+    public static String getAlias(){
+    	return "Pregunta";
+    }  
 }

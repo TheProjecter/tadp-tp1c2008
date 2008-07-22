@@ -31,5 +31,9 @@ public class Ejercicio extends ItemExamen{
 	public Set<? extends ItemExamen> getItemsFrom(Materia materia) {
 		return materia.getEjercicios();
 	}
+	
+	 public static String getAlias(){
+	    	return "Ejercicio";
+	     } 
 }
 

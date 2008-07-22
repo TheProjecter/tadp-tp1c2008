@@ -6,7 +6,6 @@
 <page-specification class="ar.utn.tadp.techie.seis.web.ABMUnidades">
 
 <component id="unidadesForm" type="Form">
-	<binding name="listener" value="listener:onGuardar"/>
 </component>
 
 <property name="currentUnidad"/>

@@ -17,9 +17,9 @@
         <binding name="model" value="tiposItemModel"/>
         <binding name="value" value="tipoItem"/>
  </component>
-  <component id="tiposContenidoItem" type="PropertySelection">
+  <component id="tipoContenidoItemAsString" type="PropertySelection">
         <binding name="model" value="tiposContenidoItemModel"/>
-        <binding name="value" value="tiposContenidoItemAsString"/>
+        <binding name="value" value="tipoContenidoItemAsString"/>
  </component>
   <component id="complejidades" type="PropertySelection">
         <binding name="model" value="complejidadesModel"/>
