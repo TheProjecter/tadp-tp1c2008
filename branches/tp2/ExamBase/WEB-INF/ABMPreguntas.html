@@ -63,7 +63,8 @@
             <b><input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/></b>	</font>
 			<br><br>
 			
-			<input name = "guardar" type = "submit" value = "Guardar" title="Generar y Grabar item en la base de datos."/>
+			<input jwcid = "guardar@Submit" type = "button" value = "Guardar" listener="listener:onGuardar" title="Generar y Grabar item en la base de datos."/>
+			
 			&nbsp;&nbsp;
 			<input jwcid = "volver@Submit" type = "button" value = "Volver" listener="listener:onVolver"/>
 			

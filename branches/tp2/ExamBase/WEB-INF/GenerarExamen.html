@@ -9,13 +9,13 @@
 		<br><br><br><br>
 
 	 <form jwcid="generarExamenForm" >
-		 <table border="0" cellpadding="6" width="35%" >
+		 <table border="0" cellpadding="6" width="40%" >
 				<tr>
 					<td align="left">
 						<font size="3" color="#000000" face="Arial, Helvetica, sans-serif"><b>Materia</b></font>
 					</td>
 					<td align="right">
-						<input type="text" jwcid="materia@TextField" value="ognl:materia"  readonly="readonly"/>	
+						<input type="text" jwcid="nombreMateria@TextField" value="ognl:nombreMateria"  readonly="readonly"/>	
 					</td>
 				</tr>
 		
@@ -87,7 +87,8 @@
 		<br><font size="3" color="red" face="Arial, Helvetica, sans-serif">
             <b><input type="text" jwcid="mensaje@Insert" value="ognl:mensaje"/></b>	</font>
 		<br><br>
-		<input name="generarExamen" type="Submit" value="Generar" title="Generar y Guardar el Examen con los parámetros solicitados."/>	
+		
+		<input jwcid = "generarExamen@Submit" type = "button" value = "Generar" listener="listener:onGenerarExamen" title="Generar y Guardar el Examen con los parámetros solicitados."/>
 	
 		&nbsp;&nbsp;
 		<input jwcid = "volver@Submit" type = "button" value = "Volver" listener="listener:onVolver"/>

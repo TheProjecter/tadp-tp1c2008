@@ -11,22 +11,29 @@ import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
 
+import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
 
+	private Materia materia;	
 	private String unidadesString; //para mantener unidades agregadas y poder agregar nuevas
 	private String[]  unidades = {""}; //para mostrar en la tabla
 
 	
-	public abstract String getMateria();
-	public abstract void setMateria(String materia);
+	public abstract String getNombreMateria();
+	public abstract void setNombreMateria(String materia);
 	
+	public Materia getMateria(){
+		return materia;
+	}
+	public void setMateria(Materia m){
+		materia = m;
+	}
 	
 	public GenerarExamen(){
 		//unidadesSet = new HashSet<String>();
 		unidadesString = "";
-		
 	}
 	
 	@InitialValue("literal:3")
@@ -69,7 +76,7 @@ public abstract class GenerarExamen extends BasePage {
 	 */
 	public IPropertySelectionModel getUnidadesModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
-		 String[] unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria()); 
+		 String[] unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getNombreMateria()); 
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
         return new StringPropertySelectionModel(unidades);
     }
@@ -119,15 +126,20 @@ public abstract class GenerarExamen extends BasePage {
 		int cantPracticas = Integer.parseInt(getCantidadPreguntasPracticas());
 
 		
-		MateriasPoolMock.getInstance().generarExamen( getMateria(), cantTeoricos, cantPracticos, 
+		MateriasPoolMock.getInstance().generarExamen( getNombreMateria(), cantTeoricos, cantPracticos, 
 				cantTeoricas, cantPracticas, getUnidades(), Calendar.getInstance()
 				);
+		
+		setMensaje("Examen generado y guardado correctamente.");
 		
 	}
 	/**
 	 * retorna a la pagina principal (Home)
 	 */
 	public void onVolver(IRequestCycle cycle){
+		String[] aux = {""};
+		unidades = aux;
+		unidadesString = "";
 		cycle.activate("Home");
 	}
 }

@@ -13,6 +13,7 @@ import org.apache.tapestry.annotations.*;
 
 import ar.utn.tadp.techie.seis.ADesarrollar;
 import ar.utn.tadp.techie.seis.ItemExamen;
+import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.Pregunta;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAOMock;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
@@ -20,7 +21,8 @@ import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class Home extends BasePage {
 	
-	private String materia; 
+	private String nombreMateria; 
+	private Materia materia;
 	
 	private Set<ItemExamen> items=null;
 	
@@ -34,12 +36,12 @@ public abstract class Home extends BasePage {
 	//public abstract void setMateria(String m);
 	/** tuve que desistir de  abstract porke no pude hacer ke pase la materia a las otras paginas **/
 	//@Persist("session")
-	public String getMateria(){ 
-		return this.materia; 
+	public String getNombreMateria(){ 
+		return this.nombreMateria; 
 	}
-	public void setMateria(String m)
+	public void setNombreMateria(String m)
 	{
-		this.materia=m;
+		this.nombreMateria=m;
 	}
 
 	
@@ -75,14 +77,14 @@ public abstract class Home extends BasePage {
 	public IPage unidadesPage(IRequestCycle cycle)
 	{
 		ABMUnidades abmUnidadesPage = getUnidadesPage();
-		abmUnidadesPage.setMateria((String)materia);
+		abmUnidadesPage.setMateria((String)nombreMateria);
 		return goToPage(abmUnidadesPage);
 		
 	}
 	public IPage preguntasPage(IRequestCycle cycle)
 	{
 		ABMPreguntas preguntasPage = getPreguntasPage();
-		preguntasPage.setMateria((String)materia);
+		preguntasPage.setMateria((String)nombreMateria);
 		return goToPage(preguntasPage);
 		
 	}
@@ -90,7 +92,7 @@ public abstract class Home extends BasePage {
 	{
 		
 		GenerarExamen examenPage = getGenerarExamenPage();
-		examenPage.setMateria((String)materia);
+		examenPage.setNombreMateria((String)nombreMateria);
 		return goToPage(examenPage);
 		
 	}
@@ -118,7 +120,7 @@ public abstract class Home extends BasePage {
 	 */
 	private boolean isMateriaSeleccionada()
 	{
-		if( getMateria() == null ) //si no hay ninguna materia seleccionada
+		if( getNombreMateria() == null ) //si no hay ninguna materia seleccionada
 		{	
 			setMensaje("Seleccione la Materia con la que desea trabajar.");
 			return false;
@@ -146,15 +148,15 @@ public abstract class Home extends BasePage {
 	}
 	/**
 	 * @author juanmi
-	 * Este metodo stea la lista de items pertenecientes
-	 *  a una materia seleccionada en el combo box de la pagina
+	 * Solicita la materia seleccionada al pool y carga los items correspondientes a la materia en la pagina.
+	 *  
 	 * **/
 	public void onBuscarPreguntas(IRequestCycle cycle)
 	{
-		String materiaSeleccionada = (String)getMateria();
+		String materiaSeleccionada = (String)getNombreMateria();
 		//String diseño = "Diseño";
-
-		items = MateriasPoolMock.getInstance().getItems(materiaSeleccionada);
+		materia = MateriasPoolMock.getInstance().getMateria(materiaSeleccionada);
+		items = materia.getItems();
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
 			
 		cycle.activate("Home");

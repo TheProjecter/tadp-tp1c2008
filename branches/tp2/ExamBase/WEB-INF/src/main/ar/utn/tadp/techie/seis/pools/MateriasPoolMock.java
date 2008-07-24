@@ -14,7 +14,7 @@ public class MateriasPoolMock extends MateriasPool{
 	
 	Collection<Materia> materias;
 	Set<String> unidades;
-	
+	Materia materia;
 	/** @author juanmi
 	 * 
 	 * @param materia
@@ -32,7 +32,7 @@ public class MateriasPoolMock extends MateriasPool{
         HashSet<ItemExamen> itemsMuyUsados = new HashSet<ItemExamen>();
         HashSet<ItemExamen> itemsPocoUsados = new HashSet<ItemExamen>();
 
-        Materia materia = new Materia("Diseño");
+        materia = new Materia("Diseño");
 
         // Creo lotes de prueba de Unidades Tematicas
         HashSet<String> unidadesAbarcadas = new HashSet<String>();
@@ -199,5 +199,9 @@ public class MateriasPoolMock extends MateriasPool{
 		
 		
 	}
+	@Override
+	public Materia getMateria(String nombre) {
+        return materia;
+    }
 	
 }

@@ -6,7 +6,6 @@
 <page-specification class="ar.utn.tadp.techie.seis.web.ABMPreguntas">
 <!-- formulario -->
 <component id="preguntaForm" type="Form">
-	<binding name="listener" value="listener:onGuardar"/>
 </component>
 <!-- combo boxes -->
  <component id="unidades" type="PropertySelection">

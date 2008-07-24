@@ -10,7 +10,6 @@
 </component>
 -->
 <component id="generarExamenForm" type="Form">
-	<binding name="listener" value="listener:onGenerarExamen"/>
 </component>
 <component id="cantidadPreguntasTeoricas" type="TextField">
         <binding name="value" value="cantidadPreguntasTeoricas"/>
@@ -25,10 +24,6 @@
         <binding name="value" value="cantidadEjerciciosPracticos"/>
 </component>
 
-<!--
-<component id="agregarUnidadForm" type="Form">
-	<binding name="listener" value="listener:onSelectUnidad"/>
-</component>-->
  <component id="unidad" type="PropertySelection">
         <binding name="model" value="unidadesModel"/>
         <binding name="value" value="unidad"/>
