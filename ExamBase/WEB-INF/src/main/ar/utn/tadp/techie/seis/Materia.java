@@ -185,11 +185,10 @@ public class Materia  implements ItemAddable
     	
     }
     
-    
-    
     public void addExamen(Examen examen)
     {
         examenes.add(examen);
 
     }
-}
+    
+  }
