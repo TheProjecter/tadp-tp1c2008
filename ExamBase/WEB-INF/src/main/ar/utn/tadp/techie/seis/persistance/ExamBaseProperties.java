@@ -42,7 +42,7 @@ public class ExamBaseProperties extends Properties
         super();
         //La propiedades por defecto
         Properties defaultProperties = new Properties();
-        defaultProperties.setProperty("db.host", "localhost");
+        defaultProperties.setProperty("db.host", "xuan.myftp.org\\SQLEXPRESS");
         defaultProperties.setProperty("db.loginUser", "sa");
         defaultProperties.setProperty("db.loginPass", "Feedback.512");
         defaultProperties.setProperty("db.connectionsCached", "3");
