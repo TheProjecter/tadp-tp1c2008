@@ -22,7 +22,6 @@ public class MateriasDaoTestCase extends TestCase
     @Override
     public void setUp() throws Exception
     {
-         SQLServerConnectionPool.registrateDriver();
     }
     
     public void testConnectionPool() throws Exception
@@ -46,25 +45,18 @@ public class MateriasDaoTestCase extends TestCase
                 stat.setInt(1, 1);
                 results = stat.executeQuery();
                 String nombre = "";
-                while(results.next())
+                while(results.next())                
                 {
                    nombre = results.getString("nombre");
-                    
+                   assertTrue(true);
                 }
-                
-                //TODO
-                
             }
             catch(SQLException e)
             {
-               
+               assertTrue(false);
             }
-        
         }
-        
     }
     
-           
-   
 }
     
