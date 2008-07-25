@@ -17,6 +17,7 @@ import org.apache.tapestry.record.PropertyChangeObserver;
 
 import ar.utn.tadp.techie.seis.ADesarrollar;
 import ar.utn.tadp.techie.seis.Ejercicio;
+import ar.utn.tadp.techie.seis.Examen;
 import ar.utn.tadp.techie.seis.ExamenBuilder;
 import ar.utn.tadp.techie.seis.ExamenSinPreguntasNiEjerciciosException;
 import ar.utn.tadp.techie.seis.ItemExamen;
@@ -188,7 +189,10 @@ public abstract class GenerarExamen extends BasePage {
 		}
 		
 		try {
-			examenBuilder.generarExamen();
+			Examen examen = examenBuilder.generarExamen();
+			//agrego el examen a la materia ? o le aviso al pool y el se encarga? ... 
+			//opto por la opcion b por ahora
+			MateriasPoolMock.getInstance().addExamen(materia, examen);
 			
 		} catch (PreguntasInsuficientesException e) {
 			setMensaje("No se pudo generar el Examen. "+ e.toString());

@@ -5,6 +5,7 @@
 
 package ar.utn.tadp.techie.seis.pools;
 
+import ar.utn.tadp.techie.seis.Examen;
 import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
@@ -99,5 +100,10 @@ public class MateriasPool
 			Calendar fecha) {
 		// TODO Auto-generated method stub
 		return;
+	}
+
+	public void addExamen(Materia materia, Examen examen) {
+		// TODO Auto-generated method stub
+		
 	}
 }
