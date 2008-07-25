@@ -4,11 +4,7 @@
 "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_0.dtd">
 
 <page-specification class="ar.utn.tadp.techie.seis.web.GenerarExamen">
-<!--
-<component id="cargarDatosForm" type="Form">
-  <binding name="listener" value="listener:onGenerarExamen"/>
-</component>
--->
+
 <component id="generarExamenForm" type="Form">
 </component>
 <component id="cantidadPreguntasTeoricas" type="TextField">

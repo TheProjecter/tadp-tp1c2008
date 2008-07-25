@@ -88,16 +88,11 @@ public class MateriasPool
 		
 	}
 
-	public String[] getUnidadesAsStringArray(String materia) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void setNewItem(String materia, ItemExamen item) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	@Deprecated
 	public void generarExamen(String materia, int cantEjerciciosTeoricos,
 			int cantEjerciciosPracticos, int cantPreguntasTeoricas,
 			int cantPreguntasPracticas, String[] strings,

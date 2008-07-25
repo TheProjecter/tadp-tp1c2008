@@ -190,5 +190,10 @@ public class Materia  implements ItemAddable
         examenes.add(examen);
 
     }
+
+	public Collection<String> getUnidades() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
   }

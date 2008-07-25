@@ -19,7 +19,7 @@ import org.apache.tapestry.annotations.*;
 public abstract class ABMPreguntas extends BasePage {
 	
 
-	private String[] unidades;
+	private String[] unidades={""};
 	private String[] complejidades = {"1","2","3","4","5"};
 	private String[] tiposItem = {Pregunta.getAlias(), Ejercicio.getAlias()};
 	private String[] tiposContenidoItemAsString = {ItemExamen.TiposItem.TEORICO.toString(),
@@ -28,7 +28,8 @@ public abstract class ABMPreguntas extends BasePage {
 										   };												
 	public ABMPreguntas(){
 		
-		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());
+		
+		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray(unidades);
 		
 	}
 	
