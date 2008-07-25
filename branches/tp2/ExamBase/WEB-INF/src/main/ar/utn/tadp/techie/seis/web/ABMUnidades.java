@@ -67,7 +67,7 @@ public abstract class ABMUnidades extends BasePage {
 		//String diseño = "Diseño";
 		MateriasPoolMock.getInstance().setUnidad(materiaSeleccionada, getUnidad());
 		//unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(materiaSeleccionada);
-		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray();		
+		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray(unidades);		
 
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
 			
