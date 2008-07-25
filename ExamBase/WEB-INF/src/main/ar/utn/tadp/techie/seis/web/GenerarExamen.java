@@ -231,7 +231,7 @@ public abstract class GenerarExamen extends BasePage {
 		/*String[] aux = {""};
 		unidades = aux;
 		unidadesString = "";*/
-		unidades=null;
+		unidades.clear();
 		cycle.activate("Home");
 	}
 }
