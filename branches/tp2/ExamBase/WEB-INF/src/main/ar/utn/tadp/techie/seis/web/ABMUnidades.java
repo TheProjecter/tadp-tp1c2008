@@ -10,22 +10,18 @@ import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class ABMUnidades extends BasePage {
 
-	private String[] unidades;
+	private String[] unidades={""};
 
 	
 	public ABMUnidades(){
 		
-		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());		
+		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray(unidades);		
 	}
 	
 	
 	@InitialValue("literal:Ingrese una unidad")
 	public abstract String getUnidad();
-	public void setUnidad(String s){
-		
-		MateriasPoolMock.getInstance().setUnidad(getUnidad(),getMateria());
-		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getMateria());
-	}
+	public abstract void setUnidad(String s);
 	
 	
 	@Override
@@ -70,7 +66,9 @@ public abstract class ABMUnidades extends BasePage {
 		String materiaSeleccionada = (String)getMateria();
 		//String diseño = "Diseño";
 		MateriasPoolMock.getInstance().setUnidad(materiaSeleccionada, getUnidad());
-		unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(materiaSeleccionada);
+		//unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(materiaSeleccionada);
+		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray();		
+
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
 			
 		cycle.activate("ABMUnidades");

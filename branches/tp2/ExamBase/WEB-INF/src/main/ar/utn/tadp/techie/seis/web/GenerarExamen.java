@@ -1,7 +1,11 @@
 package ar.utn.tadp.techie.seis.web;
 
 
+
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+
 
 import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.annotations.*;
@@ -11,15 +15,28 @@ import org.apache.tapestry.html.BasePage;
 import org.apache.tapestry.record.PropertyChangeObserver;
 
 
+import ar.utn.tadp.techie.seis.ADesarrollar;
+import ar.utn.tadp.techie.seis.Ejercicio;
+import ar.utn.tadp.techie.seis.ExamenBuilder;
+import ar.utn.tadp.techie.seis.ExamenSinPreguntasNiEjerciciosException;
+import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
+import ar.utn.tadp.techie.seis.PreguntasInsuficientesException;
+import ar.utn.tadp.techie.seis.PrototipoItem;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
 
-	private Materia materia;	
-	private String unidadesString; //para mantener unidades agregadas y poder agregar nuevas
-	private String[]  unidades = {""}; //para mostrar en la tabla
-
+	private Materia materia;	//referencia a la materia a la que se agregara el examen
+	//private String  unidadesString; //para mantener unidades agregadas y poder agregar nuevas
+	private Collection<String> unidades;
+	//private String[] unidades = {""}; //para mostrar en la tabla
+	
+	int cantTeoricos  = 0;
+	int cantPracticos = 0;
+	int cantTeoricas  = 0;
+	int cantPracticas = 0;
+	int complejidad = 0;
 	
 	public abstract String getNombreMateria();
 	public abstract void setNombreMateria(String materia);
@@ -32,8 +49,9 @@ public abstract class GenerarExamen extends BasePage {
 	}
 	
 	public GenerarExamen(){
-		//unidadesSet = new HashSet<String>();
-		unidadesString = "";
+		unidades = new HashSet<String>();
+		//unidadesString = "";
+		//Collection<String> unidades=new HashSet<String>();
 	}
 	
 	@InitialValue("literal:3")
@@ -44,6 +62,8 @@ public abstract class GenerarExamen extends BasePage {
 	public abstract String getCantidadEjerciciosTeoricos();
 	@InitialValue("literal:2")
 	public abstract String getCantidadEjerciciosPracticos();
+	@InitialValue("literal:2")
+	public abstract String getComplejidadText();
 	public abstract String getUnidad();
 	public abstract void setUnidad(String u);
 	
@@ -76,17 +96,20 @@ public abstract class GenerarExamen extends BasePage {
 	 */
 	public IPropertySelectionModel getUnidadesModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
-		 String[] unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(getNombreMateria()); 
+		
+		String[] unidadesArray={""};
+		unidadesArray = (String[]) MateriasPoolMock.getInstance().getUnidades(getNombreMateria()).toArray(unidadesArray); 
+		//String[] unidades = materia.getUnidades();
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
-        return new StringPropertySelectionModel(unidades);
+        return new StringPropertySelectionModel(unidadesArray);
     }
 	
-	public String[] getUnidades(){	       
+	public Collection<String> getUnidades(){	       
 		
 			return unidades;
 		
 	}
-	public void setUnidades(String[] u){
+	public void setUnidades(Collection<String>  u){
 		unidades = u;
 	}
 	/*
@@ -105,12 +128,12 @@ public abstract class GenerarExamen extends BasePage {
 	 * Agrega la unidad seleccionada al String de Unidades y actualiza el array De unidades para mostrar en la tabla.
 	 */
 	public void onSelectUnidad(IRequestCycle cycle){
-
-	
+/*
 		unidadesString += getUnidad() + ",";
 		//probe usando un set y el mensaje toArray pero despues de agregar una unidad no cambia.. =(... 
-		//por eso opte por esta solucion
-		setUnidades(unidadesString.split(","));
+		//por eso opte por esta solucion.
+		setUnidades(unidadesString.split(","));*/
+		unidades.add(getUnidad());
 	}
 	
 	/**
@@ -120,26 +143,91 @@ public abstract class GenerarExamen extends BasePage {
 	public void onGenerarExamen(IRequestCycle cycle){
 		
 		//TODO --juanmi
-		int cantTeoricos  = Integer.parseInt(getCantidadEjerciciosTeoricos());
-		int cantPracticos = Integer.parseInt(getCantidadEjerciciosPracticos());
-		int cantTeoricas  = Integer.parseInt(getCantidadPreguntasTeoricas());
-		int cantPracticas = Integer.parseInt(getCantidadPreguntasPracticas());
+		cantTeoricos  = Integer.parseInt(getCantidadEjerciciosTeoricos());
+		cantPracticos = Integer.parseInt(getCantidadEjerciciosPracticos());
+		cantTeoricas  = Integer.parseInt(getCantidadPreguntasTeoricas());
+		cantPracticas = Integer.parseInt(getCantidadPreguntasPracticas());
+		complejidad = Integer.parseInt(getComplejidadText());
+		/*
+		Collection<String> unidadesAbarcadas = new HashSet<String>();
 
+		for(String u : unidades){
+			unidadesAbarcadas.add(u);
+	
+		}*/
+		ExamenBuilder examenBuilder = new ExamenBuilder(materia,  unidades, Calendar.getInstance());
 		
-		MateriasPoolMock.getInstance().generarExamen( getNombreMateria(), cantTeoricos, cantPracticos, 
-				cantTeoricas, cantPracticas, getUnidades(), Calendar.getInstance()
-				);
+		if( hayEjerciciosPracticos()){
+			
+			PrototipoItem<Ejercicio> protoEjercicioPractico = new PrototipoItem<Ejercicio>(Ejercicio.class);
+			protoEjercicioPractico.setComplejidad(complejidad);
+			protoEjercicioPractico.setTipo(ItemExamen.TiposItem.PRACTICO);
+			examenBuilder.putPrototipo(protoEjercicioPractico, cantTeoricos);
+		}
+		if( hayEjerciciosTeoricos()){
+			
+			PrototipoItem<Ejercicio> protoEjercicioTeorico = new PrototipoItem<Ejercicio>(Ejercicio.class);
+			protoEjercicioTeorico.setComplejidad(complejidad);
+			protoEjercicioTeorico.setTipo(ItemExamen.TiposItem.TEORICO);
+			examenBuilder.putPrototipo(protoEjercicioTeorico, cantPracticos);
+		}
+
+		if( hayPreguntasTeoricas()){
+
+			PrototipoItem<ADesarrollar> protoPreguntaTeorica = new PrototipoItem<ADesarrollar>(ADesarrollar.class);
+			protoPreguntaTeorica.setComplejidad(complejidad);
+			protoPreguntaTeorica.setTipo(ItemExamen.TiposItem.TEORICO);
+			examenBuilder.putPrototipo(protoPreguntaTeorica, cantTeoricas);
+		}
+		if( hayPreguntasPracticas()){
+
+			PrototipoItem<ADesarrollar> protoPreguntaPractica = new PrototipoItem<ADesarrollar>(ADesarrollar.class);
+			protoPreguntaPractica.setComplejidad(complejidad);
+			protoPreguntaPractica.setTipo(ItemExamen.TiposItem.PRACTICO);
+			examenBuilder.putPrototipo(protoPreguntaPractica, cantPracticas);
+		}
+		
+		try {
+			examenBuilder.generarExamen();
+			
+		} catch (PreguntasInsuficientesException e) {
+			setMensaje("No se pudo generar el Examen. "+ e.toString());
+			//e.printStackTrace();
+		} catch (ExamenSinPreguntasNiEjerciciosException e) {
+			setMensaje("No se pudo generar el Examen. "+ e.toString());
+			//e.printStackTrace();
+		}catch(Exception e){
+			setMensaje("No se pudo generar el Examen. "+ e.toString());
+		}
+		
 		
 		setMensaje("Examen generado y guardado correctamente.");
 		
+	}
+	private boolean hayPreguntasPracticas() {
+		// TODO Auto-generated method stub
+		return cantPracticas>0;
+	}
+	private boolean hayPreguntasTeoricas() {
+		// TODO Auto-generated method stub
+		return cantTeoricas>0;
+	}
+	private boolean hayEjerciciosTeoricos() {
+		// TODO Auto-generated method stub
+		return cantTeoricos>0;
+	}
+	private boolean hayEjerciciosPracticos() {
+		// TODO Auto-generated method stub
+		return cantPracticos>0;
 	}
 	/**
 	 * retorna a la pagina principal (Home)
 	 */
 	public void onVolver(IRequestCycle cycle){
-		String[] aux = {""};
+		/*String[] aux = {""};
 		unidades = aux;
-		unidadesString = "";
+		unidadesString = "";*/
+		unidades=null;
 		cycle.activate("Home");
 	}
 }

@@ -179,20 +179,9 @@ public class MateriasPoolMock extends MateriasPool{
 		unidades.add(string);
 		
 	}
+	
 	@Override
-	public String[] getUnidadesAsStringArray(String materia){
-		
-		String unids = "";
-		
-		//convierto el set en un array de strings para poder pasarlo al componente
-		for(String u: unidades)
-		{
-			unids +=  u + ",";
-		}
-		return unids.split(",");
-		
-	}
-	@Override
+	@Deprecated
 	public void generarExamen(String materia, int cantEjerciciosTeoricos,
 			int cantEjerciciosPracticos, int cantPreguntasTeoricas
 			, int cantPreguntasPracticas, String[]unidades, Calendar fecha){

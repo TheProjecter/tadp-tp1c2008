@@ -5,7 +5,6 @@
 <page-specification class="ar.utn.tadp.techie.seis.web.Home">
 
 <component id="materiaForm" type="Form">
-<binding name="listener" value="listener:onBuscarPreguntas"/>
 </component>
 
  <component id="nombreMateria" type="PropertySelection">
