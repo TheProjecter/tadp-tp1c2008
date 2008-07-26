@@ -63,9 +63,10 @@ public class MateriasDaoTestCase extends TestCase
     public void testGetMateriaByNombre()
     {
         SQLServerMateriaDAO dao = new SQLServerMateriaDAO();
-        String nombre = "TADP";
+        String nombre = "PARADIGMAS DE PROGRAMACION";
         Materia materia = dao.getMateriaByNombre(nombre);
-        
+        assertNotNull(materia);
+        assertEquals(materia.getNombre(),nombre);
         
     }
     
