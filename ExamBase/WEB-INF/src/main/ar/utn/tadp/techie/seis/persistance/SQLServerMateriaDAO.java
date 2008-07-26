@@ -201,17 +201,22 @@ public class SQLServerMateriaDAO implements MateriaDAO
                     }
                     res.close();
                     String fechaString = relacionExamen.get(examenId);
-                    Examen nuevoExamen = new Examen(StringToCalendar(fechaString), items);
-                    retval.addExamen(nuevoExamen);
+                    try
+                    {
+                        Examen nuevoExamen = new Examen(StringToCalendar(fechaString), items);
+                        retval.addExamen(nuevoExamen);
+                    }
+                    catch(ExamenSinPreguntasNiEjerciciosException ex)
+                    {
+                        System.out.println("No se pudo cargar uno de los examenes: "+ex);
+                    }
+                    
+                    
                 }
 
                 //Al fin se termino
                 return retval;
 
-            }
-            catch(ExamenSinPreguntasNiEjerciciosException ex)
-            {
-                System.out.println("No se pudo cargar uno de los examenes: "+ex);
             }
             catch(SQLException e)
             {
