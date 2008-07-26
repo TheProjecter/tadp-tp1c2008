@@ -6,6 +6,7 @@
 package ar.utn.tadp.techie.seis.persistance;
 
 import ar.utn.tadp.techie.seis.Materia;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -14,6 +15,8 @@ import java.util.Set;
  */
 public interface MateriaDAO
 {
+
+    public Collection<String> getMateriasNameList();
 
     public Set<String> listarMaterias();
     

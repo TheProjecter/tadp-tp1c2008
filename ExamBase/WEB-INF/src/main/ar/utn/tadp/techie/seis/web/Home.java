@@ -16,7 +16,9 @@ import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.Pregunta;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAOMock;
+import ar.utn.tadp.techie.seis.pools.MateriasPool;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
+import java.util.Collection;
 
 
 public abstract class Home extends BasePage {
@@ -47,7 +49,8 @@ public abstract class Home extends BasePage {
 	
 	public IPropertySelectionModel getMateriasModel() {
 		// para prueba ...las materias van a venir del resultado de un query a la base
-		Set<String> materiasSet = MateriaDAOMock.getInstance().listarMaterias(); 
+		//Set<String> materiasSet = MateriaDAOMock.getInstance().listarMaterias(); 
+                Collection<String> materias = MateriasPool.getInstance().getMateriasNameList();
 		/*
 		String materias = "";//= "Seleccione...";
 		
@@ -58,7 +61,7 @@ public abstract class Home extends BasePage {
 		}
 			*/
 		String [] materiasArray ={""};
-		materiasArray = materiasSet.toArray(materiasArray);
+		materiasArray = materias.toArray(materiasArray);
 		return new StringPropertySelectionModel(materiasArray);
         //return new StringPropertySelectionModel((String[])materias.split(","));
     }
@@ -158,7 +161,7 @@ public abstract class Home extends BasePage {
 	{
 		String materiaSeleccionada = getNombreMateria();
 		//String diseño = "Diseño";
-		materia = MateriasPoolMock.getInstance().getMateria(materiaSeleccionada);
+		materia = MateriasPool.getInstance().getMateria(materiaSeleccionada);
 		items = materia.getItems();
 		//con la materia que seleccione genero el query para buscar las preguntas de la misma
 			
