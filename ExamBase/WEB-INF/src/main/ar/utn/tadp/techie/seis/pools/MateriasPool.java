@@ -43,6 +43,19 @@ public class MateriasPool
             instance = new MateriasPool();
         return instance;
     }
+
+    public void addExamen(String nombreMateria, Examen examen) throws Exception
+    {
+        getMateria(nombreMateria).addExamen(examen);
+        dao.addExamen(nombreMateria, examen);
+    }
+
+    public void addItemToMateria(String materia, ItemExamen item)
+    {
+        Materia mat = getMateria(materia);
+        mat.addItem(item);
+        dao.addItem(materia, item);
+    }
     
     /**
      * Devuelve la instancia de la materia, si no esta en el pool

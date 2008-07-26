@@ -15,9 +15,7 @@ import ar.utn.tadp.techie.seis.ADesarrollar;
 import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.Pregunta;
-import ar.utn.tadp.techie.seis.persistance.MateriaDAOMock;
 import ar.utn.tadp.techie.seis.pools.MateriasPool;
-import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 import java.util.Collection;
 
 
@@ -92,6 +90,7 @@ public abstract class Home extends BasePage {
 	{
 		ABMPreguntas preguntasPage = getPreguntasPage();
 		preguntasPage.setMateria(nombreMateria);
+                preguntasPage.updateUnidades();
 		return goToPage(preguntasPage);
 		
 	}

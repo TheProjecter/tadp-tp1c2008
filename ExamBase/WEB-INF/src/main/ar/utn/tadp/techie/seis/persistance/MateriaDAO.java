@@ -5,7 +5,11 @@
 
 package ar.utn.tadp.techie.seis.persistance;
 
+import ar.utn.tadp.techie.seis.Examen;
+import ar.utn.tadp.techie.seis.ItemExamen;
+import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 import ar.utn.tadp.techie.seis.Materia;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,6 +20,8 @@ import java.util.Set;
 public interface MateriaDAO
 {
 
+    public void addExamen(String nombreMateria, Examen examen) throws SQLException;
+
     public void addUnidadTematica(String materia, String unidad);
 
     public Collection<String> getMateriasNameList();
@@ -25,4 +31,6 @@ public interface MateriaDAO
     public Materia getMateriaByNombre(String nombre);
     
     public Collection<String> getUnidadesList(String materia);
+    
+    public void addItem(String materia,ItemExamen item);
 }
