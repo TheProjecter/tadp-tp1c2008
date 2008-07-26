@@ -6,7 +6,8 @@ public abstract class ItemExamen {
 	
     private String unidadTematica;
     private int complejidad;
-
+    private int id;
+    
     public enum TiposItem {TEORICO,PRACTICO,TEORICOPRACTICO};
     private int cantidadDeVecesQueSeUso;
     private TiposItem tipo;
@@ -49,6 +50,13 @@ public abstract class ItemExamen {
             this.complejidad = complejidad;
     }
 
+    public void setId(int id){
+    	this.id = id;
+    }
+  
+    public int getId(){
+    	return id;
+    }
     
     public int getCantidadDeVecesQueSeUso() {
             return cantidadDeVecesQueSeUso;
