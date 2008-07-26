@@ -296,5 +296,63 @@ public class SQLServerMateriaDAO implements MateriaDAO
             }
         }
     }
+
+    public Collection<String> getUnidadesList(String materia)
+    {
+        Connection conn = pool.getConnection();
+        Collection<String> retval = new HashSet<String>();
+        synchronized(conn)
+        {
+            try
+            {
+                String query = "SELECT UT.nombre " +
+                               "FROM UnidadTematica as UT, Materia as M " +
+                               "WHERE   UT.id_materia = M.id_materia " +
+                               "    AND M.nombre = ?";
+                PreparedStatement stat = conn.prepareStatement(query);
+                stat.setString(1, materia);
+                ResultSet res = stat.executeQuery();
+
+                
+                while(res.next())
+                {
+                    retval.add(res.getString("nombre"));
+                }
+            }
+            catch(SQLException e)
+            {
+                System.err.println("Error al leer las unidades tematicas de la materia " + materia);
+            }
+            return retval;
+            
+        }
+    }
+
+    public void addUnidadTematica(String materia, String unidad)
+    {
+        Connection conn = pool.getConnection();
+        
+        synchronized(conn)
+        {
+            try
+            {
+               String query = "INSERT	UnidadTematica (id_materia, nombre) " +
+                              "SELECT	id_materia, " +
+                              "         ? " +
+                              "FROM	Materia " +
+                              "WHERE	Materia.nombre = ? ";
+               PreparedStatement stat = conn.prepareStatement(query);
+               stat.setString(1, unidad);
+               stat.setString(2, materia);
+               stat.execute();
+               
+            }
+            catch(SQLException e)
+            {
+                System.err.println("Error al grabar la unidad tematica " + unidad + " de la materia " + materia);
+            }
+            
+        }
+    }
     
 }

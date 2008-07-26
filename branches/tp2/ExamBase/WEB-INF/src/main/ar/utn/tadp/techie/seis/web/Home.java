@@ -84,6 +84,7 @@ public abstract class Home extends BasePage {
 	{
 		ABMUnidades abmUnidadesPage = getUnidadesPage();
 		abmUnidadesPage.setMateria(nombreMateria);
+                abmUnidadesPage.updateUnidades();
 		return goToPage(abmUnidadesPage);
 		
 	}
