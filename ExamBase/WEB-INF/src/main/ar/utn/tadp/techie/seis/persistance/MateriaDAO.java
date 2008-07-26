@@ -16,10 +16,13 @@ import java.util.Set;
 public interface MateriaDAO
 {
 
+    public void addUnidadTematica(String materia, String unidad);
+
     public Collection<String> getMateriasNameList();
 
     public Set<String> listarMaterias();
     
     public Materia getMateriaByNombre(String nombre);
     
+    public Collection<String> getUnidadesList(String materia);
 }

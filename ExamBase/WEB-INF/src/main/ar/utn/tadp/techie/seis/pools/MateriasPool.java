@@ -69,6 +69,11 @@ public class MateriasPool
         return dao.getMateriasNameList();
     }
     
+    public Collection<String> getUnidadesList(String materia)
+    {
+        return dao.getUnidadesList(materia);
+    }
+    
     private void addMateria(Materia materia)
     { 
         if(mapaMaterias.size() < size)
@@ -165,4 +170,9 @@ public class MateriasPool
 		// TODO Auto-generated method stub
 		
 	}
+        
+        public void addUnidadTematica(String materia, String unidad)
+        {
+            dao.addUnidadTematica(materia, unidad);
+        }
 }
