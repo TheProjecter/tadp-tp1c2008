@@ -5,6 +5,7 @@
 
 package ar.utn.tadp.techie.seis.persistance;
 
+import ar.utn.tadp.techie.seis.Materia;
 import java.util.Set;
 
 /**
@@ -15,5 +16,7 @@ public interface MateriaDAO
 {
 
     public Set<String> listarMaterias();
+    
+    public Materia getMateriaByNombre(String nombre);
     
 }

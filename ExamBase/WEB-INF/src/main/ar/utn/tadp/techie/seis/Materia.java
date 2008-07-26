@@ -191,9 +191,13 @@ public class Materia  implements ItemAddable
 
     }
 
-	public Collection<String> getUnidades() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Collection<String> getUnidades()
+    {
+        Collection<String> retval = new HashSet<String>();
+        for(ItemExamen item: getItems()) {
+            retval.add(item.getUnidadTematica());
+        }
+        return retval;
+    }
     
   }

@@ -15,7 +15,7 @@ public abstract class ABMUnidades extends BasePage {
 	
 	public ABMUnidades(){
 		
-		unidades = (String[]) MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray(unidades);		
+		unidades = MateriasPoolMock.getInstance().getUnidades(getMateria()).toArray(unidades);		
 	}
 	
 	
@@ -63,7 +63,7 @@ public abstract class ABMUnidades extends BasePage {
 	 * **/
 	public void onGuardar(IRequestCycle cycle)
 	{
-		String materiaSeleccionada = (String)getMateria();
+		String materiaSeleccionada = getMateria();
 		//String diseño = "Diseño";
 		MateriasPoolMock.getInstance().setUnidad(materiaSeleccionada, getUnidad());
 		//unidades = MateriasPoolMock.getInstance().getUnidadesAsStringArray(materiaSeleccionada);

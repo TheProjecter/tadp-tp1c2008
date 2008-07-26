@@ -3,7 +3,6 @@ package ar.utn.tadp.techie.seis.persistance;
 import java.util.HashSet;
 import java.util.Set;
 
-import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
 
 
 public class MateriaDAOMock implements MateriaDAO {

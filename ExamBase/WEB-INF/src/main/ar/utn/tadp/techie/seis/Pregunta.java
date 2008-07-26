@@ -29,7 +29,7 @@ public abstract class Pregunta extends ItemExamen
     public boolean equals (Object p)
     {
 
-        if(p instanceof Pregunta)
+        if(p != null && p instanceof Pregunta)
         {
             Pregunta pregunta = (Pregunta) p;
 
