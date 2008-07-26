@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
 import junit.framework.TestCase;
 
 /**
@@ -68,6 +69,14 @@ public class MateriasDaoTestCase extends TestCase
         assertNotNull(materia);
         assertEquals(materia.getNombre(),nombre);
         
+    }
+    
+    public void testGetMateriasNameList()
+    {
+        SQLServerMateriaDAO dao = new SQLServerMateriaDAO();
+        Collection<String> materias = dao.getMateriasNameList();
+        assertNotNull(materias);
+        assertTrue(materias.size()>0);        
     }
     
 }

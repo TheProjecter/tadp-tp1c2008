@@ -13,6 +13,7 @@ import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.ItemExamen.TiposItem;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.Pregunta;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -268,6 +270,30 @@ public class SQLServerMateriaDAO implements MateriaDAO
         catch(ParseException ex)
         {
             return new GregorianCalendar();
+        }
+    }
+
+    public Collection<String> getMateriasNameList()
+    {
+        Connection conn = pool.getConnection();
+        synchronized(conn)
+        {
+            try
+            {
+                Collection<String> retval = new HashSet<String>();
+                String query = "SELECT nombre FROM Materia";
+                ResultSet res = conn.prepareStatement(query).executeQuery();
+                while(res.next())
+                {
+                    retval.add(res.getString("nombre"));
+                }
+                return retval;
+            }
+            catch(SQLException e)
+            {
+                System.err.println("Error no se pudiaron listar las Materias");
+                return new HashSet<String>();
+            }
         }
     }
     

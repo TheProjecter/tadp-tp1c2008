@@ -10,7 +10,9 @@ import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.persistance.MateriaDAO;
 
+import ar.utn.tadp.techie.seis.persistance.SQLServerMateriaDAO;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +34,7 @@ public class MateriasPool
     {
         mapaMaterias = new HashMap<Materia,Boolean>();
         size = 3; //TODO Hardcodeado!, sacarlo de configuracion
+        dao = new SQLServerMateriaDAO();
     }
     
     public static MateriasPool getInstance()
@@ -60,6 +63,11 @@ public class MateriasPool
         return retval;
     }
     
+    
+    public Collection<String> getMateriasNameList()
+    {
+        return dao.getMateriasNameList();
+    }
     
     private void addMateria(Materia materia)
     { 
