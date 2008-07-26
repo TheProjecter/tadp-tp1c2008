@@ -5,6 +5,7 @@
 
 package ar.utn.tadp.techie.seis.persistance;
 
+import ar.utn.tadp.techie.seis.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,21 +19,21 @@ import junit.framework.TestCase;
  */
 public class MateriasDaoTestCase extends TestCase
 {
+    public SQLServerConnectionPool pool;
     
     @Override
     public void setUp() throws Exception
-    {
-    }
-    
-    public void testConnectionPool() throws Exception
     {
         String dbHost = ExamBaseProperties.getInstance().getProperty("db.host");
         String dbLoginUser = ExamBaseProperties.getInstance().getProperty("db.loginUser");
         String dbLoginPass = ExamBaseProperties.getInstance().getProperty("db.loginPass");
         int dbConnectionsCached = Integer.parseInt(ExamBaseProperties.getInstance().getProperty("db.connectionsCached"));
         
-        SQLServerConnectionPool pool = new SQLServerConnectionPool(dbConnectionsCached, dbHost, dbLoginUser, dbLoginPass);
-        
+        pool = new SQLServerConnectionPool(dbConnectionsCached, dbHost, dbLoginUser, dbLoginPass);
+    }
+    
+    public void testConnectionPool() throws Exception
+    {
         Connection conn = pool.getConnection();
                 
         synchronized(conn)
@@ -56,6 +57,16 @@ public class MateriasDaoTestCase extends TestCase
                assertTrue(false);
             }
         }
+    }
+    
+    
+    public void testGetMateriaByNombre()
+    {
+        SQLServerMateriaDAO dao = new SQLServerMateriaDAO();
+        String nombre = "TADP";
+        Materia materia = dao.getMateriaByNombre(nombre);
+        
+        
     }
     
 }

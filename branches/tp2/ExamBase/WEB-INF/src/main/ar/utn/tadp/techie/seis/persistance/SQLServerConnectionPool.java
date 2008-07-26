@@ -32,7 +32,8 @@ public class SQLServerConnectionPool
         registrateDriver();
         
         String connectionUrl =  "jdbc:sqlserver://" +
-                                             url + ";" +    
+                                             url + ";" +
+                                            "databaseName=Exam_Base;" +
                                             "user=" + user + ";" +
                                             "password=" + pass +";";
 

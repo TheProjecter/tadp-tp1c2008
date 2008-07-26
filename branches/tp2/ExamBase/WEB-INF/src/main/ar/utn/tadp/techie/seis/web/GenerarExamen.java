@@ -99,7 +99,7 @@ public abstract class GenerarExamen extends BasePage {
 		// para prueba ...las materias van a venir del resultado de un query a la base
 		
 		String[] unidadesArray={""};
-		unidadesArray = (String[]) MateriasPoolMock.getInstance().getUnidades(getNombreMateria()).toArray(unidadesArray); 
+		unidadesArray = MateriasPoolMock.getInstance().getUnidades(getNombreMateria()).toArray(unidadesArray); 
 		//String[] unidades = materia.getUnidades();
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
         return new StringPropertySelectionModel(unidadesArray);

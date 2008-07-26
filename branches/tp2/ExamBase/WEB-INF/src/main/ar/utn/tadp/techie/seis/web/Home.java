@@ -58,7 +58,7 @@ public abstract class Home extends BasePage {
 		}
 			*/
 		String [] materiasArray ={""};
-		materiasArray = (String[]) materiasSet.toArray(materiasArray);
+		materiasArray = materiasSet.toArray(materiasArray);
 		return new StringPropertySelectionModel(materiasArray);
         //return new StringPropertySelectionModel((String[])materias.split(","));
     }
@@ -80,14 +80,14 @@ public abstract class Home extends BasePage {
 	public IPage unidadesPage(IRequestCycle cycle)
 	{
 		ABMUnidades abmUnidadesPage = getUnidadesPage();
-		abmUnidadesPage.setMateria((String)nombreMateria);
+		abmUnidadesPage.setMateria(nombreMateria);
 		return goToPage(abmUnidadesPage);
 		
 	}
 	public IPage preguntasPage(IRequestCycle cycle)
 	{
 		ABMPreguntas preguntasPage = getPreguntasPage();
-		preguntasPage.setMateria((String)nombreMateria);
+		preguntasPage.setMateria(nombreMateria);
 		return goToPage(preguntasPage);
 		
 	}
@@ -95,7 +95,7 @@ public abstract class Home extends BasePage {
 	{
 		
 		GenerarExamen examenPage = getGenerarExamenPage();
-		examenPage.setNombreMateria((String)nombreMateria);
+		examenPage.setNombreMateria(nombreMateria);
 		return goToPage(examenPage);
 		
 	}
@@ -156,7 +156,7 @@ public abstract class Home extends BasePage {
 	 * **/
 	public void onBuscarPreguntas(IRequestCycle cycle)
 	{
-		String materiaSeleccionada = (String)getNombreMateria();
+		String materiaSeleccionada = getNombreMateria();
 		//String diseño = "Diseño";
 		materia = MateriasPoolMock.getInstance().getMateria(materiaSeleccionada);
 		items = materia.getItems();

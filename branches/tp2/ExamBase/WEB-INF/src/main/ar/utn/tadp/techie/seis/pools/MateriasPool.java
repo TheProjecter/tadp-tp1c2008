@@ -47,26 +47,73 @@ public class MateriasPool
      * @param nombre el nombre de una materia
      * @return la materia con ese nombre
      */
-    public Materia getMateria(String nombre) {
-        return null;
+    public Materia getMateria(String nombre)
+    {
+        
+        //Busco en las que estan cargadas
+        for(Materia materia:mapaMaterias.keySet())
+            if(materia.getNombre().equals(nombre))
+                return materia;
+        
+        Materia retval = dao.getMateriaByNombre(nombre);
+        addMateria(retval);
+        return retval;
     }
+    
+    
+    private void addMateria(Materia materia)
+    { 
+        if(mapaMaterias.size() < size)
+        {
+            mapaMaterias.put(materia, false);
+            return;
+        }
+        //Si esta lleno busco una no-dirty para borrar
+        for(Materia materiaASacar:mapaMaterias.keySet())
+        {
+            //Si no esta dirty la borro
+            if(!mapaMaterias.get(materiaASacar))
+            {
+                mapaMaterias.remove(materiaASacar);
+                addMateria(materia);
+                return;
+            }
+        }
+        //Si esta todas modificadas tengo que elejir una
+        Materia materiaASacar = mapaMaterias.keySet().iterator().next();
+        //TODO Actualizarla en el dao, pero por como esta hecha la implementacion
+        //hasta ahora no lo necesitamos
+        mapaMaterias.remove(materiaASacar);
+        addMateria(materia);
+        //Y por que recursivo? porque puede ser que haya mas materias que la capacidad permite
+        //si llamo al metodo materiaModified con una materia que no estaba en el pool y el pool esta lleno
+        //voy a agregar una materia demas que voy a eliminar en este motodo cuando tenga que liberar espacio
+        //pero como todo esto de dirty no se usa no importa
+    }
+    
     /**
      * Avisa que la materia se modifico y antes de sacarla del pool
      * hay que actualizar en la db. Sino se avisa cuando el pool elimine
      * la materia va a pensar que nadie la cambio y se pierden los cambios
      * @param mat la materia
      */
-    public void materiaModified(Materia mat) {
-        
+    public void materiaModified(Materia mat)
+    {
+        mapaMaterias.put(mat, true);
     }
     /**
      * Fuerza que se guarden todos los cambios en la db
      */
-    public void forceWrite() {
-        
+    public void forceWrite()
+    {
+        for(Materia materia:mapaMaterias.keySet())
+        {
+            mapaMaterias.put(materia,true);
+        }
     }
 
-	public Set<ItemExamen> getItems(String materia) {
+	public Set<ItemExamen> getItems(String materia)
+        {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -75,7 +122,8 @@ public class MateriasPool
 	 * @param materia
 	 * @return devuelve una lista de las unidades pertenecientes a la materia
 	 */
-	public Set<String> getUnidades(String materia) {
+	public Set<String> getUnidades(String materia)
+        {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,20 +132,23 @@ public class MateriasPool
 	 * @param materiaSeleccionada
 	 * @param string 
 	 */
-	public void setUnidad(String materiaSeleccionada, String string) {
+	public void setUnidad(String materiaSeleccionada, String string)
+        {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void setNewItem(String materia, ItemExamen item) {
+	public void setNewItem(String materia, ItemExamen item)
+        {
 		// TODO Auto-generated method stub
 		
 	}
 	@Deprecated
 	public void generarExamen(String materia, int cantEjerciciosTeoricos,
 			int cantEjerciciosPracticos, int cantPreguntasTeoricas,
-			int cantPreguntasPracticas, String[] strings,
-			Calendar fecha) {
+			int cfantPreguntasPracticas, String[] strings,
+			Calendar fecha)
+        {
 		// TODO Auto-generated method stub
 		return;
 	}
