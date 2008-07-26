@@ -24,6 +24,7 @@ import ar.utn.tadp.techie.seis.ItemExamen;
 import ar.utn.tadp.techie.seis.Materia;
 import ar.utn.tadp.techie.seis.PreguntasInsuficientesException;
 import ar.utn.tadp.techie.seis.PrototipoItem;
+import ar.utn.tadp.techie.seis.pools.MateriasPool;
 import ar.utn.tadp.techie.seis.pools.MateriasPoolMock;
 
 public abstract class GenerarExamen extends BasePage {
@@ -99,7 +100,7 @@ public abstract class GenerarExamen extends BasePage {
 		// para prueba ...las materias van a venir del resultado de un query a la base
 		
 		String[] unidadesArray={""};
-		unidadesArray = MateriasPoolMock.getInstance().getUnidades(getNombreMateria()).toArray(unidadesArray); 
+		unidadesArray = MateriasPool.getInstance().getUnidadesList(getNombreMateria()).toArray(unidadesArray); 
 		//String[] unidades = materia.getUnidades();
 		 //MateriasPoolMock.getInstance().getUnidades(getMateria());
         return new StringPropertySelectionModel(unidadesArray);
@@ -156,6 +157,7 @@ public abstract class GenerarExamen extends BasePage {
 			unidadesAbarcadas.add(u);
 	
 		}*/
+                materia = MateriasPool.getInstance().getMateria(getNombreMateria());
 		ExamenBuilder examenBuilder = new ExamenBuilder(materia,  unidades, Calendar.getInstance());
 		
 		if( hayEjerciciosPracticos()){
@@ -192,7 +194,7 @@ public abstract class GenerarExamen extends BasePage {
 			Examen examen = examenBuilder.generarExamen();
 			//agrego el examen a la materia ? o le aviso al pool y el se encarga? ... 
 			//opto por la opcion b por ahora
-			MateriasPoolMock.getInstance().addExamen(materia, examen);
+			MateriasPool.getInstance().addExamen(getNombreMateria(), examen);
 			
 		} catch (PreguntasInsuficientesException e) {
 			setMensaje("No se pudo generar el Examen. "+ e.toString());
